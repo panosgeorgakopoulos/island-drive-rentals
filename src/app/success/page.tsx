@@ -1,49 +1,169 @@
 import Link from "next/link"
-import { CheckCircle, Calendar, MapPin, Car } from "lucide-react"
+import { CheckCircle, Calendar, MapPin, Car, FileText } from "lucide-react"
+import { prisma } from "@/lib/prisma"
+import { auth } from "@/lib/auth"
+import { PrintButton } from "@/components/PrintButton"
 
-export default function SuccessPage({
-  searchParams,
-}: {
-  searchParams: { session_id?: string; mock?: string }
-}) {
+export default async function SuccessPage({ searchParams }: { searchParams: Promise<{ bookingId?: string }> }) {
+  const { bookingId } = await searchParams
+  const session = await auth()
+  
+  let booking = null
+
+  if (bookingId) {
+    booking = await prisma.booking.findUnique({
+      where: { id: bookingId },
+      include: { vehicle: true, user: true }
+    })
+  } else if (session?.user?.id) {
+    booking = await prisma.booking.findFirst({
+      where: { userId: session.user.id },
+      orderBy: { createdAt: 'desc' },
+      include: { vehicle: true, user: true }
+    })
+  }
+
+  if (!booking) {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-6 bg-gray-50">
+        <div className="bg-white p-8 rounded-2xl shadow-sm border text-center max-w-md w-full">
+          <h2 className="text-xl font-bold mb-4">No Recent Booking Found</h2>
+          <Link href="/profile" className="text-blue-600 font-medium hover:underline">View My Profile</Link>
+        </div>
+      </div>
+    )
+  }
+
+  const invoiceNumber = `INV-${booking.id.slice(0, 8).toUpperCase()}`
+  const days = Math.ceil((new Date(booking.endDate).getTime() - new Date(booking.startDate).getTime()) / (1000 * 60 * 60 * 24))
+
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
-      <div className="bg-white max-w-lg w-full rounded-2xl p-8 border shadow-lg text-center">
-        <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
-          <CheckCircle className="text-green-500" size={40} />
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center p-6 pt-12 pb-24">
+      {/* Printable Invoice Container */}
+      <div className="bg-white max-w-3xl w-full rounded-2xl p-8 md:p-12 border shadow-lg print:shadow-none print:border-none print:p-0">
+        
+        {/* Header */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-8 mb-8 gap-4">
+          <div className="flex items-center gap-4">
+            <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center print:border print:border-green-500">
+              <CheckCircle className="text-green-500" size={32} />
+            </div>
+            <div>
+              <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">Booking Confirmed</h1>
+              <p className="text-gray-500 font-medium">Thank you for choosing Island Drive Rentals</p>
+            </div>
+          </div>
+          <div className="text-left md:text-right">
+            <div className="text-sm text-gray-500 uppercase font-bold tracking-wider">Invoice / Reference</div>
+            <div className="text-2xl font-black text-gray-900">{invoiceNumber}</div>
+            <div className="text-sm font-medium mt-1">
+              <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full inline-block">
+                Paid in Full
+              </span>
+            </div>
+          </div>
         </div>
         
-        <h1 className="text-3xl font-extrabold text-gray-900 mb-2">Booking Confirmed!</h1>
-        <p className="text-gray-500 mb-8">
-          Thank you for choosing Island Drive Rentals. We have sent a confirmation email to you.
-        </p>
-        
-        <div className="bg-gray-50 p-6 rounded-xl text-left space-y-4 mb-8">
-           <h3 className="font-bold text-gray-900 border-b pb-2">Next Steps</h3>
-           <ul className="text-sm text-gray-600 space-y-3">
-             <li className="flex items-start gap-3">
-               <Calendar className="text-blue-600 shrink-0 mt-0.5" size={16} />
-               <span>Mark your calendar for the pick-up date. Don't forget your driver's license.</span>
-             </li>
-             <li className="flex items-start gap-3">
-               <MapPin className="text-blue-600 shrink-0 mt-0.5" size={16} />
-               <span>Meet our representative at the selected location on time.</span>
-             </li>
-             <li className="flex items-start gap-3">
-               <Car className="text-blue-600 shrink-0 mt-0.5" size={16} />
-               <span>Check the vehicle, sign the rental agreement and you're good to go!</span>
-             </li>
-           </ul>
+        {/* Reservation Details Grid */}
+        <div className="grid md:grid-cols-2 gap-8 mb-10">
+          <div>
+            <h3 className="text-sm font-bold text-gray-500 uppercase flex items-center gap-2 mb-4">
+              <Car size={16} /> Customer & Vehicle
+            </h3>
+            <div className="bg-gray-50 p-5 rounded-xl print:bg-transparent print:border print:p-4">
+              <dl className="space-y-3 text-sm">
+                <div className="flex justify-between">
+                  <dt className="text-gray-500">Customer Name</dt>
+                  <dd className="font-bold text-gray-900">{booking.user.name}</dd>
+                </div>
+                <div className="flex justify-between">
+                  <dt className="text-gray-500">Customer Email</dt>
+                  <dd className="font-bold text-gray-900">{booking.user.email}</dd>
+                </div>
+                <div className="flex justify-between pt-3 border-t">
+                  <dt className="text-gray-500">Vehicle</dt>
+                  <dd className="font-bold text-gray-900">{booking.vehicle.name}</dd>
+                </div>
+                <div className="flex justify-between">
+                  <dt className="text-gray-500">Class</dt>
+                  <dd className="font-bold text-gray-900 capitalize">{booking.vehicle.category}</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+          
+          <div>
+            <h3 className="text-sm font-bold text-gray-500 uppercase flex items-center gap-2 mb-4">
+              <Calendar size={16} /> Trip Itinerary
+            </h3>
+            <div className="bg-blue-50 p-5 rounded-xl border border-blue-100 print:bg-transparent print:border print:p-4">
+              <dl className="space-y-3 text-sm">
+                <div className="flex justify-between">
+                  <dt className="text-blue-800">Pick-up Date</dt>
+                  <dd className="font-bold text-blue-900">{new Date(booking.startDate).toLocaleDateString()}</dd>
+                </div>
+                <div className="flex justify-between">
+                  <dt className="text-blue-800">Drop-off Date</dt>
+                  <dd className="font-bold text-blue-900">{new Date(booking.endDate).toLocaleDateString()}</dd>
+                </div>
+                <div className="flex justify-between pt-3 border-t border-blue-200">
+                  <dt className="text-blue-800 flex items-center gap-1"><MapPin size={14}/> Location</dt>
+                  <dd className="font-bold text-blue-900">Athens Airport</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
         </div>
-        
-        <div className="space-y-3">
-          <Link href="/profile" className="block w-full text-center bg-blue-600 text-white font-bold py-3 rounded-xl hover:bg-blue-700 transition">
-            View My Bookings
-          </Link>
-          <Link href="/" className="block w-full text-center bg-gray-100 text-gray-900 font-bold py-3 rounded-xl hover:bg-gray-200 transition">
-            Return Home
-          </Link>
+
+        {/* Financial Breakdown */}
+        <div className="mb-10">
+          <h3 className="text-sm font-bold text-gray-500 uppercase flex items-center gap-2 mb-4">
+            <FileText size={16} /> Financial Breakdown
+          </h3>
+          <table className="w-full text-left text-sm">
+            <thead className="bg-gray-100 print:bg-gray-200">
+              <tr>
+                <th className="py-3 px-4 font-bold rounded-l-lg">Description</th>
+                <th className="py-3 px-4 font-bold text-right">Rate</th>
+                <th className="py-3 px-4 font-bold text-right rounded-r-lg">Amount</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y">
+              <tr>
+                <td className="py-4 px-4 text-gray-900 font-medium">{booking.vehicle.name} Rental ({days} days)</td>
+                <td className="py-4 px-4 text-right text-gray-500">€{booking.vehicle.basePrice} / day</td>
+                <td className="py-4 px-4 text-right font-medium text-gray-900">€{(booking.vehicle.basePrice * days).toFixed(2)}</td>
+              </tr>
+              <tr>
+                <td className="py-4 px-4 text-gray-900 font-medium">Taxes & Fees (Included)</td>
+                <td className="py-4 px-4 text-right text-gray-500">-</td>
+                <td className="py-4 px-4 text-right font-medium text-gray-900">€0.00</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colSpan={2} className="py-5 px-4 text-right font-bold text-lg">Total Paid</td>
+                <td className="py-5 px-4 text-right font-black text-2xl text-blue-600 border-t-2 border-gray-900">€{booking.totalPrice.toFixed(2)}</td>
+              </tr>
+            </tfoot>
+          </table>
         </div>
+
+        {/* Footer info for print */}
+        <div className="text-center text-xs text-gray-400 mt-16 pt-8 border-t hidden print:block">
+          Island Drive Rentals | VAT: EL123456789 | Athens Airport, Greece | support@islanddrive.gr
+        </div>
+      </div>
+      
+      {/* Actions (Hidden in Print) */}
+      <div className="mt-8 flex gap-4 print:hidden max-w-3xl w-full justify-end">
+        <PrintButton />
+        <Link 
+          href="/fleet"
+          className="bg-blue-600 text-white font-bold py-3 px-8 rounded-xl hover:bg-blue-700 transition"
+        >
+          Book Another Vehicle
+        </Link>
       </div>
     </div>
   )

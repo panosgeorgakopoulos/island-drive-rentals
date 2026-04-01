@@ -29,27 +29,27 @@ export function HeroSearch() {
   }
 
   return (
-    <div className="bg-white p-4 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-4 items-center justify-between text-gray-800 text-left max-w-4xl mx-auto mt-8">
-      <div className="flex-1 w-full pl-4 border-r border-gray-200 hidden md:block">
-        <label className="text-xs font-bold text-gray-500 uppercase">Pickup Location</label>
+    <div className="bg-white/95 backdrop-blur-md p-2 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-0 items-stretch text-gray-800 text-left max-w-4xl mx-auto mt-8 border border-white/20">
+      <div className="flex-1 w-full px-5 py-3 border-b md:border-b-0 md:border-r border-gray-100 hidden md:block">
+        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Pickup Location</label>
         <div className="flex items-center gap-2 mt-1">
-          <MapPin size={20} className="text-blue-600" />
+          <MapPin size={18} className="text-[var(--color-primary)]" />
           <input 
             type="text" 
             placeholder="Athens Airport" 
-            className="w-full font-medium outline-none" 
+            className="w-full font-semibold outline-none bg-transparent text-gray-900 placeholder-gray-400" 
             value={location}
             onChange={e => setLocation(e.target.value)}
           />
         </div>
       </div>
-      <div className="flex-1 w-full pl-4 border-r border-gray-200 hidden md:block">
-        <label className="text-xs font-bold text-gray-500 uppercase">Pickup Date</label>
+      <div className="flex-1 w-full px-5 py-3 border-b md:border-b-0 md:border-r border-gray-100 hidden md:block">
+        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Pickup Date</label>
         <div className="flex items-center gap-2 mt-1">
-          <Calendar size={20} className="text-blue-600" />
+          <Calendar size={18} className="text-[var(--color-primary)]" />
           <input 
             type="date" 
-            className="w-full font-medium outline-none bg-transparent" 
+            className="w-full font-semibold outline-none bg-transparent text-gray-900" 
             min={todayDate}
             value={startDate}
             onChange={e => {
@@ -61,13 +61,13 @@ export function HeroSearch() {
           />
         </div>
       </div>
-      <div className="flex-1 w-full pl-4 hidden md:block">
-        <label className="text-xs font-bold text-gray-500 uppercase">Return Date</label>
+      <div className="flex-1 w-full px-5 py-3 hidden md:block">
+        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Return Date</label>
         <div className="flex items-center gap-2 mt-1">
-          <Calendar size={20} className="text-blue-600" />
+          <Calendar size={18} className="text-[var(--color-primary)]" />
           <input 
             type="date" 
-            className="w-full font-medium outline-none bg-transparent" 
+            className="w-full font-semibold outline-none bg-transparent text-gray-900" 
             min={startDate || todayDate}
             value={endDate}
             onChange={e => setEndDate(e.target.value)}
@@ -76,9 +76,9 @@ export function HeroSearch() {
       </div>
       <button 
         onClick={handleSearch}
-        className="w-full md:w-auto bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition flex items-center justify-center gap-2"
+        className="btn-primary m-1 !rounded-xl !px-8"
       >
-        <Search size={20} /> Search
+        <Search size={18} /> Search
       </button>
     </div>
   )

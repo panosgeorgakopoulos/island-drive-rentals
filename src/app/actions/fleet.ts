@@ -3,8 +3,14 @@
 import { prisma } from "@/lib/prisma"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
+import { auth } from "@/lib/auth"
 
 export async function createVehicle(formData: FormData) {
+  const session = await auth();
+  if (!session || session.user.role !== "admin") {
+    throw new Error("Unauthorized: Admin access required.");
+  }
+
   const name = formData.get("name") as string
   const type = formData.get("type") as string
   const category = formData.get("category") as string
@@ -40,6 +46,11 @@ export async function createVehicle(formData: FormData) {
 }
 
 export async function updateVehicle(id: string, formData: FormData) {
+  const session = await auth();
+  if (!session || session.user.role !== "admin") {
+    throw new Error("Unauthorized: Admin access required.");
+  }
+
   const name = formData.get("name") as string
   const type = formData.get("type") as string
   const category = formData.get("category") as string

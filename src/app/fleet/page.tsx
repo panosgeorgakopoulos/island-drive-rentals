@@ -10,15 +10,16 @@ export default async function PublicFleetPage({ searchParams }: { searchParams: 
   })
 
   return (
-    <div className="bg-gray-50 min-h-screen pb-20">
-      <div className="bg-white border-b py-12">
+    <div className="bg-[var(--color-surface-alt)] min-h-screen pb-20">
+      <div className="bg-white border-b border-gray-100 section-spacing !pb-12">
         <div className="max-w-6xl mx-auto px-6">
-          <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">Our Fleet</h1>
+          <p className="text-sm font-bold text-[var(--color-primary)] uppercase tracking-widest mb-3">Browse</p>
+          <h1 className="text-4xl font-extrabold tracking-tighter text-gray-900">Our Fleet</h1>
           <p className="text-lg text-gray-500 mt-2">Choose from our wide selection of premium vehicles.</p>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 mt-8">
+      <div className="max-w-6xl mx-auto px-6 mt-10">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {vehicles.map((v: any) => {
             const images = JSON.parse(v.images)
@@ -26,38 +27,40 @@ export default async function PublicFleetPage({ searchParams }: { searchParams: 
             const specs = JSON.parse(v.specs)
             
             return (
-              <div key={v.id} className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-shadow border overflow-hidden flex flex-col">
+              <div key={v.id} className="card-premium overflow-hidden flex flex-col group">
                 <div 
-                  className="h-56 bg-gray-200 bg-cover bg-center" 
+                  className="h-56 bg-gray-200 bg-cover bg-center relative overflow-hidden" 
                   style={{ backgroundImage: `url(${mainImg})` }} 
-                />
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
                 <div className="p-6 flex-1 flex flex-col">
                   <div className="flex justify-between items-start">
                     <div>
-                      <h3 className="text-xl font-bold text-gray-900">{v.name}</h3>
+                      <h3 className="text-lg font-bold text-gray-900">{v.name}</h3>
                       <p className="text-sm text-gray-500 capitalize">{v.category} {v.type}</p>
                     </div>
                     <div className="text-right">
-                      <span className="text-xl font-bold text-blue-600">€{v.basePrice}</span>
-                      <span className="text-xs text-gray-500 block">per day</span>
+                      <span className="text-xl font-extrabold text-[var(--color-primary)]">€{v.basePrice}</span>
+                      <span className="text-xs text-gray-400 block">/day</span>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-y-3 mt-6 mb-6 text-sm text-gray-600">
+                  <div className="grid grid-cols-2 gap-y-3 mt-6 mb-6 text-sm text-gray-500">
                     {specs.seats && (
-                      <div className="flex items-center gap-2"><Users size={16}/> {specs.seats} Seats</div>
+                      <div className="flex items-center gap-2"><Users size={15}/> {specs.seats} Seats</div>
                     )}
                     {specs.transmission && (
-                      <div className="flex items-center gap-2"><Settings size={16}/> {specs.transmission}</div>
+                      <div className="flex items-center gap-2"><Settings size={15}/> {specs.transmission}</div>
                     )}
                     {specs.fuel && (
-                      <div className="flex items-center gap-2"><Fuel size={16}/> {specs.fuel}</div>
+                      <div className="flex items-center gap-2"><Fuel size={15}/> {specs.fuel}</div>
                     )}
-                    <div className="flex items-center gap-2"><CarIcon size={16}/> AC</div>
+                    <div className="flex items-center gap-2"><CarIcon size={15}/> AC</div>
                   </div>
 
                   <div className="mt-auto">
-                    <Link href={`/fleet/${v.slug}${start && end ? `?start=${start}&end=${end}` : ''}`} className="block w-full text-center bg-gray-900 text-white py-3 rounded-xl font-medium hover:bg-gray-800 transition">
+                    <Link href={`/fleet/${v.slug}${start && end ? `?start=${start}&end=${end}` : ''}`} className="btn-primary w-full text-center text-sm !py-3">
                       View Details
                     </Link>
                   </div>
@@ -67,7 +70,7 @@ export default async function PublicFleetPage({ searchParams }: { searchParams: 
           })}
         </div>
         {vehicles.length === 0 && (
-           <div className="text-center py-20 bg-white rounded-2xl border">
+           <div className="text-center py-20 card-premium">
              <CarIcon size={48} className="mx-auto text-gray-300 mb-4" />
              <h3 className="text-xl font-bold text-gray-700">No vehicles available</h3>
              <p className="text-gray-500">Check back soon for new additions to our fleet.</p>

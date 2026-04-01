@@ -3,6 +3,33 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import { Users, Fuel, Car as CarIcon, Settings, Calendar, MapPin, Check } from "lucide-react"
 import { BookingSidebar } from "@/components/BookingSidebar"
+import { Metadata } from "next"
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  
+  const vehicle = await prisma.vehicle.findUnique({
+    where: { slug }
+  })
+
+  if (!vehicle) {
+    return {
+      title: "Vehicle Not Found",
+      description: "The requested vehicle could not be found."
+    }
+  }
+
+  const images = JSON.parse(vehicle.images)
+  const mainImg = images[0] || ""
+
+  return {
+    title: vehicle.name,
+    description: `Rent the ${vehicle.name} (${vehicle.category}) for just €${vehicle.basePrice}/day at Island Drive Rentals.`,
+    openGraph: {
+      images: [mainImg]
+    }
+  }
+}
 
 export default async function VehicleDetailsPage({ params, searchParams }: { params: Promise<{ slug: string }>, searchParams: Promise<{ start?: string, end?: string }> }) {
   const { slug } = await params
@@ -21,7 +48,7 @@ export default async function VehicleDetailsPage({ params, searchParams }: { par
   const specs = JSON.parse(vehicle.specs)
 
   return (
-    <div className="bg-gray-50 min-h-screen pb-20">
+    <div className="bg-gray-50 min-h-screen pb-36 md:pb-20">
       <div className="bg-white border-b">
         <div className="max-w-6xl mx-auto px-6 py-8">
           <Link href="/fleet" className="text-sm font-medium text-blue-600 hover:underline mb-4 inline-block">

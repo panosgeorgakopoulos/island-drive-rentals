@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma"
 import { CheckCircle, Clock, XCircle, FileSpreadsheet } from "lucide-react"
+import { cancelBookingAction } from "@/app/actions/booking"
 
 export default async function AdminBookingsPage() {
   const bookings = await prisma.booking.findMany({
@@ -30,6 +31,7 @@ export default async function AdminBookingsPage() {
               <th className="p-4 font-medium">Location</th>
               <th className="p-4 font-medium">Total Price</th>
               <th className="p-4 font-medium">Status</th>
+              <th className="p-4 font-medium text-right">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y text-sm">
@@ -69,11 +71,20 @@ export default async function AdminBookingsPage() {
                      </span>
                   )}
                 </td>
+                <td className="p-4 text-right">
+                  {b.status === "confirmed" && (
+                    <form action={cancelBookingAction.bind(null, b.id)}>
+                      <button type="submit" className="text-xs font-medium text-red-600 hover:text-red-700 bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded-lg transition">
+                        Cancel
+                      </button>
+                    </form>
+                  )}
+                </td>
               </tr>
             ))}
             {bookings.length === 0 && (
               <tr>
-                <td colSpan={6} className="p-8 text-center text-gray-500">
+                <td colSpan={7} className="p-8 text-center text-gray-500">
                   No bookings found.
                 </td>
               </tr>

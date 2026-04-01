@@ -21,7 +21,7 @@ export default auth((req) => {
       return NextResponse.redirect(new URL('/login', nextUrl))
     }
     if (user?.role !== 'admin') {
-      return NextResponse.redirect(new URL('/', nextUrl))
+      return NextResponse.redirect(new URL('/login?error=unauthorized', nextUrl))
     }
     return null
   }
