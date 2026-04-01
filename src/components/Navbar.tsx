@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { auth } from "@/lib/auth"
+import { logoutAction } from "@/app/actions/auth"
 
 export async function Navbar() {
   const session = await auth()
@@ -24,7 +25,7 @@ export async function Navbar() {
                 <Link href="/admin" className="text-gray-600 hover:text-blue-600 transition">Admin Panel</Link>
               )}
               <Link href="/profile" className="text-gray-600">{user.name || user.email}</Link>
-              <form action="/api/auth/signout" method="POST">
+              <form action={logoutAction}>
                 <button type="submit" className="text-red-600 hover:text-red-700 font-medium">Logout</button>
               </form>
             </div>

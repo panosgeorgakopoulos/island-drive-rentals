@@ -2,7 +2,7 @@
 
 import { prisma } from "@/lib/prisma"
 import bcryptjs from "bcryptjs"
-import { signIn } from "@/lib/auth"
+import { signIn, signOut } from "@/lib/auth"
 import { AuthError } from "next-auth"
 import { redirect } from "next/navigation"
 
@@ -18,6 +18,10 @@ export async function loginAction(formData: FormData) {
     }
     throw error // Important for Next.js redirects to work!
   }
+}
+
+export async function logoutAction() {
+  await signOut({ redirectTo: "/" })
 }
 
 export async function registerAction(formData: FormData) {
