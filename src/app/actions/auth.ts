@@ -8,12 +8,12 @@ import { redirect } from "next/navigation"
 
 export async function loginAction(formData: FormData) {
   try {
-    await signIn("credentials", Object.fromEntries(formData), { redirectTo: "/" })
+    await signIn("credentials", formData)
   } catch (error) {
     if (error instanceof AuthError) {
        switch (error.type) {
-         case "CredentialsSignin": return { error: "Invalid credentials." }
-         default: return { error: "Something went wrong." }
+         case "CredentialsSignin": redirect("/login?error=InvalidCredentials")
+         default: redirect("/login?error=SomethingWentWrong")
        }
     }
     throw error // Important for Next.js redirects to work!
@@ -26,12 +26,12 @@ export async function registerAction(formData: FormData) {
   const password = formData.get("password") as string
   
   if (!name || !email || !password || password.length < 6) {
-    return { error: "Invalid input or password too short." }
+    redirect("/register?error=InvalidInput")
   }
 
   const existing = await prisma.user.findUnique({ where: { email } })
   if (existing) {
-    return { error: "Email already taken." }
+    redirect("/register?error=EmailTaken")
   }
 
   const hashedPassword = await bcryptjs.hash(password, 10)
