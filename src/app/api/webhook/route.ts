@@ -16,26 +16,59 @@ export async function POST(req: NextRequest) {
       process.env.STRIPE_WEBHOOK_SECRET!
     )
   } catch (err: any) {
-    console.error(`Webhook Error: ${err.message}`)
+    console.error(`Webhook signature verification failed: ${err.message}`)
     return new NextResponse(`Webhook Error: ${err.message}`, { status: 400 })
   }
 
   if (event.type === "checkout.session.completed") {
-    const session = event.data.object as any
-    const bookingId = session.metadata?.bookingId
+    const stripeSession = event.data.object as any
+    const meta = stripeSession.metadata
 
-    if (bookingId) {
-      const booking = await prisma.booking.update({
-        where: { id: bookingId },
-        data: { 
-          status: "confirmed",
-          paymentIntentId: session.payment_intent as string
-        },
-        include: { user: true, vehicle: true }
+    if (!meta?.vehicleId || !meta?.userId || !meta?.startDate || !meta?.endDate) {
+      console.error("Webhook: Missing metadata in Stripe session", meta)
+      return new NextResponse("Missing metadata", { status: 400 })
+    }
+
+    const startDate = new Date(meta.startDate)
+    const endDate = new Date(meta.endDate)
+    const totalPrice = parseFloat(meta.totalPrice)
+    const pickupLocation = meta.pickupLocation || "Athens Airport"
+
+    try {
+      const booking = await prisma.$transaction(async (tx) => {
+        // 1. Check for overlapping CONFIRMED bookings (concurrent-safe inside transaction)
+        const overlapping = await tx.booking.findFirst({
+          where: {
+            vehicleId: meta.vehicleId,
+            status: "confirmed",
+            startDate: { lt: endDate },    // existing starts before requested ends
+            endDate: { gt: startDate },    // existing ends after requested starts
+          }
+        })
+
+        if (overlapping) {
+          throw new Error("VEHICLE_UNAVAILABLE")
+        }
+
+        // 2. Create CONFIRMED booking atomically
+        return tx.booking.create({
+          data: {
+            userId: meta.userId,
+            vehicleId: meta.vehicleId,
+            startDate,
+            endDate,
+            pickupLocation,
+            totalPrice,
+            status: "confirmed",
+            paymentIntentId: stripeSession.payment_intent as string
+          },
+          include: { user: true, vehicle: true }
+        })
       })
 
+      // 3. Google Sheets sync (fire-and-forget)
       if (process.env.GOOGLE_SPREADSHEET_ID) {
-        await appendToSheet([
+        appendToSheet([
           new Date().toISOString(),
           booking.user.email,
           `${booking.vehicle.name} - ${booking.vehicle.type}`,
@@ -45,10 +78,23 @@ export async function POST(req: NextRequest) {
           booking.totalPrice,
           booking.extras || "None",
           "confirmed"
-        ], process.env.GOOGLE_SPREADSHEET_ID)
+        ], process.env.GOOGLE_SPREADSHEET_ID).catch(console.error)
       }
 
-      // TODO: Send Confirmation Email 
+      // TODO: Send email confirmation
+
+    } catch (err: any) {
+      if (err.message === "VEHICLE_UNAVAILABLE") {
+        // Payment succeeded but vehicle was booked concurrently.
+        // In production you would issue a Stripe refund here.
+        console.error("CRITICAL: Stripe payment succeeded but vehicle is no longer available. Refund required.", {
+          paymentIntent: stripeSession.payment_intent,
+          vehicleId: meta.vehicleId,
+          dates: `${meta.startDate} - ${meta.endDate}`
+        })
+        return new NextResponse("Conflict: vehicle unavailable", { status: 409 })
+      }
+      throw err
     }
   }
 
