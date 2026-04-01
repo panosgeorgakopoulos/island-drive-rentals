@@ -17,6 +17,9 @@ export async function POST(req: NextRequest) {
     const startDateStr = formData.get("startDate") as string
     const endDateStr = formData.get("endDate") as string
     const pickupLocation = (formData.get("pickupLocation") as string) || "Athens Airport"
+    const supportedLocales = ['en', 'el', 'fr', 'it', 'es', 'de', 'sv', 'no']
+    const rawLang = (formData.get("lang") as string) || "en"
+    const lang = supportedLocales.includes(rawLang) ? rawLang : "en"
 
     if (!vehicleId || !startDateStr || !endDateStr) {
       return new NextResponse("Missing required fields", { status: 400 })
@@ -61,7 +64,6 @@ export async function POST(req: NextRequest) {
       // The booking is created ONLY inside the webhook on success.
       // ========================================================
       const checkoutSession = await stripe.checkout.sessions.create({
-        payment_method_types: ["card"],
         line_items: [
           {
             price_data: {
@@ -76,14 +78,15 @@ export async function POST(req: NextRequest) {
           },
         ],
         mode: "payment",
-        success_url: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/book/${vehicle.id}?start=${startDateStr}&end=${endDateStr}`,
+        success_url: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/${lang}/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/${lang}/book/${vehicle.id}?start=${startDateStr}&end=${endDateStr}`,
         metadata: {
           userId: session.user.id,
           vehicleId: vehicle.id,
           startDate: startDateStr,
           endDate: endDateStr,
           pickupLocation,
+          extras: extrasStr,
           totalPrice: String(totalPrice),
         }
       })
@@ -146,11 +149,11 @@ export async function POST(req: NextRequest) {
         ], process.env.GOOGLE_SPREADSHEET_ID).catch(console.error)
       }
 
-      return NextResponse.redirect(new URL("/success?mock=true", req.url))
+      return NextResponse.redirect(new URL(`/${lang}/success?mock=true`, req.url))
     } catch (err: any) {
       if (err.message === "VEHICLE_UNAVAILABLE") {
         return NextResponse.redirect(
-          new URL(`/book/${vehicle.id}?start=${startDateStr}&end=${endDateStr}&error=unavailable`, req.url)
+          new URL(`/${lang}/book/${vehicle.id}?start=${startDateStr}&end=${endDateStr}&error=unavailable`, req.url)
         )
       }
       throw err

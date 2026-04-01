@@ -10,14 +10,16 @@ export function BookingCheckoutClient({
   start,
   end,
   location,
-  pricing
+  pricing,
+  lang
 }: {
   vehicle: any,
   user: any,
   start: string,
   end: string,
   location: string,
-  pricing: { days: number, baseTotal: number, surgeAmount: number, discountAmount: number, finalTotal: number, hasSurge: boolean, hasDiscount: boolean, discountPercent: number }
+  pricing: { days: number, baseTotal: number, surgeAmount: number, discountAmount: number, finalTotal: number, hasSurge: boolean, hasDiscount: boolean, discountPercent: number },
+  lang: string
 }) {
   const [wantsInsurance, setWantsInsurance] = useState(false)
   const [wantsChildSeat, setWantsChildSeat] = useState(false)
@@ -60,6 +62,7 @@ export function BookingCheckoutClient({
             <input type="hidden" name="startDate" value={start || ""} />
             <input type="hidden" name="endDate" value={end || ""} />
             <input type="hidden" name="extras" value={extrasString} />
+            <input type="hidden" name="lang" value={lang} />
             
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
