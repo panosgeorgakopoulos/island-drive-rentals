@@ -8,8 +8,142 @@
     "language": "Språk"
   },
   "hero": {
-    "title": "Lei den Perfekte Bilen",
-    "subtitle": "Utforsk øyene i luksus.",
-    "cta": "Se Flåten"
+    "title": "Utforsk Øyas Frihet",
+    "subtitle": "Førsteklasses leiebiler, scootere og ATV-er for din perfekte ferie.",
+    "cta": "Se Flåten",
+    "viewAll": "Se Alle Kjøretøy"
+  },
+  "features": {
+    "topRated": "Topp Rangert",
+    "topRatedDesc": "4.9/5 Gjennomsnittlig Anmeldelse",
+    "noHidden": "Ingen Skjulte Gebyrer",
+    "noHiddenDesc": "Ryddig og transparent",
+    "freeCancel": "Gratis Avbestilling",
+    "freeCancelDesc": "Frem til 48 timer før",
+    "support": "24/7 Døgnvakt",
+    "supportDesc": "Alltid tilgjengelig",
+    "ourFleet": "Vår Flåte",
+    "premiumVehicles": "Premium Kjøretøy"
+  },
+  "fleetPage": {
+    "browse": "Bla gjennom",
+    "title": "Vår Flåte",
+    "subtitle": "Velg fra vårt utvalg av premium kjøretøy.",
+    "filters": "Filtrering",
+    "category": "Kategori",
+    "allCategories": "Alle Kategorier",
+    "economy": "Økonomi",
+    "suv": "SUV",
+    "van": "Kassebil",
+    "luxury": "Luksus",
+    "scooter": "Scooter",
+    "atv": "ATV",
+    "maxPrice": "Maks Pris",
+    "applyFilters": "Bruk Filter",
+    "perDay": "/dag",
+    "seats": "Seter",
+    "viewDetails": "Mer Info",
+    "noVehicles": "Ingen kjøretøy tilgjengelig",
+    "checkBack": "Sjekk innom for oppdateringer."
+  },
+  "booking": {
+    "checkoutTitle": "Fullfør bestilling",
+    "pickupDate": "Hentedato",
+    "returnDate": "Leveringsdato",
+    "pickupLocation": "Hentested",
+    "premiumExtras": "Premium Tilbehør",
+    "fullInsurance": "Full Forsikring (Kasko)",
+    "fullInsuranceDesc": "Ingen egenandel, glass og dekk inkl.",
+    "childSeat": "Barnesete",
+    "childSeatDesc": "Sikkerhet kommer først",
+    "additionalDriver": "Ekstra Sjåfør",
+    "additionalDriverDesc": "Del på kjøringen",
+    "customerInfo": "Kundeinformasjon",
+    "fullName": "Fullt Navn",
+    "email": "E-postadresse",
+    "confirmAndPay": "Bekreft & Betal",
+    "selectDatesFirst": "Velg gyldige datoer",
+    "bookingSummary": "Ordreoversikt",
+    "dailyRate": "Dagspris",
+    "duration": "Varighet",
+    "day": "dag",
+    "days": "dager",
+    "dates": "Dato",
+    "baseTotal": "Grunnpris",
+    "highSeason": "Høysesongtillegg (+20%)",
+    "weeklyDiscount": "Ukerabatt",
+    "total": "Total"
+  },
+  "locationsPage": {
+    "explore": "Destinasjoner",
+    "title": "Gode Lokasjoner",
+    "subtitle": "Tilgjengelig over alle greske topplokasjoner.",
+    "airports": "Pick-up punkter",
+    "searchVehicles": "Søk Etter Biler",
+    "locations": {
+      "santorini": {
+        "name": "Santorini",
+        "desc": "Utforsk imponerende vulkaner med sikker luksus."
+      },
+      "mykonos": {
+        "name": "Mykonos",
+        "desc": "Se nattelivet og nydelige sandstrender i premiumkomfort."
+      },
+      "crete": {
+        "name": "Kreta",
+        "desc": "Romslige SUVer for episke fjellturer."
+      },
+      "paros": {
+        "name": "Paros",
+        "desc": "Perfekt for kykladene."
+      },
+      "rhodes": {
+        "name": "Rhodos",
+        "desc": "En bil for store greske veier."
+      }
+    }
+  },
+  "aboutPage": {
+    "title": "Øyferie På Nytt",
+    "mission": "Etablert 2026 - vår visjon gir gremme luksus på utleiemarkedet.",
+    "section1Title": "Vår Flåte",
+    "section1Desc1": "Ingen lureri, bare kompromissløs glede.",
+    "section1Desc2": "Kvalitet i alle ledd og biler.",
+    "browseFleet": "Se vårt utvalg",
+    "whyChooseUs": "Vår Standard",
+    "whyChooseUsDesc": "Oppleve luksus på ferien.",
+    "noHiddenFees": "Ingen Ekstra Gebyrer",
+    "noHiddenFeesDesc": "Du betaler det du ser.",
+    "roadside": "24/7 Veihjelp",
+    "roadsideDesc": "Kjør alltid trygt.",
+    "newModels": "Nye Biler",
+    "newModelsDesc": "Helt splitter nye modeller.",
+    "vipDelivery": "VIP Oppmøte",
+    "vipDeliveryDesc": "Direkte fra terminal."
+  },
+  "contactPage": {
+    "title": "Kontakt",
+    "subtitle": "Kontakt oss for alt mulig.",
+    "hq": "Hovedkontor",
+    "addressTitle": "Adresse",
+    "addressVal1": "Ermou 123",
+    "addressVal2": "Syntagma",
+    "addressVal3": "Aten 10563",
+    "phoneTitle": "Telefon",
+    "emailTitle": "E-post",
+    "supportHours": "Åpningstider",
+    "supportHoursDesc1": "24t nødhjelp via telefon.",
+    "supportHoursDesc2": "Kontortider (09-18) hverdager.",
+    "sendMessage": "Sende melding",
+    "formDesc": "Svar vanlig om et døgn.",
+    "firstName": "Fornavn",
+    "lastName": "Etternavn",
+    "emailAddress": "E-post",
+    "message": "Din Beskjed",
+    "firstNamePlaceholder": "Ola",
+    "lastNamePlaceholder": "Nordmann",
+    "emailPlaceholder": "ola@example.no",
+    "messagePlaceholder": "Spør om hva som helst",
+    "sendButton": "Send Inn"
   }
 }

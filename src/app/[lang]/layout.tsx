@@ -3,7 +3,8 @@ import { Inter } from "next/font/google";
 import "../globals.css";
 import { Navbar } from "@/components/Navbar";
 import { auth } from "@/lib/auth";
-import { getDictionary } from "@/lib/dictionaries";
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,13 +38,14 @@ export default async function RootLayout({
 }>) {
   const { lang } = await params;
   const session = await auth();
-  const dict = await getDictionary(lang);
+  const messages = await getMessages();
 
   return (
     <html lang={lang}>
       <body className={`${inter.className} antialiased text-gray-900 bg-white`}>
-        <Navbar user={session?.user} dict={dict} lang={lang} />
-        {children}
+        <NextIntlClientProvider messages={messages}>
+          <Navbar user={session?.user} lang={lang} />
+          {children}
         <footer className="bg-gray-950 py-16 text-sm text-gray-500">
           <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="text-center md:text-left">
@@ -58,6 +60,7 @@ export default async function RootLayout({
             </div>
           </div>
         </footer>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

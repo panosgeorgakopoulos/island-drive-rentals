@@ -3,13 +3,147 @@
     "home": "Inicio",
     "fleet": "Nuestra Flota",
     "locations": "Ubicaciones",
-    "about": "Sobre Nosotros",
+    "about": "Nosotros",
     "contact": "Contacto",
     "language": "Idioma"
   },
   "hero": {
-    "title": "Alquila el Coche Perfecto",
-    "subtitle": "Explora las islas con lujo.",
-    "cta": "Ver Flota"
+    "title": "Explora la Libertad de las Islas",
+    "subtitle": "Alquiler premium de coches, scooters y ATVs para unas vacaciones perfectas.",
+    "cta": "Ver Flota",
+    "viewAll": "Ver Todos los Vehículos"
+  },
+  "features": {
+    "topRated": "Mejor Valorado",
+    "topRatedDesc": "Reseña media 4.9/5",
+    "noHidden": "Sin Cargos Ocultos",
+    "noHiddenDesc": "Precios transparentes",
+    "freeCancel": "Cancelación Gratuita",
+    "freeCancelDesc": "Hasta 48h antes",
+    "support": "Soporte 24/7",
+    "supportDesc": "Siempre a tu disposición",
+    "ourFleet": "Nuestra Flota",
+    "premiumVehicles": "Vehículos Premium"
+  },
+  "fleetPage": {
+    "browse": "Explorar",
+    "title": "Nuestra Flota",
+    "subtitle": "Elige entre nuestra amplia selección de vehículos premium.",
+    "filters": "Opciones de Filtro",
+    "category": "Categoría",
+    "allCategories": "Todas las Categorías",
+    "economy": "Económico",
+    "suv": "SUV",
+    "van": "Furgoneta",
+    "luxury": "Lujo",
+    "scooter": "Scooter",
+    "atv": "ATV",
+    "maxPrice": "Precio Máx",
+    "applyFilters": "Aplicar Filtros",
+    "perDay": "/día",
+    "seats": "Plazas",
+    "viewDetails": "Ver Detalles",
+    "noVehicles": "No hay vehículos disponibles",
+    "checkBack": "Vuelve pronto para ver nuestras novedades."
+  },
+  "booking": {
+    "checkoutTitle": "Completa tu reserva",
+    "pickupDate": "Fecha de Recogida",
+    "returnDate": "Fecha de Devolución",
+    "pickupLocation": "Lugar de Recogida",
+    "premiumExtras": "Extras Premium",
+    "fullInsurance": "Seguro de Protección Total",
+    "fullInsuranceDesc": "Cero franquicia, cobertura de lunas y neumáticos",
+    "childSeat": "Silla Infantil",
+    "childSeatDesc": "Seguridad ante todo para los más pequeños",
+    "additionalDriver": "Conductor Adicional",
+    "additionalDriverDesc": "Comparte la conducción",
+    "customerInfo": "Información del Cliente",
+    "fullName": "Nombre Completo",
+    "email": "Correo Electrónico",
+    "confirmAndPay": "Confirmar y Pagar",
+    "selectDatesFirst": "Selecciona fechas válidas primero",
+    "bookingSummary": "Resumen de Reserva",
+    "dailyRate": "Tarifa",
+    "duration": "Duración",
+    "day": "día",
+    "days": "días",
+    "dates": "Fechas",
+    "baseTotal": "Total Base",
+    "highSeason": "Recargo Temporada Alta (+20%)",
+    "weeklyDiscount": "Descuento Semanal",
+    "total": "Total"
+  },
+  "locationsPage": {
+    "explore": "Destinos",
+    "title": "Ubicaciones Exclusivas",
+    "subtitle": "Disponible en las islas griegas más exclusivas. Recoge tu vehículo al bajar del avión o ferry.",
+    "airports": "Puntos de Recogida",
+    "searchVehicles": "Buscar Vehículos",
+    "locations": {
+      "santorini": {
+        "name": "Santorini",
+        "desc": "Experimenta los majestuosos atardeceres y paisajes volcánicos con la máxima comodidad."
+      },
+      "mykonos": {
+        "name": "Mikonos",
+        "desc": "Navega por la vibrante vida nocturna y las playas de arena blanca."
+      },
+      "crete": {
+        "name": "Creta",
+        "desc": "Descubre ruinas antiguas y enormes litorales con nuestros SUV de lujo."
+      },
+      "paros": {
+        "name": "Paros",
+        "desc": "La experiencia cicládica requiere el descapotable perfecto."
+      },
+      "rhodes": {
+        "name": "Rodas",
+        "desc": "Conduce por ciudades medievales y bahías cristalinas."
+      }
+    }
+  },
+  "aboutPage": {
+    "title": "Redefiniendo el Viaje",
+    "mission": "Fundada en 2026, Island Drive Rentals ofrece un lujo sin concesiones y transparencia en el mercado griego.",
+    "section1Title": "Nuestra Flota, Tu Libertad",
+    "section1Desc1": "Creemos que el viaje debe ser tan notable como el destino. Olvida los cargos ocultos, modelos anticuados y contratos confusos.",
+    "section1Desc2": "Cada vehículo se mantiene según los más altos estándares y se renueva cada año.",
+    "browseFleet": "Explora nuestra flota",
+    "whyChooseUs": "Por qué Elegirnos",
+    "whyChooseUsDesc": "Experimenta la diferencia de un servicio premium diseñado para viajeros modernos.",
+    "noHiddenFees": "Cero Cargos Ocultos",
+    "noHiddenFeesDesc": "Precios transparentes. Opciones de cobertura total al reservar.",
+    "roadside": "Asistencia 24/7",
+    "roadsideDesc": "Conduce con tranquilidad. Nuestro equipo opera día y noche en todas las islas.",
+    "newModels": "Modelos Nuevos",
+    "newModelsDesc": "Nuestra flota consta estrictamente de vehículos recientes.",
+    "vipDelivery": "Entrega VIP en Aeropuerto",
+    "vipDeliveryDesc": "Llaves entregadas personalmente a tu llegada. Sin esperar filas."
+  },
+  "contactPage": {
+    "title": "Contáctanos",
+    "subtitle": "Nuestro equipo de soporte está disponible 24/7.",
+    "hq": "Sede Corporativa",
+    "addressTitle": "Dirección",
+    "addressVal1": "Calle Ermou 123",
+    "addressVal2": "Plaza Sintagma",
+    "addressVal3": "Atenas, Grecia 10563",
+    "phoneTitle": "Teléfono",
+    "emailTitle": "Email",
+    "supportHours": "Horario de Atención",
+    "supportHoursDesc1": "Soporte telefónico 24/7 para alquileres activos.",
+    "supportHoursDesc2": "Para consultas generales, de lunes a viernes, 09:00 - 18:00 (EET).",
+    "sendMessage": "Envíanos un mensaje",
+    "formDesc": "Rellena el formulario y nuestro equipo responderá en menos de 24 horas.",
+    "firstName": "Nombre",
+    "lastName": "Apellidos",
+    "emailAddress": "Correo Electrónico",
+    "message": "Mensaje",
+    "firstNamePlaceholder": "Juan",
+    "lastNamePlaceholder": "Pérez",
+    "emailPlaceholder": "juan@example.com",
+    "messagePlaceholder": "¿En qué podemos ayudarte?",
+    "sendButton": "Enviar Mensaje"
   }
 }

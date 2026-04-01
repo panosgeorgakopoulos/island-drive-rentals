@@ -2,11 +2,11 @@ import Link from "next/link";
 import { Search, Star, Shield, Clock, Headphones } from "lucide-react";
 import { HeroSearch } from "@/components/HeroSearch";
 import { prisma } from "@/lib/prisma";
-import { getDictionary } from "@/lib/dictionaries";
+import { getTranslations } from "next-intl/server";
 
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
-  const dict = await getDictionary(lang);
+  const t = await getTranslations();
   const featuredVehicles = await prisma.vehicle.findMany({
     where: { isActive: true },
     take: 3,
@@ -26,10 +26,10 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         
         <div className="relative z-20 w-full max-w-5xl mx-auto px-6 text-center text-white space-y-8">
           <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter drop-shadow-lg leading-[0.95]">
-            {dict.hero?.title || 'Explore the Island Freedom'}
+            {t('hero.title')}
           </h1>
           <p className="text-lg md:text-xl font-light text-gray-300 max-w-2xl mx-auto">
-            {dict.hero?.subtitle || 'Premium car, scooter, and ATV rentals for your perfect vacation.'}
+            {t('hero.subtitle')}
           </p>
 
           <HeroSearch />
@@ -43,29 +43,29 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             <div className="bg-[var(--color-primary-light)] w-14 h-14 mx-auto rounded-xl flex items-center justify-center">
               <Star className="text-[var(--color-primary)]" size={24} />
             </div>
-            <h3 className="font-bold text-sm">Top Rated</h3>
-            <p className="text-xs text-gray-500">4.9/5 Average Review</p>
+            <h3 className="font-bold text-sm">{t('features.topRated')}</h3>
+            <p className="text-xs text-gray-500">{t('features.topRatedDesc')}</p>
           </div>
           <div className="space-y-3">
             <div className="bg-[var(--color-primary-light)] w-14 h-14 mx-auto rounded-xl flex items-center justify-center">
               <Shield className="text-[var(--color-primary)]" size={24} />
             </div>
-            <h3 className="font-bold text-sm">No Hidden Fees</h3>
-            <p className="text-xs text-gray-500">Transparent pricing</p>
+            <h3 className="font-bold text-sm">{t('features.noHidden')}</h3>
+            <p className="text-xs text-gray-500">{t('features.noHiddenDesc')}</p>
           </div>
           <div className="space-y-3">
             <div className="bg-[var(--color-primary-light)] w-14 h-14 mx-auto rounded-xl flex items-center justify-center">
               <Clock className="text-[var(--color-primary)]" size={24} />
             </div>
-            <h3 className="font-bold text-sm">Free Cancellation</h3>
-            <p className="text-xs text-gray-500">Up to 48h before pick-up</p>
+            <h3 className="font-bold text-sm">{t('features.freeCancel')}</h3>
+            <p className="text-xs text-gray-500">{t('features.freeCancelDesc')}</p>
           </div>
           <div className="space-y-3">
             <div className="bg-[var(--color-primary-light)] w-14 h-14 mx-auto rounded-xl flex items-center justify-center">
               <Headphones className="text-[var(--color-primary)]" size={24} />
             </div>
-            <h3 className="font-bold text-sm">24/7 Support</h3>
-            <p className="text-xs text-gray-500">Always here for you</p>
+            <h3 className="font-bold text-sm">{t('features.support')}</h3>
+            <p className="text-xs text-gray-500">{t('features.supportDesc')}</p>
           </div>
         </div>
       </section>
@@ -74,8 +74,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       <section className="section-spacing bg-[var(--color-surface-alt)] flex-1">
         <div className="max-w-6xl mx-auto px-6 text-center space-y-12">
           <div>
-            <p className="text-sm font-bold text-[var(--color-primary)] uppercase tracking-widest mb-3">Our Fleet</p>
-            <h2 className="text-4xl font-extrabold tracking-tighter">Premium Vehicles</h2>
+            <p className="text-sm font-bold text-[var(--color-primary)] uppercase tracking-widest mb-3">{t('features.ourFleet')}</p>
+            <h2 className="text-4xl font-extrabold tracking-tighter">{t('features.premiumVehicles')}</h2>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
@@ -97,11 +97,11 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                       </div>
                       <div className="text-right">
                         <span className="text-xl font-extrabold text-[var(--color-primary)]">€{vehicle.basePrice}</span>
-                        <span className="text-xs text-gray-400 block">/day</span>
+                        <span className="text-xs text-gray-400 block">{t('fleetPage.perDay')}</span>
                       </div>
                     </div>
                     <div className="flex gap-4 text-xs text-gray-500 font-medium mt-4 mb-6 uppercase tracking-wide">
-                      {specs.seats && <span>{specs.seats} Seats</span>}
+                      {specs.seats && <span>{specs.seats} {t('fleetPage.seats')}</span>}
                       {specs.seats && specs.transmission && <span className="text-gray-300">•</span>}
                       {specs.transmission && <span>{specs.transmission}</span>}
                       {specs.fuel && <span className="text-gray-300">•</span>}
@@ -109,7 +109,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                     </div>
                     <div className="mt-auto">
                       <Link href={`/${lang}/fleet/${vehicle.slug}`} className="btn-primary w-full text-center text-sm !py-3">
-                        View Details
+                        {t('fleetPage.viewDetails')}
                       </Link>
                     </div>
                   </div>
@@ -120,7 +120,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           
           <div className="pt-4">
             <Link href={`/${lang}/fleet`} className="btn-secondary">
-              View All Vehicles
+              {t('hero.viewAll')}
             </Link>
           </div>
         </div>

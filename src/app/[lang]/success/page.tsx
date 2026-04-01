@@ -3,9 +3,17 @@ import { CheckCircle, Calendar, MapPin, Car, FileText } from "lucide-react"
 import { prisma } from "@/lib/prisma"
 import { auth } from "@/lib/auth"
 import { PrintButton } from "@/components/PrintButton"
+import { getDictionary } from "@/lib/dictionaries"
 
-export default async function SuccessPage({ searchParams }: { searchParams: Promise<{ bookingId?: string }> }) {
+export default async function SuccessPage({ 
+  searchParams, params 
+}: { 
+  searchParams: Promise<{ bookingId?: string }>,
+  params: Promise<{ lang: string }>
+}) {
   const { bookingId } = await searchParams
+  const { lang } = await params
+  const dict = await getDictionary(lang)
   const session = await auth()
   
   let booking = null
@@ -28,7 +36,7 @@ export default async function SuccessPage({ searchParams }: { searchParams: Prom
       <div className="min-h-screen flex items-center justify-center p-6 bg-gray-50">
         <div className="bg-white p-8 rounded-2xl shadow-sm border text-center max-w-md w-full">
           <h2 className="text-xl font-bold mb-4">No Recent Booking Found</h2>
-          <Link href="/profile" className="text-blue-600 font-medium hover:underline">View My Profile</Link>
+          <Link href={`/${lang}/profile`} className="text-blue-600 font-medium hover:underline">View My Profile</Link>
         </div>
       </div>
     )
@@ -49,8 +57,8 @@ export default async function SuccessPage({ searchParams }: { searchParams: Prom
               <CheckCircle className="text-green-500" size={32} />
             </div>
             <div>
-              <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">Booking Confirmed</h1>
-              <p className="text-gray-500 font-medium">Thank you for choosing Island Drive Rentals</p>
+              <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">{dict.successPage?.title || 'Booking Confirmed'}</h1>
+              <p className="text-gray-500 font-medium">{dict.successPage?.thanks || 'Thank you for choosing Island Drive Rentals'}</p>
             </div>
           </div>
           <div className="text-left md:text-right">
@@ -159,7 +167,7 @@ export default async function SuccessPage({ searchParams }: { searchParams: Prom
       <div className="mt-8 flex gap-4 print:hidden max-w-3xl w-full justify-end">
         <PrintButton />
         <Link 
-          href="/fleet"
+          href={`/${lang}/fleet`}
           className="bg-blue-600 text-white font-bold py-3 px-8 rounded-xl hover:bg-blue-700 transition"
         >
           Book Another Vehicle

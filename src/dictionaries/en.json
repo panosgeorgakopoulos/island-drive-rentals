@@ -8,8 +8,142 @@
     "language": "Language"
   },
   "hero": {
-    "title": "Rent the Perfect Car",
-    "subtitle": "Explore the islands in luxury.",
-    "cta": "Browse Fleet"
+    "title": "Explore the Island Freedom",
+    "subtitle": "Premium car, scooter, and ATV rentals for your perfect vacation.",
+    "cta": "Browse Fleet",
+    "viewAll": "View All Vehicles"
+  },
+  "features": {
+    "topRated": "Top Rated",
+    "topRatedDesc": "4.9/5 Average Review",
+    "noHidden": "No Hidden Fees",
+    "noHiddenDesc": "Transparent pricing",
+    "freeCancel": "Free Cancellation",
+    "freeCancelDesc": "Up to 48h before pick-up",
+    "support": "24/7 Support",
+    "supportDesc": "Always here for you",
+    "ourFleet": "Our Fleet",
+    "premiumVehicles": "Premium Vehicles"
+  },
+  "fleetPage": {
+    "browse": "Browse",
+    "title": "Our Fleet",
+    "subtitle": "Choose from our wide selection of premium vehicles.",
+    "filters": "Filter Options",
+    "category": "Category",
+    "allCategories": "All Categories",
+    "economy": "Economy",
+    "suv": "SUV",
+    "van": "Van",
+    "luxury": "Luxury",
+    "scooter": "Scooter",
+    "atv": "ATV",
+    "maxPrice": "Max Price",
+    "applyFilters": "Apply Filters",
+    "perDay": "/day",
+    "seats": "Seats",
+    "viewDetails": "View Details",
+    "noVehicles": "No vehicles available",
+    "checkBack": "Check back soon for new additions to our fleet."
+  },
+  "booking": {
+    "checkoutTitle": "Complete your booking",
+    "pickupDate": "Pickup Date",
+    "returnDate": "Return Date",
+    "pickupLocation": "Pickup Location",
+    "premiumExtras": "Premium Extras",
+    "fullInsurance": "Full Protection Insurance",
+    "fullInsuranceDesc": "Zero excess, glass & tire cover",
+    "childSeat": "Child Seat",
+    "childSeatDesc": "Safety first for the little ones",
+    "additionalDriver": "Additional Driver",
+    "additionalDriverDesc": "Share the driving duties",
+    "customerInfo": "Customer Information",
+    "fullName": "Full Name",
+    "email": "Email Address",
+    "confirmAndPay": "Confirm & Pay",
+    "selectDatesFirst": "Select valid dates first",
+    "bookingSummary": "Booking Summary",
+    "dailyRate": "Daily Rate",
+    "duration": "Duration",
+    "day": "day",
+    "days": "days",
+    "dates": "Dates",
+    "baseTotal": "Base Total",
+    "highSeason": "High Season Surge (+20%)",
+    "weeklyDiscount": "Weekly Discount",
+    "total": "Total"
+  },
+  "locationsPage": {
+    "explore": "Destinations",
+    "title": "Prime Locations",
+    "subtitle": "Available across the most exclusive Greek Islands. Pick up your vehicle right off the plane or ferry.",
+    "airports": "Pick-up Points",
+    "searchVehicles": "Search Vehicles",
+    "locations": {
+      "santorini": {
+        "name": "Santorini",
+        "desc": "Experience the majestic sunsets and volcanic landscapes in premium comfort."
+      },
+      "mykonos": {
+        "name": "Mykonos",
+        "desc": "Navigate the vibrant nightlife and pristine white sandy beaches."
+      },
+      "crete": {
+        "name": "Crete",
+        "desc": "Discover ancient ruins, deep gorges, and expansive coastlines with our luxury SUVs."
+      },
+      "paros": {
+        "name": "Paros",
+        "desc": "The quintessential cycladic experience requires the perfect convertible."
+      },
+      "rhodes": {
+        "name": "Rhodes",
+        "desc": "Drive through medieval towns and crystal clear bays in absolute luxury."
+      }
+    }
+  },
+  "aboutPage": {
+    "title": "Redefining Island Travel",
+    "mission": "Founded in 2026, Island Drive Rentals brings uncompromising luxury, safety, and transparency to the Greek rental market.",
+    "section1Title": "Our Fleet, Your Freedom",
+    "section1Desc1": "We believe that the journey should be as remarkable as the destination. Say goodbye to hidden mileage fees, outdated models, and confusing contracts.",
+    "section1Desc2": "Every vehicle in the Island Drive fleet is maintained to the highest manufacturer standards and refreshed every season. From nimble scooters for Cycladic alleyways to premium SUVs for mountainous ascents, your perfect ride awaits.",
+    "browseFleet": "Browse our fleet",
+    "whyChooseUs": "Why Choose Us",
+    "whyChooseUsDesc": "Experience the difference of a truly premium rental service tailored for modern travelers.",
+    "noHiddenFees": "No Hidden Fees",
+    "noHiddenFeesDesc": "Transparent pricing from day one. Full coverage options available at checkout.",
+    "roadside": "24/7 Roadside",
+    "roadsideDesc": "Drive with peace of mind. Our support team is active around the clock across all islands.",
+    "newModels": "New Models",
+    "newModelsDesc": "Our fleet consists strictly of late-model vehicles featuring the latest safety tech.",
+    "vipDelivery": "VIP Airport Delivery",
+    "vipDeliveryDesc": "Keys handed directly to you at arrivals. Skip the rental desk lines entirely."
+  },
+  "contactPage": {
+    "title": "Contact Us",
+    "subtitle": "Our premium support team is available 24/7 to assist with your rental queries.",
+    "hq": "Corporate Headquarters",
+    "addressTitle": "Address",
+    "addressVal1": "123 Ermou Street",
+    "addressVal2": "Syntagma Square",
+    "addressVal3": "Athens, Greece 10563",
+    "phoneTitle": "Phone",
+    "emailTitle": "Email",
+    "supportHours": "Support Hours",
+    "supportHoursDesc1": "Phone support is available 24/7 for active rentals.",
+    "supportHoursDesc2": "For general inquiries or reservations, our administrative office operates Monday–Friday, 09:00 - 18:00 (EET).",
+    "sendMessage": "Send us a message",
+    "formDesc": "Fill out the form below and our team will get back to you within 24 hours.",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "emailAddress": "Email Address",
+    "message": "Message",
+    "firstNamePlaceholder": "John",
+    "lastNamePlaceholder": "Doe",
+    "emailPlaceholder": "john@example.com",
+    "messagePlaceholder": "How can we help you?",
+    "sendButton": "Send Message"
   }
 }

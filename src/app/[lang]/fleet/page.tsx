@@ -2,9 +2,17 @@ import { prisma } from "@/lib/prisma"
 import Link from "next/link"
 import { Users, Fuel, Car as CarIcon, Settings } from "lucide-react"
 import { FleetFilters } from "@/components/FleetFilters"
+import { getTranslations } from "next-intl/server"
 
-export default async function PublicFleetPage({ searchParams }: { searchParams: Promise<{ start?: string, end?: string, category?: string, maxPrice?: string }> }) {
+export default async function PublicFleetPage({ 
+  searchParams, params 
+}: { 
+  searchParams: Promise<{ start?: string, end?: string, category?: string, maxPrice?: string }>,
+  params: Promise<{ lang: string }> 
+}) {
   const { start, end, category, maxPrice } = await searchParams;
+  const { lang } = await params;
+  const t = await getTranslations('fleetPage');
   
   const where: any = { isActive: true }
   if (category) where.category = category
@@ -19,9 +27,9 @@ export default async function PublicFleetPage({ searchParams }: { searchParams: 
     <div className="bg-[var(--color-surface-alt)] min-h-screen pb-20">
       <div className="bg-white border-b border-gray-100 section-spacing !pb-12">
         <div className="max-w-6xl mx-auto px-6">
-          <p className="text-sm font-bold text-[var(--color-primary)] uppercase tracking-widest mb-3">Browse</p>
-          <h1 className="text-4xl font-extrabold tracking-tighter text-gray-900">Our Fleet</h1>
-          <p className="text-lg text-gray-500 mt-2">Choose from our wide selection of premium vehicles.</p>
+          <p className="text-sm font-bold text-[var(--color-primary)] uppercase tracking-widest mb-3">{t('browse')}</p>
+          <h1 className="text-4xl font-extrabold tracking-tighter text-gray-900">{t('title')}</h1>
+          <p className="text-lg text-gray-500 mt-2">{t('subtitle')}</p>
         </div>
       </div>
 
@@ -56,13 +64,13 @@ export default async function PublicFleetPage({ searchParams }: { searchParams: 
                     </div>
                     <div className="text-right">
                       <span className="text-xl font-extrabold text-[var(--color-primary)]">€{v.basePrice}</span>
-                      <span className="text-xs text-gray-400 block">/day</span>
+                      <span className="text-xs text-gray-400 block">{t('perDay')}</span>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-y-3 mt-6 mb-6 text-sm text-gray-500">
                     {specs.seats && (
-                      <div className="flex items-center gap-2"><Users size={15}/> {specs.seats} Seats</div>
+                      <div className="flex items-center gap-2"><Users size={15}/> {specs.seats} {t('seats')}</div>
                     )}
                     {specs.transmission && (
                       <div className="flex items-center gap-2"><Settings size={15}/> {specs.transmission}</div>
@@ -74,8 +82,8 @@ export default async function PublicFleetPage({ searchParams }: { searchParams: 
                   </div>
 
                   <div className="mt-auto">
-                    <Link href={`/fleet/${v.slug}${start && end ? `?start=${start}&end=${end}` : ''}`} className="btn-primary w-full text-center text-sm !py-3">
-                      View Details
+                    <Link href={`/${lang}/fleet/${v.slug}${start && end ? `?start=${start}&end=${end}` : ''}`} className="btn-primary w-full text-center text-sm !py-3">
+                      {t('viewDetails')}
                     </Link>
                   </div>
                 </div>
@@ -86,8 +94,8 @@ export default async function PublicFleetPage({ searchParams }: { searchParams: 
           {vehicles.length === 0 && (
              <div className="text-center py-20 card-premium mt-8">
                <CarIcon size={48} className="mx-auto text-gray-300 mb-4" />
-               <h3 className="text-xl font-bold text-gray-700">No vehicles available</h3>
-               <p className="text-gray-500">Check back soon for new additions to our fleet.</p>
+               <h3 className="text-xl font-bold text-gray-700">{t('noVehicles')}</h3>
+               <p className="text-gray-500">{t('checkBack')}</p>
              </div>
           )}
         </div>

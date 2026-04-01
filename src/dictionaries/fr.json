@@ -2,14 +2,148 @@
   "nav": {
     "home": "Accueil",
     "fleet": "Notre Flotte",
-    "locations": "Lieux",
+    "locations": "Emplacements",
     "about": "À Propos",
     "contact": "Contact",
     "language": "Langue"
   },
   "hero": {
-    "title": "Louez la Voiture Parfaite",
-    "subtitle": "Explorez les îles avec luxe.",
-    "cta": "Voir la Flotte"
+    "title": "Explorez la Liberté des Îles",
+    "subtitle": "Location de véhicules premium, scooters et VTT pour des vacances parfaites.",
+    "cta": "Parcourir la Flotte",
+    "viewAll": "Voir Tous les Véhicules"
+  },
+  "features": {
+    "topRated": "Mieux Noté",
+    "topRatedDesc": "Avis moyen 4.9/5",
+    "noHidden": "Aucun Frais Caché",
+    "noHiddenDesc": "Tarification transparente",
+    "freeCancel": "Annulation Gratuite",
+    "freeCancelDesc": "Jusqu'à 48h avant",
+    "support": "Assistance 24/7",
+    "supportDesc": "Toujours là pour vous",
+    "ourFleet": "Notre Flotte",
+    "premiumVehicles": "Véhicules Premium"
+  },
+  "fleetPage": {
+    "browse": "Parcourir",
+    "title": "Notre Flotte",
+    "subtitle": "Choisissez parmi notre large sélection de véhicules premium.",
+    "filters": "Options de Filtrage",
+    "category": "Catégorie",
+    "allCategories": "Toutes les Catégories",
+    "economy": "Économique",
+    "suv": "SUV",
+    "van": "Van",
+    "luxury": "Luxe",
+    "scooter": "Scooter",
+    "atv": "VTT",
+    "maxPrice": "Prix Max",
+    "applyFilters": "Appliquer les Filtres",
+    "perDay": "/jour",
+    "seats": "Sièges",
+    "viewDetails": "Voir les Détails",
+    "noVehicles": "Aucun véhicule disponible",
+    "checkBack": "Revenez bientôt pour de nouveaux ajouts."
+  },
+  "booking": {
+    "checkoutTitle": "Finalisez votre réservation",
+    "pickupDate": "Date de Prise en Charge",
+    "returnDate": "Date de Retour",
+    "pickupLocation": "Lieu de Prise en Charge",
+    "premiumExtras": "Options Premium",
+    "fullInsurance": "Assurance Protection Complète",
+    "fullInsuranceDesc": "Zéro franchise, couverture bris de glace et pneus",
+    "childSeat": "Siège Enfant",
+    "childSeatDesc": "Sécurité avant tout pour les plus petits",
+    "additionalDriver": "Conducteur Supplémentaire",
+    "additionalDriverDesc": "Partagez la conduite",
+    "customerInfo": "Informations Client",
+    "fullName": "Nom Complet",
+    "email": "Adresse Email",
+    "confirmAndPay": "Confirmer et Payer",
+    "selectDatesFirst": "Sélectionnez d'abord des dates valides",
+    "bookingSummary": "Résumé de Réservation",
+    "dailyRate": "Période",
+    "duration": "Durée",
+    "day": "jour",
+    "days": "jours",
+    "dates": "Dates",
+    "baseTotal": "Total de Base",
+    "highSeason": "Surtaxe Haute Saison (+20%)",
+    "weeklyDiscount": "Remise Hebdomadaire",
+    "total": "Total"
+  },
+  "locationsPage": {
+    "explore": "Destinations",
+    "title": "Emplacements de Choix",
+    "subtitle": "Disponible sur les îles grecques les plus exclusives. Récupérez votre véhicule dès votre descente de l'avion ou du ferry.",
+    "airports": "Points de Prise en Charge",
+    "searchVehicles": "Rechercher des Véhicules",
+    "locations": {
+      "santorini": {
+        "name": "Santorin",
+        "desc": "Découvrez les couchers de soleil majestueux et les paysages volcaniques dans un confort absolu."
+      },
+      "mykonos": {
+        "name": "Mykonos",
+        "desc": "Naviguez entre une vie nocturne vibrante et des plages de sable blanc immaculées."
+      },
+      "crete": {
+        "name": "Crète",
+        "desc": "Découvrez des ruines antiques et de vastes côtes à bord de nos SUV de luxe."
+      },
+      "paros": {
+        "name": "Paros",
+        "desc": "L'expérience cycladique parfaite exige le cabriolet idéal."
+      },
+      "rhodes": {
+        "name": "Rhodes",
+        "desc": "Conduisez à travers des villes médiévales et des baies cristallines."
+      }
+    }
+  },
+  "aboutPage": {
+    "title": "Redéfinir le Voyage sur les Îles",
+    "mission": "Fondée en 2026, Island Drive Rentals apporte un niveau de luxe, de sécurité et de transparence sans compromis sur le marché grec de la location.",
+    "section1Title": "Notre Flotte, Votre Liberté",
+    "section1Desc1": "Nous croyons que le voyage doit être aussi remarquable que la destination. Dites adieu aux frais de kilométrage cachés, aux modèles obsolètes et aux contrats confus.",
+    "section1Desc2": "Chaque véhicule de notre flotte est entretenu selon les normes les plus strictes du constructeur et renouvelé chaque saison. Du scooter agile pour les ruelles cycladiques aux SUV premium, votre véhicule idéal vous attend.",
+    "browseFleet": "Parcourir notre flotte",
+    "whyChooseUs": "Pourquoi Nous Choisir",
+    "whyChooseUsDesc": "Expérimentez la différence d'un service de location véritablement haut de gamme.",
+    "noHiddenFees": "Aucun Frais Caché",
+    "noHiddenFeesDesc": "Tarification transparente dès le premier jour.",
+    "roadside": "Assistance 24/7",
+    "roadsideDesc": "Conduisez l'esprit tranquille. Notre équipe est active 24h/24.",
+    "newModels": "Nouveaux Modèles",
+    "newModelsDesc": "Véhicules récents équipés des dernières technologies de sécurité.",
+    "vipDelivery": "Livraison VIP aéroport",
+    "vipDeliveryDesc": "Les clés vous sont remises directement à l'arrivée. Évitez les files d'attente."
+  },
+  "contactPage": {
+    "title": "Contactez-nous",
+    "subtitle": "Notre équipe d'assistance premium est disponible 24/7.",
+    "hq": "Siège Social",
+    "addressTitle": "Adresse",
+    "addressVal1": "123 rue Ermou",
+    "addressVal2": "Place Syntagma",
+    "addressVal3": "Athènes, Grèce 10563",
+    "phoneTitle": "Téléphone",
+    "emailTitle": "Email",
+    "supportHours": "Heures d'Ouverture",
+    "supportHoursDesc1": "L'assistance téléphonique est disponible 24/7 pour les locations actives.",
+    "supportHoursDesc2": "Notre bureau administratif est ouvert du lundi au vendredi, 09h00 - 18h00.",
+    "sendMessage": "Envoyez-nous un message",
+    "formDesc": "Remplissez le formulaire et notre équipe vous répondra sous 24h.",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "emailAddress": "Adresse Email",
+    "message": "Message",
+    "firstNamePlaceholder": "Jean",
+    "lastNamePlaceholder": "Dupont",
+    "emailPlaceholder": "jean@example.com",
+    "messagePlaceholder": "Comment pouvons-nous vous aider ?",
+    "sendButton": "Envoyer le Message"
   }
 }

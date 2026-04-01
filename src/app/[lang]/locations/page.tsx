@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Search } from "lucide-react"
+import { getTranslations } from "next-intl/server"
 
 const LOCATIONS = [
   {
@@ -39,16 +40,19 @@ const LOCATIONS = [
   }
 ]
 
-export default function LocationsPage() {
+export default async function LocationsPage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  const t = await getTranslations('locationsPage');
+
   return (
     <div className="bg-[var(--color-surface-alt)] min-h-screen pb-20">
       {/* Hero */}
       <div className="bg-gray-900 border-b relative">
         <div className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay" style={{backgroundImage: 'url("https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=2000")'}} />
         <div className="max-w-6xl mx-auto px-6 section-spacing relative z-10 text-white">
-          <p className="text-sm font-bold text-[var(--color-primary)] uppercase tracking-widest mb-3">Destinations</p>
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">Prime Locations</h1>
-          <p className="text-lg text-gray-300 mt-4 max-w-xl text-balance">Available across the most exclusive Greek Islands. Pick up your vehicle right off the plane or ferry.</p>
+          <p className="text-sm font-bold text-[var(--color-primary)] uppercase tracking-widest mb-3">{t('explore')}</p>
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">{t('title')}</h1>
+          <p className="text-lg text-gray-300 mt-4 max-w-xl text-balance">{t('subtitle')}</p>
         </div>
       </div>
 
@@ -61,12 +65,12 @@ export default function LocationsPage() {
                 style={{ backgroundImage: `url(${loc.img})` }}
               >
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <h2 className="absolute bottom-6 left-6 text-3xl font-extrabold text-white tracking-tight drop-shadow-md">{loc.name}</h2>
+                <h2 className="absolute bottom-6 left-6 text-3xl font-extrabold text-white tracking-tight drop-shadow-md">{t(`locations.${loc.id}.name` as any)}</h2>
               </div>
               <div className="p-8 flex-1 flex flex-col">
-                <p className="text-gray-500 mb-6">{loc.desc}</p>
+                <p className="text-gray-500 mb-6">{t(`locations.${loc.id}.desc` as any)}</p>
                 <div className="space-y-2 mb-8">
-                  <h4 className="text-xs font-bold text-[var(--color-primary)] uppercase tracking-wider mb-3">Pick-up Points</h4>
+                  <h4 className="text-xs font-bold text-[var(--color-primary)] uppercase tracking-wider mb-3">{t('airports')}</h4>
                   {loc.points.map(p => (
                     <div key={p} className="flex items-center gap-2 text-sm font-medium text-gray-700">
                       <div className="w-1.5 h-1.5 rounded-full bg-gray-300" /> {p}
@@ -74,8 +78,8 @@ export default function LocationsPage() {
                   ))}
                 </div>
                 <div className="mt-auto">
-                  <Link href={`/fleet?location=${loc.id}`} className="btn-secondary w-full">
-                    <Search size={18} /> Search Vehicles
+                  <Link href={`/${lang}/fleet?location=${loc.id}`} className="btn-secondary w-full">
+                    <Search size={18} /> {t('searchVehicles')}
                   </Link>
                 </div>
               </div>

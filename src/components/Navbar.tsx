@@ -5,9 +5,11 @@ import { logoutAction } from "@/app/[lang]/actions/auth"
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
 import { LanguageSwitcher } from "./LanguageSwitcher"
+import { useTranslations } from 'next-intl'
 
-export function Navbar({ user, dict, lang }: { user: any, dict: any, lang: string }) {
+export function Navbar({ user, lang }: { user: any, lang: string }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const t = useTranslations('nav')
 
   return (
     <header className="border-b border-gray-100 bg-white/95 backdrop-blur-md sticky top-0 z-[90]">
@@ -16,10 +18,10 @@ export function Navbar({ user, dict, lang }: { user: any, dict: any, lang: strin
           Island Drive
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-sm font-semibold">
-          <Link href={`/${lang}/fleet`} className="text-gray-500 hover:text-[var(--color-primary)] transition">{dict.nav?.fleet || 'Fleet'}</Link>
-          <Link href={`/${lang}/locations`} className="text-gray-500 hover:text-[var(--color-primary)] transition">{dict.nav?.locations || 'Locations'}</Link>
-          <Link href={`/${lang}/about`} className="text-gray-500 hover:text-[var(--color-primary)] transition">{dict.nav?.about || 'About'}</Link>
-          <Link href={`/${lang}/contact`} className="text-gray-500 hover:text-[var(--color-primary)] transition">{dict.nav?.contact || 'Contact'}</Link>
+          <Link href={`/${lang}/fleet`} className="text-gray-500 hover:text-[var(--color-primary)] transition">{t('fleet')}</Link>
+          <Link href={`/${lang}/locations`} className="text-gray-500 hover:text-[var(--color-primary)] transition">{t('locations')}</Link>
+          <Link href={`/${lang}/about`} className="text-gray-500 hover:text-[var(--color-primary)] transition">{t('about')}</Link>
+          <Link href={`/${lang}/contact`} className="text-gray-500 hover:text-[var(--color-primary)] transition">{t('contact')}</Link>
         </nav>
         <div className="hidden md:flex items-center gap-4">
           <LanguageSwitcher />
@@ -51,13 +53,13 @@ export function Navbar({ user, dict, lang }: { user: any, dict: any, lang: strin
       {isMobileMenuOpen && (
         <div className="md:hidden bg-white border-t border-gray-100 p-6 shadow-xl absolute w-full left-0 flex flex-col gap-4">
           <div className="flex justify-between items-center pb-2 border-b border-gray-50">
-            <span className="text-sm font-medium text-gray-500">{dict.nav?.language || 'Language'}</span>
+            <span className="text-sm font-medium text-gray-500">{t('language')}</span>
             <LanguageSwitcher />
           </div>
-          <Link href={`/${lang}/fleet`} className="font-semibold text-gray-800" onClick={() => setIsMobileMenuOpen(false)}>{dict.nav?.fleet || 'Fleet'}</Link>
-          <Link href={`/${lang}/locations`} className="font-semibold text-gray-800" onClick={() => setIsMobileMenuOpen(false)}>{dict.nav?.locations || 'Locations'}</Link>
-          <Link href={`/${lang}/about`} className="font-semibold text-gray-800" onClick={() => setIsMobileMenuOpen(false)}>{dict.nav?.about || 'About'}</Link>
-          <Link href={`/${lang}/contact`} className="font-semibold text-gray-800" onClick={() => setIsMobileMenuOpen(false)}>{dict.nav?.contact || 'Contact'}</Link>
+          <Link href={`/${lang}/fleet`} className="font-semibold text-gray-800" onClick={() => setIsMobileMenuOpen(false)}>{t('fleet')}</Link>
+          <Link href={`/${lang}/locations`} className="font-semibold text-gray-800" onClick={() => setIsMobileMenuOpen(false)}>{t('locations')}</Link>
+          <Link href={`/${lang}/about`} className="font-semibold text-gray-800" onClick={() => setIsMobileMenuOpen(false)}>{t('about')}</Link>
+          <Link href={`/${lang}/contact`} className="font-semibold text-gray-800" onClick={() => setIsMobileMenuOpen(false)}>{t('contact')}</Link>
           <div className="border-t border-gray-100 pt-4 mt-2">
             {user ? (
               <div className="flex flex-col gap-4">

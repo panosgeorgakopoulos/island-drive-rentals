@@ -8,8 +8,142 @@
     "language": "Språk"
   },
   "hero": {
-    "title": "Hyr den Perfekta Bilen",
-    "subtitle": "Utforska öarna i lyx.",
-    "cta": "Se Flottan"
+    "title": "Utforska Öns Frihet",
+    "subtitle": "Hyrbilar, skotrar och ATV:er i premiumklass för din perfekta semester.",
+    "cta": "Bläddra Skåp",
+    "viewAll": "Visa Alla Fordon"
+  },
+  "features": {
+    "topRated": "Toppbetyg",
+    "topRatedDesc": "4.9/5 i Snittbetyg",
+    "noHidden": "Inga Dolda Avgifter",
+    "noHiddenDesc": "Transparent prissättning",
+    "freeCancel": "Fri Avbokning",
+    "freeCancelDesc": "Upp till 48h i förväg",
+    "support": "Support 24/7",
+    "supportDesc": "Alltid här för dig",
+    "ourFleet": "Vår Flotta",
+    "premiumVehicles": "Premiumfordon"
+  },
+  "fleetPage": {
+    "browse": "Sök",
+    "title": "Vår Flotta",
+    "subtitle": "Välj från vårt breda utbud av premiumfordon.",
+    "filters": "Filter",
+    "category": "Kategori",
+    "allCategories": "Alla Kategorier",
+    "economy": "Ekonomi",
+    "suv": "SUV",
+    "van": "Skåpbil",
+    "luxury": "Lyx",
+    "scooter": "Skoter",
+    "atv": "ATV",
+    "maxPrice": "Maxpris",
+    "applyFilters": "Använd filter",
+    "perDay": "/dag",
+    "seats": "Sittplatser",
+    "viewDetails": "Visa Detaljer",
+    "noVehicles": "Inga fordon tillgängliga",
+    "checkBack": "Kom tillbaka snart för nya fordon."
+  },
+  "booking": {
+    "checkoutTitle": "Slutför din bokning",
+    "pickupDate": "Upphämtningsdatum",
+    "returnDate": "Återlämningsdatum",
+    "pickupLocation": "Upphämtningsplats",
+    "premiumExtras": "Premium Tillägg",
+    "fullInsurance": "Fullt Heltäckande Skydd",
+    "fullInsuranceDesc": "Noll självrisk, glas & däck",
+    "childSeat": "Barnstol",
+    "childSeatDesc": "Säkerhet för de minsta",
+    "additionalDriver": "Extra Förare",
+    "additionalDriverDesc": "Dela på körningen",
+    "customerInfo": "Kundinformation",
+    "fullName": "Fullständigt Namn",
+    "email": "E-postadress",
+    "confirmAndPay": "Bekräfta & Betala",
+    "selectDatesFirst": "Välj giltiga datum",
+    "bookingSummary": "Bokningsöversikt",
+    "dailyRate": "Dagspris",
+    "duration": "Duration",
+    "day": "dag",
+    "days": "dagar",
+    "dates": "Datum",
+    "baseTotal": "Bastotal",
+    "highSeason": "Säsongstillägg (+20%)",
+    "weeklyDiscount": "Veckorabatt",
+    "total": "Totalt"
+  },
+  "locationsPage": {
+    "explore": "Destinationer",
+    "title": "Utvalda Platser",
+    "subtitle": "Tillgängligt på de mest exklusiva grekiska öarna.",
+    "airports": "Upphämtningspunkter",
+    "searchVehicles": "Sök Fordon",
+    "locations": {
+      "santorini": {
+        "name": "Santorini",
+        "desc": "Upplev majestätiska solnedgångar och vulkaniska landskap i högsta komfort."
+      },
+      "mykonos": {
+        "name": "Mykonos",
+        "desc": "Navigera nattlivet och vita sandstränder."
+      },
+      "crete": {
+        "name": "Kreta",
+        "desc": "Upptäck antika ruiner med våra rymliga lyx-SUVar."
+      },
+      "paros": {
+        "name": "Paros",
+        "desc": "Den perfekta bilklassen för det cykladiska landskapet."
+      },
+      "rhodes": {
+        "name": "Rhodos",
+        "desc": "Kör genom medeltida orter med premiumkomfort."
+      }
+    }
+  },
+  "aboutPage": {
+    "title": "Nya Standarder för Öresor",
+    "mission": "Grundat 2026. Vi levererar kompromisslös lyx på hela den grekiska uthyrningsmarknaden.",
+    "section1Title": "Vår Flotta, Din Frihet",
+    "section1Desc1": "Resan bör vara en lyxupplevelse. Glöm dolda avgifter.",
+    "section1Desc2": "Varje fordon i vår flotta är top-of-the-line.",
+    "browseFleet": "Se flottan",
+    "whyChooseUs": "Varför välja oss",
+    "whyChooseUsDesc": "Upplev skillnaden.",
+    "noHiddenFees": "Inga Avgifter",
+    "noHiddenFeesDesc": "Transparens framförallt.",
+    "roadside": "24/7 Vägassistans",
+    "roadsideDesc": "Kör tryggt genom hela Grekland.",
+    "newModels": "Nya Modeller",
+    "newModelsDesc": "Högsta säkerhetsstandard i nya bilar.",
+    "vipDelivery": "VIP Flygplansöverlämning",
+    "vipDeliveryDesc": "Nycklarna ges till dig så fort du anlänt."
+  },
+  "contactPage": {
+    "title": "Kontakta Oss",
+    "subtitle": "Vår premiums kundtjänst väntar på ditt samtal.",
+    "hq": "Huvudkontoret",
+    "addressTitle": "Adress",
+    "addressVal1": "Ermou 123",
+    "addressVal2": "Syntagmatorget",
+    "addressVal3": "Aten 10563",
+    "phoneTitle": "Telefon",
+    "emailTitle": "E-post",
+    "supportHours": "Öppettider",
+    "supportHoursDesc1": "Telefonsupport dygnet runt.",
+    "supportHoursDesc2": "Verkstad & kontor: Mån-Fre (09-18).",
+    "sendMessage": "Skicka meddelande",
+    "formDesc": "Fyll i formuläret.",
+    "firstName": "Förnamn",
+    "lastName": "Efternamn",
+    "emailAddress": "E-postadress",
+    "message": "Meddelande",
+    "firstNamePlaceholder": "Lars",
+    "lastNamePlaceholder": "Svensson",
+    "emailPlaceholder": "lars@example.com",
+    "messagePlaceholder": "Hur kan vi hjälpa dig?",
+    "sendButton": "Skicka"
   }
 }

@@ -8,8 +8,142 @@
     "language": "Sprache"
   },
   "hero": {
-    "title": "Mieten Sie das perfekte Auto",
-    "subtitle": "Erkunden Sie die Inseln im Luxus.",
-    "cta": "Flotte ansehen"
+    "title": "Erlebe die Freiheit der Insel",
+    "subtitle": "Premium-Autos, Roller und ATVs für Ihren perfekten Urlaub.",
+    "cta": "Flotte ansehen",
+    "viewAll": "Alle Fahrzeuge"
+  },
+  "features": {
+    "topRated": "Top-Bewertet",
+    "topRatedDesc": "4.9/5 Bewertung",
+    "noHidden": "Keine versteckten Kosten",
+    "noHiddenDesc": "Transparente Preise",
+    "freeCancel": "Kostenlose Stornierung",
+    "freeCancelDesc": "Bis 48h vorher",
+    "support": "24/7 Kundenservice",
+    "supportDesc": "Immer für Sie da",
+    "ourFleet": "Unsere Flotte",
+    "premiumVehicles": "Premium-Fahrzeuge"
+  },
+  "fleetPage": {
+    "browse": "Durchsuchen",
+    "title": "Unsere Flotte",
+    "subtitle": "Wählen Sie aus unserer erstklassigen Fahrzeugauswahl.",
+    "filters": "Filteroptionen",
+    "category": "Kategorie",
+    "allCategories": "Alle Kategorien",
+    "economy": "Kleinwagen",
+    "suv": "SUV",
+    "van": "Van",
+    "luxury": "Luxus",
+    "scooter": "Roller",
+    "atv": "Quad",
+    "maxPrice": "Maximaler Preis",
+    "applyFilters": "Filter anwenden",
+    "perDay": "/Tag",
+    "seats": "Sitze",
+    "viewDetails": "Details anzeigen",
+    "noVehicles": "Keine Fahrzeuge verfügbar",
+    "checkBack": "Schauen Sie bald wieder für neue Angebote vorbei."
+  },
+  "booking": {
+    "checkoutTitle": "Buchung abschließen",
+    "pickupDate": "Abholdatum",
+    "returnDate": "Rückgabedatum",
+    "pickupLocation": "Abholort",
+    "premiumExtras": "Premium-Extras",
+    "fullInsurance": "Vollkaskoschutz",
+    "fullInsuranceDesc": "Ohne Selbstbeteiligung, inkl. Glas & Reifen",
+    "childSeat": "Kindersitz",
+    "childSeatDesc": "Sicherheit für die Kleinen",
+    "additionalDriver": "Zusatzfahrer",
+    "additionalDriverDesc": "Fahrspaß teilen",
+    "customerInfo": "Kundeninformationen",
+    "fullName": "Vollständiger Name",
+    "email": "E-Mail-Adresse",
+    "confirmAndPay": "Bestätigen & Bezahlen",
+    "selectDatesFirst": "Bitte gültige Daten wählen",
+    "bookingSummary": "Buchungsübersicht",
+    "dailyRate": "Tagesrate",
+    "duration": "Dauer",
+    "day": "Tag",
+    "days": "Tage",
+    "dates": "Daten",
+    "baseTotal": "Basisgesamtbetrag",
+    "highSeason": "Hochsaisonzuschlag (+20%)",
+    "weeklyDiscount": "Wochenrabatt",
+    "total": "Gesamtsumme"
+  },
+  "locationsPage": {
+    "explore": "Ziele",
+    "title": "Premium-Standorte",
+    "subtitle": "Verfügbar auf den exklusivsten griechischen Inseln.",
+    "airports": "Abholpunkte",
+    "searchVehicles": "Fahrzeuge suchen",
+    "locations": {
+      "santorini": {
+        "name": "Santorin",
+        "desc": "Erleben Sie die majestätischen Sonnenuntergänge in absolutem Komfort."
+      },
+      "mykonos": {
+        "name": "Mykonos",
+        "desc": "Genießen Sie das vibrierende Nachtleben und die weißen Strände."
+      },
+      "crete": {
+        "name": "Kreta",
+        "desc": "Entdecken Sie antike Ruinen und Küsten mit unseren SUVs."
+      },
+      "paros": {
+        "name": "Paros",
+        "desc": "Das ultimative Kykladen-Erlebnis in einem Cabrio."
+      },
+      "rhodes": {
+        "name": "Rhodos",
+        "desc": "Fahren Sie durch mittelalterliche Städte in purem Luxus."
+      }
+    }
+  },
+  "aboutPage": {
+    "title": "Inselreisen neu definiert",
+    "mission": "Seit 2026 bringt Island Drive Rentals kompromisslosen Luxus und Sicherheit nach Griechenland.",
+    "section1Title": "Unsere Flotte, Ihre Freiheit",
+    "section1Desc1": "Der Weg ist das Ziel. Verabschieden Sie sich von versteckten Gebühren und alten Modellen.",
+    "section1Desc2": "Jedes Fahrzeug wird nach Herstellervorgaben gewartet.",
+    "browseFleet": "Durchsuchen Sie unsere Flotte",
+    "whyChooseUs": "Warum Wir",
+    "whyChooseUsDesc": "Erleben Sie wahrhaft erstklassigen Service.",
+    "noHiddenFees": "Keine versteckten Gebühren",
+    "noHiddenFeesDesc": "Transparente Preisgestaltung vom ersten Tag an.",
+    "roadside": "24/7 Pannenhilfe",
+    "roadsideDesc": "Fahren Sie mit Ruhe. Wir sind rund um die Uhr da.",
+    "newModels": "Neue Modelle",
+    "newModelsDesc": "Ausschließlich neuste Fahrzeuge mit aktueller Sicherheitstechnik.",
+    "vipDelivery": "VIP-Flughafenübergabe",
+    "vipDeliveryDesc": "Schlüsselübergabe direkt am Terminal. Keine Warteschlangen."
+  },
+  "contactPage": {
+    "title": "Kontaktiere uns",
+    "subtitle": "Unser Premium-Support-Team ist rund um die Uhr für Sie da.",
+    "hq": "Hauptsitz",
+    "addressTitle": "Adresse",
+    "addressVal1": "Ermou Str. 123",
+    "addressVal2": "Syntagma Platz",
+    "addressVal3": "Athen, Griechenland 10563",
+    "phoneTitle": "Telefon",
+    "emailTitle": "E-Mail",
+    "supportHours": "Support-Zeiten",
+    "supportHoursDesc1": "Telefonischer Support ist für aktive Mieter 24/7 verfügbar.",
+    "supportHoursDesc2": "Für allgemeine Anfragen erreichen Sie uns Mo-Fr, 09:00 - 18:00 (EET).",
+    "sendMessage": "Senden Sie uns eine Nachricht",
+    "formDesc": "Füllen Sie das Formular aus. Wir melden uns in 24h.",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "emailAddress": "E-Mail-Adresse",
+    "message": "Nachricht",
+    "firstNamePlaceholder": "Max",
+    "lastNamePlaceholder": "Mustermann",
+    "emailPlaceholder": "max@example.com",
+    "messagePlaceholder": "Wie können wir Ihnen helfen?",
+    "sendButton": "Nachricht senden"
   }
 }
