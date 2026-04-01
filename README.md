@@ -1,71 +1,60 @@
-# Island Drive Rentals - Full-Stack Car Rental Platform
+# Island Drive Rentals - Tier-1 Enterprise Car Rental Platform
 
-A premium, fully responsive car rental website built for scale and performance. Features a complete booking engine, Stripe payments, authentication, role-based admin dashboard, and Google Sheets integration.
+Welcome to **Island Drive Rentals**, a professional-grade, highly scalable car rental platform designed to emulate industry leaders. Built to handle secure bookings, dynamic pricing, role-based administration, and automated operational logs.
 
-## Tech Stack
-- **Frontend & Backend**: Next.js 15 (App Router), React, Server Actions
-- **Styling**: Tailwind CSS, Lucide React (Icons)
-- **Database**: SQLite (Development) / PostgreSQL (Production) via **Prisma ORM**
-- **Authentication**: NextAuth.js v5 (beta) with Credentials provider (Email/Password)
-- **Payments**: Stripe Checkout & Webhooks
-- **Integrations**: Google Sheets API v4
-
----
-
-## Features
-
-1. **User Authentication**: Secure Sign up & Login flow. Role-based access control protecting `/admin` routes.
-2. **Dynamic Fleet Management**: Admins can manage the vehicle directory (CRUD).
-3. **Advanced Booking System**: Date selection, total price calculation, and overlapping validation (extendable).
-4. **Stripe Payments**: Checkout session generation with proper webhook validation to confirm secure payments.
-5. **Google Sheets Sync**: Each confirmed booking automatically appends a row to a designated spreadsheet.
-6. **Customer Portal**: Users can view their past and upcoming reservations via `/profile`.
+## 🚀 Tech Stack
+- **Framework**: Next.js 15 (App Router) with React Server Components and Server Actions.
+- **Styling**: Tailwind CSS configured with a highly consistent, premium luxury design system (Sixt-inspired).
+- **Database Engine**: Prisma ORM bridging local SQLite (development) and PostgreSQL (production).
+- **Authentication**: NextAuth.js v5 providing strictly typed session objects.
+- **Payments Processing**: Stripe Checkout integration protected by Backend Webhook asynchronous validation.
 
 ---
 
-## Getting Started
+## 🔥 Key Enterprise Features
 
-### 1. Database Setup
-1. Copy `.env.example` to `.env`.
-2. Generate the Prisma Client:
-   ```bash
-   npx prisma generate
-   ```
-3. Push the schema to your SQLite database (`dev.db`):
-   ```bash
-   npx prisma db push
-   ```
-4. **Seed the database** (creates an admin user and dummy vehicles):
-   ```bash
-   npx ts-node prisma/seed.ts
-   ```
-   *Note: Default admin login is `admin@islanddrive.com` / `admin123`.*
-   *Note: You may see an ES Module warning while running ts-node. You can ignore this.*
+1. **Strict Role-Based Access Control (RBAC)**: All mutations and backend endpoints restrict access gracefully based on user session role (Customer vs Admin).
+2. **Dynamic Pricing Engine**: Shared backend utility accurately enforcing an automatic **+20% High Season Surge** in July/August, and calculating tiered **Weekly Discounts** automatically dynamically mirrored in the UI.
+3. **Advanced Fleet Filtering**: A lightning-fast, visually rich client filtering system updating via URL search parameters, pushing immediate Prisma conditional where-clauses. 
+4. **Atomic Booking Transactions**: The Checkout Webhooks rely exclusively on atomic `prisma.$transaction()` statements checking concurrent active spans to guarantee zero double-bookings.
+5. **Self-Service Cancellations**: A highly secure User Profile portal (`/profile`) allowing users to interact directly with Server Actions to cancel their bookings subject to a strict `Wait exactly 48 hours buffer` threshold.
+6. **Island Locations Hub**: Interactive visual locations pages structured to funnel premium SEO juice.
 
-### 2. Environment Configuration
+---
 
-To fully enable Stripe and Google Sheets, configure your `.env` file:
+## 🛠 Setup & Requirements
 
-**Stripe:**
-- `STRIPE_SECRET_KEY`: Get this from your Stripe Dashboard (Test Mode).
-- `STRIPE_WEBHOOK_SECRET`: Used to verify webhook events. If testing locally, use the Stripe CLI: `stripe listen --forward-to localhost:3000/api/webhook` to get this secret.
+### 1. Installation
+1. Clone the repository and run `npm install`.
+2. Copy `.env.example` to `.env`.
 
-**Google Sheets:**
-1. Go to the [Google Cloud Console](https://console.cloud.google.com/).
-2. Enable the **Google Sheets API**.
-3. Create a **Service Account** and generate a JSON Key.
-4. Extract the `client_email` and `private_key` from the JSON to your `.env` file.
-5. **CRITICAL**: Share your target Google Sheet with the `client_email` (give it Editor access).
-6. Copy the Spreadsheet ID from the URL (`https://docs.google.com/spreadsheets/d/<SPREADSHEET_ID>/edit`) and set `GOOGLE_SPREADSHEET_ID`.
+### 2. Database Bootstrap
+1. Generate Prisma Client: `npx prisma generate`
+2. Sync schema to dev database: `npx prisma db push`
+3. Generate the 20-vehicle Enterprise Fleet Seed: 
+```bash
+npx ts-node prisma/seed.ts
+```
+*(Default Admin Login: `admin@islanddrive.com` / `admin123`)*
 
-*Note: If Stripe or Google Sheets keys are missing, the app falls back to a mock payment success endpoint (`/api/webhook-mock`) so you can test the booking flow locally without issues.*
+### 3. Environment Variables
 
-### 3. Running the Server
+To fully utilize the production webhooks, configure your `.env`:
 
-Start the Next.js development server:
+**Authentication**
+- `AUTH_SECRET`: Generate this via `openssl rand -base64 32` or `npx auth secret`.
 
+**Stripe Integrations**
+- `STRIPE_SECRET_KEY`: Standard Stripe testing keys (`sk_test...`).
+- `STRIPE_WEBHOOK_SECRET`: Secure webhook verification key (`whsec_...`).
+> 💡 **MOCK MODE FALLBACK**: If you skip configuring Stripe, the platform automatically detects missing keys and safely redirects customers to an internal mock-flow that commits safe atomic transactions directly without prompting a card wall.
+
+**Google Sheets (Operational Syncing)**
+- `GOOGLE_SPREADSHEET_ID`: Standard G-Suite document ID to mirror bookings securely without logging into the dashboard.
+
+### 4. Running the Development Server
 ```bash
 npm run dev
 ```
 
-Visit `http://localhost:3000` to browse the site.
+Visit `http://localhost:3000` to browse the platform. Launch into the ultimate island driving experience.

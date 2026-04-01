@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { stripe } from "@/lib/stripe"
 import { prisma } from "@/lib/prisma"
 import { appendToSheet } from "@/lib/sheets"
+import { sendBookingConfirmation } from "@/lib/email"
 
 export async function POST(req: NextRequest) {
   const body = await req.text()
@@ -37,7 +38,7 @@ export async function POST(req: NextRequest) {
     try {
       const booking = await prisma.$transaction(async (tx) => {
         // 1. Check for overlapping CONFIRMED bookings (concurrent-safe inside transaction)
-        const overlapping = await tx.booking.findFirst({
+        const overlapping = await (tx as any).booking.findFirst({
           where: {
             vehicleId: meta.vehicleId,
             status: "confirmed",
@@ -51,7 +52,7 @@ export async function POST(req: NextRequest) {
         }
 
         // 2. Create CONFIRMED booking atomically
-        return tx.booking.create({
+        return (tx as any).booking.create({
           data: {
             userId: meta.userId,
             vehicleId: meta.vehicleId,
@@ -81,7 +82,8 @@ export async function POST(req: NextRequest) {
         ], process.env.GOOGLE_SPREADSHEET_ID).catch(console.error)
       }
 
-      // TODO: Send email confirmation
+      // 4. Send email confirmation
+      await sendBookingConfirmation(booking.user.email, booking)
 
     } catch (err: any) {
       if (err.message === "VEHICLE_UNAVAILABLE") {

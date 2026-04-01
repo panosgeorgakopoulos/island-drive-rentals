@@ -3,6 +3,7 @@ import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { stripe } from "@/lib/stripe"
 import { appendToSheet } from "@/lib/sheets"
+import { calculateTotal } from "@/lib/pricing"
 
 export async function POST(req: NextRequest) {
   try {
@@ -39,8 +40,16 @@ export async function POST(req: NextRequest) {
       return new NextResponse("Vehicle not found", { status: 404 })
     }
 
-    // --- Backend-calculated price (never trust the client) ---
-    const totalPrice = vehicle.basePrice * days
+    // --- Parse incoming extras to backend logic ---
+    const extrasStr = (formData.get("extras") as string) || ""
+    let extrasDailyCost = 0
+    if (extrasStr.includes("Full Protection Insurance")) extrasDailyCost += 15
+    if (extrasStr.includes("Child Seat")) extrasDailyCost += 5
+    if (extrasStr.includes("Additional Driver")) extrasDailyCost += 10
+
+    // --- Backend-calculated price using secure Pricing Engine ---
+    const { finalTotal, days: computedDays } = calculateTotal(vehicle, startDate, endDate)
+    const totalPrice = finalTotal + (computedDays * extrasDailyCost)
 
     // --- Check if Stripe is configured ---
     const STRIPE_SECRET = process.env.STRIPE_SECRET_KEY
@@ -92,7 +101,7 @@ export async function POST(req: NextRequest) {
     try {
       const booking = await prisma.$transaction(async (tx) => {
         // 1. Check for overlapping CONFIRMED bookings
-        const overlapping = await tx.booking.findFirst({
+        const overlapping = await (tx as any).booking.findFirst({
           where: {
             vehicleId: vehicle.id,
             status: "confirmed",
@@ -106,13 +115,14 @@ export async function POST(req: NextRequest) {
         }
 
         // 2. Create CONFIRMED booking atomically
-        return tx.booking.create({
+        return (tx as any).booking.create({
           data: {
             userId: session.user!.id!,
             vehicleId: vehicle.id,
             startDate,
             endDate,
             pickupLocation,
+            extras: extrasStr,
             totalPrice,
             status: "confirmed",
             paymentIntentId: `mock_${Date.now()}`

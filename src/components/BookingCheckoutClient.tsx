@@ -9,16 +9,14 @@ export function BookingCheckoutClient({
   start,
   end,
   location,
-  days,
-  baseTotalPrice
+  pricing
 }: {
   vehicle: any,
   user: any,
   start: string,
   end: string,
   location: string,
-  days: number,
-  baseTotalPrice: number
+  pricing: { days: number, baseTotal: number, surgeAmount: number, discountAmount: number, finalTotal: number, hasSurge: boolean, hasDiscount: boolean, discountPercent: number }
 }) {
   const [wantsInsurance, setWantsInsurance] = useState(false)
   const [wantsChildSeat, setWantsChildSeat] = useState(false)
@@ -44,7 +42,8 @@ export function BookingCheckoutClient({
     selectedExtrasArr.push("Additional Driver")
   }
 
-  const finalTotalPrice = baseTotalPrice + (days * extrasDailyCost)
+  const { days, baseTotal, surgeAmount, discountAmount, finalTotal, hasSurge, hasDiscount, discountPercent } = pricing
+  const totalWithExtras = finalTotal + (days * extrasDailyCost)
   const extrasString = selectedExtrasArr.join(", ")
 
   return (
@@ -83,7 +82,10 @@ export function BookingCheckoutClient({
               <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Pickup Location</label>
               <select name="pickupLocation" defaultValue={location || "Athens Airport"} className="w-full border border-gray-200 rounded-xl p-3 bg-[var(--color-surface-alt)] font-semibold outline-none focus:ring-2 focus:ring-[var(--color-primary)]">
                 <option value="Athens Airport">Athens Airport</option>
-                <option value="City Center">City Center</option>
+                <option value="Athens City Center">Athens City Center</option>
+                <option value="Santorini Airport">Santorini Airport</option>
+                <option value="Mykonos Port">Mykonos Port</option>
+                <option value="Crete Heraklion Airport">Crete Heraklion Airport</option>
               </select>
             </div>
 
@@ -148,7 +150,7 @@ export function BookingCheckoutClient({
               disabled={days <= 0}
               className="btn-primary w-full text-lg !py-4 mt-8"
             >
-              {days > 0 ? `Confirm & Pay €${finalTotalPrice}` : 'Select valid dates first'}
+              {days > 0 ? `Confirm & Pay €${totalWithExtras.toFixed(2)}` : 'Select valid dates first'}
             </button>
           </form>
         </div>
@@ -184,10 +186,31 @@ export function BookingCheckoutClient({
                   <span>Dates</span>
                   <span className="font-semibold text-gray-900">{new Date(start).toLocaleDateString('en-GB')} → {new Date(end).toLocaleDateString('en-GB')}</span>
                 </div>
+                
+                {/* Advanced Pricing Breakdown */}
+                <div className="pt-3 mt-3 border-t border-gray-50 space-y-2">
+                  <div className="flex justify-between font-medium">
+                    <span>Base Total</span>
+                    <span>€{baseTotal}</span>
+                  </div>
+                  {hasSurge && (
+                    <div className="flex justify-between text-yellow-600 font-medium">
+                      <span>High Season Surge (+20%)</span>
+                      <span>+€{surgeAmount}</span>
+                    </div>
+                  )}
+                  {hasDiscount && (
+                    <div className="flex justify-between text-green-600 font-medium">
+                      <span>Weekly Discount (-{discountPercent}%)</span>
+                      <span>-€{discountAmount}</span>
+                    </div>
+                  )}
+                </div>
+
                 {extrasDailyCost > 0 && (
-                  <div className="flex justify-between pt-2 border-t border-gray-50 text-orange-600 font-medium pb-1 mt-1">
+                  <div className="flex justify-between pt-3 border-t border-gray-50 text-orange-600 font-medium">
                     <span>Premium Extras</span>
-                    <span>€{extrasDailyCost * days}</span>
+                    <span>+€{extrasDailyCost * days}</span>
                   </div>
                 )}
               </>
@@ -196,7 +219,7 @@ export function BookingCheckoutClient({
 
           <div className="flex justify-between text-xl font-extrabold pb-2">
             <span>Total</span>
-            <span className="text-[var(--color-primary)]">{days > 0 ? `€${finalTotalPrice}` : '—'}</span>
+            <span className="text-[var(--color-primary)]">{days > 0 ? `€${totalWithExtras.toFixed(2)}` : '—'}</span>
           </div>
         </div>
       </div>

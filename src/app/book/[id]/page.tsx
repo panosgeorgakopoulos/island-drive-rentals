@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import { auth } from "@/lib/auth"
 import Link from "next/link"
 import { BookingCheckoutClient } from "@/components/BookingCheckoutClient"
+import { calculateTotal } from "@/lib/pricing"
 
 export default async function BookingPage({ 
   params, 
@@ -39,17 +40,12 @@ export default async function BookingPage({
   // Calculate summary from URL params
   const startDate = start ? new Date(start) : null
   const endDate = end ? new Date(end) : null
-  let days = 0
-  let totalPrice = 0
 
+  let pricingBreakdown = { days: 0, baseTotal: 0, surgeAmount: 0, discountAmount: 0, finalTotal: 0, hasSurge: false, hasDiscount: false }
+  
   if (startDate && endDate) {
-    days = Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24))
-    if (days > 0) {
-      totalPrice = days * vehicle.basePrice
-    }
+    pricingBreakdown = calculateTotal(vehicle, startDate, endDate)
   }
-
-  const baseTotalPrice = days > 0 ? days * vehicle.basePrice : 0
 
   return (
     <div className="bg-[var(--color-surface-alt)] min-h-screen pb-20 pt-10">
@@ -59,8 +55,7 @@ export default async function BookingPage({
         start={start || ""} 
         end={end || ""} 
         location={location || "Athens Airport"} 
-        days={days} 
-        baseTotalPrice={baseTotalPrice} 
+        pricing={pricingBreakdown} 
       />
     </div>
   )
