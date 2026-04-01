@@ -9,10 +9,10 @@ export default async function BookingPage({
   params, 
   searchParams 
 }: { 
-  params: Promise<{ id: string }>,
+  params: Promise<{ id: string, lang: string }>,
   searchParams: Promise<{ start?: string, end?: string, location?: string }>
 }) {
-  const { id } = await params
+  const { id, lang } = await params
   const { start, end, location } = await searchParams
   const session = await auth()
 
@@ -41,7 +41,7 @@ export default async function BookingPage({
   const startDate = start ? new Date(start) : null
   const endDate = end ? new Date(end) : null
 
-  let pricingBreakdown = { days: 0, baseTotal: 0, surgeAmount: 0, discountAmount: 0, finalTotal: 0, hasSurge: false, hasDiscount: false }
+  let pricingBreakdown = { days: 0, baseTotal: 0, surgeAmount: 0, discountAmount: 0, finalTotal: 0, hasSurge: false, hasDiscount: false, discountPercent: 0 }
   
   if (startDate && endDate) {
     pricingBreakdown = calculateTotal(vehicle, startDate, endDate)
@@ -55,7 +55,8 @@ export default async function BookingPage({
         start={start || ""} 
         end={end || ""} 
         location={location || "Athens Airport"} 
-        pricing={pricingBreakdown} 
+        pricing={pricingBreakdown}
+        lang={lang}
       />
     </div>
   )

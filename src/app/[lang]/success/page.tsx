@@ -2,16 +2,17 @@ import Link from "next/link"
 import { CheckCircle, Calendar, MapPin, Car, FileText } from "lucide-react"
 import { prisma } from "@/lib/prisma"
 import { auth } from "@/lib/auth"
+import { stripe } from "@/lib/stripe"
 import { PrintButton } from "@/components/PrintButton"
 import { getDictionary } from "@/lib/dictionaries"
 
 export default async function SuccessPage({ 
   searchParams, params 
 }: { 
-  searchParams: Promise<{ bookingId?: string }>,
+  searchParams: Promise<{ bookingId?: string, session_id?: string, mock?: string }>,
   params: Promise<{ lang: string }>
 }) {
-  const { bookingId } = await searchParams
+  const { bookingId, session_id } = await searchParams
   const { lang } = await params
   const dict = await getDictionary(lang)
   const session = await auth()
@@ -23,6 +24,32 @@ export default async function SuccessPage({
       where: { id: bookingId },
       include: { vehicle: true, user: true }
     })
+  } else if (session_id) {
+    // Look up the booking by the Stripe checkout session's payment_intent
+    try {
+      const checkoutSession = await stripe.checkout.sessions.retrieve(session_id)
+      const paymentIntentId = typeof checkoutSession.payment_intent === "string"
+        ? checkoutSession.payment_intent
+        : checkoutSession.payment_intent?.id
+
+      if (paymentIntentId) {
+        booking = await prisma.booking.findFirst({
+          where: { paymentIntentId },
+          include: { vehicle: true, user: true }
+        })
+      }
+    } catch (err) {
+      console.error("Failed to retrieve Stripe checkout session:", err)
+    }
+
+    // Fall back to the most recent booking for this user if the webhook hasn't fired yet
+    if (!booking && session?.user?.id) {
+      booking = await prisma.booking.findFirst({
+        where: { userId: session.user.id },
+        orderBy: { createdAt: 'desc' },
+        include: { vehicle: true, user: true }
+      })
+    }
   } else if (session?.user?.id) {
     booking = await prisma.booking.findFirst({
       where: { userId: session.user.id },

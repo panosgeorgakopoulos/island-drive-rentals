@@ -59,6 +59,7 @@ export async function POST(req: NextRequest) {
             startDate,
             endDate,
             pickupLocation,
+            extras: meta.extras || "",
             totalPrice,
             status: "confirmed",
             paymentIntentId: stripeSession.payment_intent as string
