@@ -2,9 +2,11 @@ import { prisma } from "@/lib/prisma"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { Users, Fuel, Car as CarIcon, Settings, Calendar, MapPin, Check } from "lucide-react"
+import { BookingSidebar } from "@/components/BookingSidebar"
 
-export default async function VehicleDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function VehicleDetailsPage({ params, searchParams }: { params: Promise<{ slug: string }>, searchParams: Promise<{ start?: string, end?: string }> }) {
   const { slug } = await params
+  const { start, end } = await searchParams
   
   const vehicle = await prisma.vehicle.findUnique({
     where: { slug }
@@ -85,51 +87,9 @@ export default async function VehicleDetailsPage({ params }: { params: Promise<{
           </div>
         </div>
 
-        {/* Booking Sidebar placeholder */}
+        {/* Booking Sidebar */}
         <div className="space-y-6">
-          <div className="bg-white rounded-2xl p-6 border shadow-sm sticky top-24">
-             <h3 className="text-xl font-bold mb-6 tracking-tight">Reserve your dates</h3>
-             
-             <div className="space-y-4">
-                <div className="border rounded-xl p-3 flex flex-col">
-                  <label className="text-xs font-bold text-gray-500 uppercase mb-1 flex items-center gap-2"><MapPin size={14}/> Location</label>
-                  <select className="font-medium outline-none bg-transparent">
-                    <option>Athens Airport</option>
-                    <option>City Center</option>
-                  </select>
-                </div>
-                
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="border rounded-xl p-3 flex flex-col">
-                    <label className="text-xs font-bold text-gray-500 uppercase mb-1 flex items-center gap-2"><Calendar size={14}/> Pick-up</label>
-                    <input type="date" className="font-medium outline-none bg-transparent" />
-                  </div>
-                  <div className="border rounded-xl p-3 flex flex-col">
-                    <label className="text-xs font-bold text-gray-500 uppercase mb-1 flex items-center gap-2"><Calendar size={14}/> Drop-off</label>
-                    <input type="date" className="font-medium outline-none bg-transparent" />
-                  </div>
-                </div>
-                
-                <div className="pt-4 border-t mt-6">
-                  <div className="flex justify-between mb-2">
-                    <span className="text-gray-600">€{vehicle.basePrice} x 3 days</span>
-                    <span className="font-medium text-gray-900">€{vehicle.basePrice * 3}</span>
-                  </div>
-                  <div className="flex justify-between font-bold text-lg mt-4 pt-4 border-t">
-                    <span>Total</span>
-                    <span className="text-blue-600">€{vehicle.basePrice * 3}</span>
-                  </div>
-                </div>
-
-                <Link 
-                  href={`/book/${vehicle.id}`} 
-                  className="block w-full bg-blue-600 text-white text-center font-bold py-4 rounded-xl mt-6 hover:bg-blue-700 transition shadow-lg shadow-blue-600/20"
-                >
-                  Continue to Book
-                </Link>
-                <p className="text-xs text-center text-gray-500 mt-3">You won't be charged yet.</p>
-             </div>
-          </div>
+          <BookingSidebar vehicleId={vehicle.id} basePrice={vehicle.basePrice} initialStart={start} initialEnd={end} />
           
           <div className="bg-blue-50 rounded-2xl p-6 border border-blue-100">
             <h4 className="font-bold text-blue-900 flex items-center gap-2"><Check size={18} className="text-blue-600" /> Free Cancellation</h4>

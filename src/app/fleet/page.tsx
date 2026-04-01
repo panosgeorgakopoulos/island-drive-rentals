@@ -2,7 +2,8 @@ import { prisma } from "@/lib/prisma"
 import Link from "next/link"
 import { Users, Fuel, Car as CarIcon, Settings } from "lucide-react"
 
-export default async function PublicFleetPage() {
+export default async function PublicFleetPage({ searchParams }: { searchParams: Promise<{ start?: string, end?: string }> }) {
+  const { start, end } = await searchParams;
   const vehicles = await prisma.vehicle.findMany({
     where: { isActive: true },
     orderBy: { basePrice: 'asc' }
@@ -19,7 +20,7 @@ export default async function PublicFleetPage() {
 
       <div className="max-w-6xl mx-auto px-6 mt-8">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {vehicles.map(v => {
+          {vehicles.map((v: any) => {
             const images = JSON.parse(v.images)
             const mainImg = images[0] || 'https://images.unsplash.com/photo-1590362891991-f776e747a588?auto=format&fit=crop&w=800'
             const specs = JSON.parse(v.specs)
@@ -56,7 +57,7 @@ export default async function PublicFleetPage() {
                   </div>
 
                   <div className="mt-auto">
-                    <Link href={`/fleet/${v.slug}`} className="block w-full text-center bg-gray-900 text-white py-3 rounded-xl font-medium hover:bg-gray-800 transition">
+                    <Link href={`/fleet/${v.slug}${start && end ? `?start=${start}&end=${end}` : ''}`} className="block w-full text-center bg-gray-900 text-white py-3 rounded-xl font-medium hover:bg-gray-800 transition">
                       View Details
                     </Link>
                   </div>

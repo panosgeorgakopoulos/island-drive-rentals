@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Search, MapPin, Calendar, Star } from "lucide-react";
+import { Search, Star } from "lucide-react";
+import { HeroSearch } from "@/components/HeroSearch";
 
 export default function Home() {
   return (
@@ -21,33 +22,7 @@ export default function Home() {
             Premium car, scooter, and ATV rentals for your perfect vacation.
           </p>
 
-          {/* Search Box */}
-          <div className="bg-white p-4 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-4 items-center justify-between text-gray-800 text-left max-w-4xl mx-auto mt-8">
-            <div className="flex-1 w-full pl-4 border-r border-gray-200 hidden md:block">
-              <label className="text-xs font-bold text-gray-500 uppercase">Pickup Location</label>
-              <div className="flex items-center gap-2 mt-1">
-                <MapPin size={20} className="text-blue-600" />
-                <input type="text" placeholder="Athens Airport" className="w-full font-medium outline-none" />
-              </div>
-            </div>
-            <div className="flex-1 w-full pl-4 border-r border-gray-200 hidden md:block">
-              <label className="text-xs font-bold text-gray-500 uppercase">Pickup Date</label>
-              <div className="flex items-center gap-2 mt-1">
-                <Calendar size={20} className="text-blue-600" />
-                <input type="date" className="w-full font-medium outline-none" />
-              </div>
-            </div>
-            <div className="flex-1 w-full pl-4 hidden md:block">
-              <label className="text-xs font-bold text-gray-500 uppercase">Return Date</label>
-              <div className="flex items-center gap-2 mt-1">
-                <Calendar size={20} className="text-blue-600" />
-                <input type="date" className="w-full font-medium outline-none" />
-              </div>
-            </div>
-            <Link href="/fleet" className="w-full md:w-auto bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition flex items-center justify-center gap-2">
-              <Search size={20} /> Search
-            </Link>
-          </div>
+          <HeroSearch />
         </div>
       </section>
 
