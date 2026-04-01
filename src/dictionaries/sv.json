@@ -145,5 +145,27 @@
     "emailPlaceholder": "lars@example.com",
     "messagePlaceholder": "Hur kan vi hjälpa dig?",
     "sendButton": "Skicka"
+  },
+  "successPage": {
+    "title": "Bokning Bekräftad",
+    "thanks": "Tack för att du valde Island Drive Rentals",
+    "invoiceReference": "Faktura / Referens",
+    "paidInFull": "Betald i Sin Helhet",
+    "customerVehicle": "Kund & Fordon",
+    "customerName": "Kundnamn",
+    "customerEmail": "Kundens E-post",
+    "vehicle": "Fordon",
+    "class": "Klass",
+    "tripItinerary": "Resplan",
+    "pickupDate": "Upphämtningsdatum",
+    "dropoffDate": "Återlämningsdatum",
+    "location": "Plats",
+    "financialBreakdown": "Ekonomisk Uppställning",
+    "description": "Beskrivning",
+    "rate": "Pris",
+    "amount": "Belopp",
+    "totalPaid": "Totalt Betalt",
+    "bookAnother": "Boka ett Annat Fordon",
+    "printInvoice": "Skriv ut Faktura"
   }
 }

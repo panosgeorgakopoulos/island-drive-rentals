@@ -145,5 +145,27 @@
     "emailPlaceholder": "giannis@example.com",
     "messagePlaceholder": "Πώς μπορούμε να σας βοηθήσουμε;",
     "sendButton": "Αποστολή Μηνύματος"
+  },
+  "successPage": {
+    "title": "Η Κράτηση Επιβεβαιώθηκε",
+    "thanks": "Σας ευχαριστούμε που επιλέξατε την Island Drive Rentals",
+    "invoiceReference": "Τιμολόγιο / Αναφορά",
+    "paidInFull": "Εξοφλήθηκε",
+    "customerVehicle": "Πελάτης & Όχημα",
+    "customerName": "Όνομα Πελάτη",
+    "customerEmail": "Email Πελάτη",
+    "vehicle": "Όχημα",
+    "class": "Κατηγορία",
+    "tripItinerary": "Δρομολόγιο Ταξιδιού",
+    "pickupDate": "Ημερομηνία Παραλαβής",
+    "dropoffDate": "Ημερομηνία Επιστροφής",
+    "location": "Τοποθεσία",
+    "financialBreakdown": "Οικονομική Ανάλυση",
+    "description": "Περιγραφή",
+    "rate": "Χρέωση",
+    "amount": "Ποσό",
+    "totalPaid": "Συνολικό Ποσό",
+    "bookAnother": "Κράτηση Άλλου Οχήματος",
+    "printInvoice": "Εκτύπωση Τιμολογίου"
   }
 }

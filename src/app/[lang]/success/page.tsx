@@ -89,11 +89,11 @@ export default async function SuccessPage({
             </div>
           </div>
           <div className="text-left md:text-right">
-            <div className="text-sm text-gray-500 uppercase font-bold tracking-wider">Invoice / Reference</div>
+            <div className="text-sm text-gray-500 uppercase font-bold tracking-wider">{dict.successPage?.invoiceReference || 'Invoice / Reference'}</div>
             <div className="text-2xl font-black text-gray-900">{invoiceNumber}</div>
             <div className="text-sm font-medium mt-1">
               <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full inline-block">
-                Paid in Full
+                {dict.successPage?.paidInFull || 'Paid in Full'}
               </span>
             </div>
           </div>
@@ -103,24 +103,24 @@ export default async function SuccessPage({
         <div className="grid md:grid-cols-2 gap-8 mb-10">
           <div>
             <h3 className="text-sm font-bold text-gray-500 uppercase flex items-center gap-2 mb-4">
-              <Car size={16} /> Customer & Vehicle
+              <Car size={16} /> {dict.successPage?.customerVehicle || 'Customer & Vehicle'}
             </h3>
             <div className="bg-gray-50 p-5 rounded-xl print:bg-transparent print:border print:p-4">
               <dl className="space-y-3 text-sm">
                 <div className="flex justify-between">
-                  <dt className="text-gray-500">Customer Name</dt>
+                  <dt className="text-gray-500">{dict.successPage?.customerName || 'Customer Name'}</dt>
                   <dd className="font-bold text-gray-900">{booking.user.name}</dd>
                 </div>
                 <div className="flex justify-between">
-                  <dt className="text-gray-500">Customer Email</dt>
+                  <dt className="text-gray-500">{dict.successPage?.customerEmail || 'Customer Email'}</dt>
                   <dd className="font-bold text-gray-900">{booking.user.email}</dd>
                 </div>
                 <div className="flex justify-between pt-3 border-t">
-                  <dt className="text-gray-500">Vehicle</dt>
+                  <dt className="text-gray-500">{dict.successPage?.vehicle || 'Vehicle'}</dt>
                   <dd className="font-bold text-gray-900">{booking.vehicle.name}</dd>
                 </div>
                 <div className="flex justify-between">
-                  <dt className="text-gray-500">Class</dt>
+                  <dt className="text-gray-500">{dict.successPage?.class || 'Class'}</dt>
                   <dd className="font-bold text-gray-900 capitalize">{booking.vehicle.category}</dd>
                 </div>
               </dl>
@@ -129,20 +129,20 @@ export default async function SuccessPage({
           
           <div>
             <h3 className="text-sm font-bold text-gray-500 uppercase flex items-center gap-2 mb-4">
-              <Calendar size={16} /> Trip Itinerary
+              <Calendar size={16} /> {dict.successPage?.tripItinerary || 'Trip Itinerary'}
             </h3>
             <div className="bg-blue-50 p-5 rounded-xl border border-blue-100 print:bg-transparent print:border print:p-4">
               <dl className="space-y-3 text-sm">
                 <div className="flex justify-between">
-                  <dt className="text-blue-800">Pick-up Date</dt>
+                  <dt className="text-blue-800">{dict.successPage?.pickupDate || 'Pick-up Date'}</dt>
                   <dd className="font-bold text-blue-900">{new Date(booking.startDate).toLocaleDateString()}</dd>
                 </div>
                 <div className="flex justify-between">
-                  <dt className="text-blue-800">Drop-off Date</dt>
+                  <dt className="text-blue-800">{dict.successPage?.dropoffDate || 'Drop-off Date'}</dt>
                   <dd className="font-bold text-blue-900">{new Date(booking.endDate).toLocaleDateString()}</dd>
                 </div>
                 <div className="flex justify-between pt-3 border-t border-blue-200">
-                  <dt className="text-blue-800 flex items-center gap-1"><MapPin size={14}/> Location</dt>
+                  <dt className="text-blue-800 flex items-center gap-1"><MapPin size={14}/> {dict.successPage?.location || 'Location'}</dt>
                   <dd className="font-bold text-blue-900">Athens Airport</dd>
                 </div>
               </dl>
@@ -153,14 +153,14 @@ export default async function SuccessPage({
         {/* Financial Breakdown */}
         <div className="mb-10">
           <h3 className="text-sm font-bold text-gray-500 uppercase flex items-center gap-2 mb-4">
-            <FileText size={16} /> Financial Breakdown
+            <FileText size={16} /> {dict.successPage?.financialBreakdown || 'Financial Breakdown'}
           </h3>
           <table className="w-full text-left text-sm">
             <thead className="bg-gray-100 print:bg-gray-200">
               <tr>
-                <th className="py-3 px-4 font-bold rounded-l-lg">Description</th>
-                <th className="py-3 px-4 font-bold text-right">Rate</th>
-                <th className="py-3 px-4 font-bold text-right rounded-r-lg">Amount</th>
+                <th className="py-3 px-4 font-bold rounded-l-lg">{dict.successPage?.description || 'Description'}</th>
+                <th className="py-3 px-4 font-bold text-right">{dict.successPage?.rate || 'Rate'}</th>
+                <th className="py-3 px-4 font-bold text-right rounded-r-lg">{dict.successPage?.amount || 'Amount'}</th>
               </tr>
             </thead>
             <tbody className="divide-y">
@@ -177,7 +177,7 @@ export default async function SuccessPage({
             </tbody>
             <tfoot>
               <tr>
-                <td colSpan={2} className="py-5 px-4 text-right font-bold text-lg">Total Paid</td>
+                <td colSpan={2} className="py-5 px-4 text-right font-bold text-lg">{dict.successPage?.totalPaid || 'Total Paid'}</td>
                 <td className="py-5 px-4 text-right font-black text-2xl text-blue-600 border-t-2 border-gray-900">€{booking.totalPrice.toFixed(2)}</td>
               </tr>
             </tfoot>
@@ -197,7 +197,7 @@ export default async function SuccessPage({
           href={`/${lang}/fleet`}
           className="bg-blue-600 text-white font-bold py-3 px-8 rounded-xl hover:bg-blue-700 transition"
         >
-          Book Another Vehicle
+          {dict.successPage?.bookAnother || 'Book Another Vehicle'}
         </Link>
       </div>
     </div>

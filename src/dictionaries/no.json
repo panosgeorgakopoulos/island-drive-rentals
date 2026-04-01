@@ -145,5 +145,27 @@
     "emailPlaceholder": "ola@example.no",
     "messagePlaceholder": "Spør om hva som helst",
     "sendButton": "Send Inn"
+  },
+  "successPage": {
+    "title": "Bestilling Bekreftet",
+    "thanks": "Takk for at du valgte Island Drive Rentals",
+    "invoiceReference": "Bestilling / Referanse",
+    "paidInFull": "Betalt i Sin Helhet",
+    "customerVehicle": "Kunde & Kjøretøy",
+    "customerName": "Kundenavn",
+    "customerEmail": "Kundens E-post",
+    "vehicle": "Kjøretøy",
+    "class": "Klasse",
+    "tripItinerary": "Reiseplan",
+    "pickupDate": "Hentedato",
+    "dropoffDate": "Returdato",
+    "location": "Sted",
+    "financialBreakdown": "Økonomisk Oversikt",
+    "description": "Beskrivelse",
+    "rate": "Sats",
+    "amount": "Beløp",
+    "totalPaid": "Totalt Betalt",
+    "bookAnother": "Bestill ett Annet Kjøretøy",
+    "printInvoice": "Skriv ut Faktura"
   }
 }

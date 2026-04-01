@@ -145,5 +145,27 @@
     "emailPlaceholder": "mario@example.com",
     "messagePlaceholder": "Come possiamo aiutarti?",
     "sendButton": "Invia Messaggio"
+  },
+  "successPage": {
+    "title": "Prenotazione Confermata",
+    "thanks": "Grazie per aver scelto Island Drive Rentals",
+    "invoiceReference": "Fattura / Riferimento",
+    "paidInFull": "Pagato per Intero",
+    "customerVehicle": "Cliente & Veicolo",
+    "customerName": "Nome Cliente",
+    "customerEmail": "Email Cliente",
+    "vehicle": "Veicolo",
+    "class": "Classe",
+    "tripItinerary": "Itinerario di Viaggio",
+    "pickupDate": "Data di Ritiro",
+    "dropoffDate": "Data di Riconsegna",
+    "location": "Luogo",
+    "financialBreakdown": "Dettaglio Finanziario",
+    "description": "Descrizione",
+    "rate": "Tariffa",
+    "amount": "Importo",
+    "totalPaid": "Totale Pagato",
+    "bookAnother": "Prenota un Altro Veicolo",
+    "printInvoice": "Stampa Fattura"
   }
 }
