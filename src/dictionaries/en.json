@@ -1,0 +1,15 @@
+{
+  "nav": {
+    "home": "Home",
+    "fleet": "Our Fleet",
+    "locations": "Locations",
+    "about": "About",
+    "contact": "Contact",
+    "language": "Language"
+  },
+  "hero": {
+    "title": "Rent the Perfect Car",
+    "subtitle": "Explore the islands in luxury.",
+    "cta": "Browse Fleet"
+  }
+}

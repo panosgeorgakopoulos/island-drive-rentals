@@ -1,0 +1,15 @@
+{
+  "nav": {
+    "home": "Hjem",
+    "fleet": "Vår Flåte",
+    "locations": "Steder",
+    "about": "Om Oss",
+    "contact": "Kontakt",
+    "language": "Språk"
+  },
+  "hero": {
+    "title": "Lei den Perfekte Bilen",
+    "subtitle": "Utforsk øyene i luksus.",
+    "cta": "Se Flåten"
+  }
+}

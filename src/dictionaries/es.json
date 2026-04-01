@@ -1,0 +1,15 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "fleet": "Nuestra Flota",
+    "locations": "Ubicaciones",
+    "about": "Sobre Nosotros",
+    "contact": "Contacto",
+    "language": "Idioma"
+  },
+  "hero": {
+    "title": "Alquila el Coche Perfecto",
+    "subtitle": "Explora las islas con lujo.",
+    "cta": "Ver Flota"
+  }
+}

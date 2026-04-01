@@ -2,8 +2,11 @@ import Link from "next/link";
 import { Search, Star, Shield, Clock, Headphones } from "lucide-react";
 import { HeroSearch } from "@/components/HeroSearch";
 import { prisma } from "@/lib/prisma";
+import { getDictionary } from "@/lib/dictionaries";
 
-export default async function Home() {
+export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  const dict = await getDictionary(lang);
   const featuredVehicles = await prisma.vehicle.findMany({
     where: { isActive: true },
     take: 3,
@@ -23,10 +26,10 @@ export default async function Home() {
         
         <div className="relative z-20 w-full max-w-5xl mx-auto px-6 text-center text-white space-y-8">
           <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter drop-shadow-lg leading-[0.95]">
-            Explore the Island<br className="hidden md:block" /> Freedom
+            {dict.hero?.title || 'Explore the Island Freedom'}
           </h1>
           <p className="text-lg md:text-xl font-light text-gray-300 max-w-2xl mx-auto">
-            Premium car, scooter, and ATV rentals for your perfect vacation.
+            {dict.hero?.subtitle || 'Premium car, scooter, and ATV rentals for your perfect vacation.'}
           </p>
 
           <HeroSearch />
@@ -105,7 +108,7 @@ export default async function Home() {
                       {specs.fuel && <span>{specs.fuel}</span>}
                     </div>
                     <div className="mt-auto">
-                      <Link href={`/fleet/${vehicle.slug}`} className="btn-primary w-full text-center text-sm !py-3">
+                      <Link href={`/${lang}/fleet/${vehicle.slug}`} className="btn-primary w-full text-center text-sm !py-3">
                         View Details
                       </Link>
                     </div>
@@ -116,7 +119,7 @@ export default async function Home() {
           </div>
           
           <div className="pt-4">
-            <Link href="/fleet" className="btn-secondary">
+            <Link href={`/${lang}/fleet`} className="btn-secondary">
               View All Vehicles
             </Link>
           </div>

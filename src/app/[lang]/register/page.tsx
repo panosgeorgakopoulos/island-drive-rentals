@@ -1,6 +1,6 @@
 "use client"
 
-import { registerAction } from "@/app/actions/auth"
+import { registerAction } from "@/app/[lang]/actions/auth"
 import Link from "next/link"
 import { Car } from "lucide-react"
 
@@ -21,7 +21,7 @@ export default function RegisterPage() {
                 <input required name="name" type="text" className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
               </div>
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700">Email address</label>
               <div className="mt-1">

@@ -1,0 +1,15 @@
+{
+  "nav": {
+    "home": "Hem",
+    "fleet": "Vår Flotta",
+    "locations": "Platser",
+    "about": "Om Oss",
+    "contact": "Kontakt",
+    "language": "Språk"
+  },
+  "hero": {
+    "title": "Hyr den Perfekta Bilen",
+    "subtitle": "Utforska öarna i lyx.",
+    "cta": "Se Flottan"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "nav": {
+    "home": "Home",
+    "fleet": "La Nostra Flotta",
+    "locations": "Posizioni",
+    "about": "Chi Siamo",
+    "contact": "Contatti",
+    "language": "Lingua"
+  },
+  "hero": {
+    "title": "Noleggia l'Auto Perfetta",
+    "subtitle": "Esplora le isole nel lusso.",
+    "cta": "Vedi la Flotta"
+  }
+}

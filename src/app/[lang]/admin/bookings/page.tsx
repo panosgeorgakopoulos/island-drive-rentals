@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma"
 import { CheckCircle, Clock, XCircle, FileSpreadsheet } from "lucide-react"
-import { cancelBookingAction } from "@/app/actions/booking"
+import { cancelBookingAction } from "@/app/[lang]/actions/booking"
 
 export default async function AdminBookingsPage() {
   const bookings = await prisma.booking.findMany({
@@ -61,14 +61,14 @@ export default async function AdminBookingsPage() {
                     </span>
                   )}
                   {b.status === "pending" && (
-                     <span className="inline-flex items-center gap-1 bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-medium">
-                       <Clock size={12} /> Pending Payment
-                     </span>
+                    <span className="inline-flex items-center gap-1 bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-medium">
+                      <Clock size={12} /> Pending Payment
+                    </span>
                   )}
                   {b.status === "cancelled" && (
-                     <span className="inline-flex items-center gap-1 bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs font-medium">
-                       <XCircle size={12} /> Cancelled
-                     </span>
+                    <span className="inline-flex items-center gap-1 bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs font-medium">
+                      <XCircle size={12} /> Cancelled
+                    </span>
                   )}
                 </td>
                 <td className="p-4 text-right">

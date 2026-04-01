@@ -1,6 +1,6 @@
 "use client"
 
-import { loginAction } from "@/app/actions/auth"
+import { loginAction } from "@/app/[lang]/actions/auth"
 import Link from "next/link"
 import { Car } from "lucide-react"
 

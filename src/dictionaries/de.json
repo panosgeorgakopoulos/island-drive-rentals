@@ -1,0 +1,15 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "fleet": "Unsere Flotte",
+    "locations": "Standorte",
+    "about": "Über Uns",
+    "contact": "Kontakt",
+    "language": "Sprache"
+  },
+  "hero": {
+    "title": "Mieten Sie das perfekte Auto",
+    "subtitle": "Erkunden Sie die Inseln im Luxus.",
+    "cta": "Flotte ansehen"
+  }
+}

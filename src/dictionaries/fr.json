@@ -1,0 +1,15 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "fleet": "Notre Flotte",
+    "locations": "Lieux",
+    "about": "À Propos",
+    "contact": "Contact",
+    "language": "Langue"
+  },
+  "hero": {
+    "title": "Louez la Voiture Parfaite",
+    "subtitle": "Explorez les îles avec luxe.",
+    "cta": "Voir la Flotte"
+  }
+}
