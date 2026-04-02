@@ -78,8 +78,8 @@ export async function POST(req: NextRequest) {
           },
         ],
         mode: "payment",
-        success_url: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/${lang}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/${lang}/book/${vehicle.id}?start=${startDateStr}&end=${endDateStr}`,
+        success_url: `http://localhost:3000/${lang}/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `http://localhost:3000/${lang}/book/${vehicle.id}?start=${startDateStr}&end=${endDateStr}`,
         metadata: {
           userId: session.user.id,
           vehicleId: vehicle.id,
@@ -92,7 +92,7 @@ export async function POST(req: NextRequest) {
       })
 
       if (checkoutSession.url) {
-        return NextResponse.redirect(new URL(checkoutSession.url))
+        return NextResponse.json({ url: checkoutSession.url })
       }
 
       return new NextResponse("Error creating checkout session", { status: 500 })
@@ -149,12 +149,12 @@ export async function POST(req: NextRequest) {
         ], process.env.GOOGLE_SPREADSHEET_ID).catch(console.error)
       }
 
-      return NextResponse.redirect(new URL(`/${lang}/success?mock=true`, req.url))
+      return NextResponse.json({ url: new URL(`/${lang}/success?mock=true`, req.url).toString() })
     } catch (err: any) {
       if (err.message === "VEHICLE_UNAVAILABLE") {
-        return NextResponse.redirect(
-          new URL(`/${lang}/book/${vehicle.id}?start=${startDateStr}&end=${endDateStr}&error=unavailable`, req.url)
-        )
+        return NextResponse.json({ 
+          url: new URL(`/${lang}/book/${vehicle.id}?start=${startDateStr}&end=${endDateStr}&error=unavailable`, req.url).toString() 
+        })
       }
       throw err
     }

@@ -76,6 +76,30 @@ export function BookingCheckoutClient({
   const { days, baseTotal, surgeAmount, discountAmount, finalTotal, hasSurge, hasDiscount, discountPercent } = pricing
   const totalWithExtras = finalTotal + (days * extrasDailyCost)
   const extrasString = selectedExtrasArr.join(", ")
+  const [isCheckingOut, setIsCheckingOut] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsCheckingOut(true);
+    
+    try {
+      const formData = new FormData(e.currentTarget);
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        body: formData,
+      });
+      
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        setIsCheckingOut(false);
+      }
+    } catch (error) {
+      console.error("Checkout error:", error);
+      setIsCheckingOut(false);
+    }
+  }
 
   return (
     <div className="max-w-4xl mx-auto px-6 grid md:grid-cols-3 gap-8">
@@ -84,7 +108,7 @@ export function BookingCheckoutClient({
         <div className="card-premium p-8">
           <h2 className="text-2xl font-extrabold tracking-tight mb-6">{t('checkoutTitle')}</h2>
           
-          <form action="/api/checkout" method="POST" className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <input type="hidden" name="vehicleId" value={vehicle.id} />
             <input type="hidden" name="startDate" value={start || ""} />
             <input type="hidden" name="endDate" value={end || ""} />
@@ -192,10 +216,17 @@ export function BookingCheckoutClient({
 
             <button 
               type="submit" 
-              disabled={days <= 0}
-              className="btn-primary w-full text-lg !py-4 mt-8"
+              disabled={days <= 0 || isCheckingOut}
+              className="btn-primary w-full text-lg !py-4 mt-8 flex justify-center items-center gap-2"
             >
-              {days > 0 ? `${t('confirmAndPay')} €${totalWithExtras.toFixed(2)}` : t('selectDatesFirst')}
+              {isCheckingOut ? (
+                <>
+                  <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                  Processing...
+                </>
+              ) : (
+                days > 0 ? `${t('confirmAndPay')} €${totalWithExtras.toFixed(2)}` : t('selectDatesFirst')
+              )}
             </button>
           </form>
         </div>
