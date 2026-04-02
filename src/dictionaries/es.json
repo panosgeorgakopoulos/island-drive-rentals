@@ -167,5 +167,68 @@
     "totalPaid": "Total Pagado",
     "bookAnother": "Reservar Otro Vehículo",
     "printInvoice": "Imprimir Factura"
+  },
+  "locations": {
+    "santorini": "Santorini",
+    "mykonos": "Mikonos",
+    "crete": "Creta",
+    "paros": "Paros",
+    "rhodes": "Rodas"
+  },
+  "admin": {
+    "panelTitle": "Panel de Administración",
+    "sidebar": {
+      "brand": "Island Drive Admin",
+      "dashboard": "Panel de Control",
+      "fleet": "Gestión de Flota",
+      "bookings": "Reservas",
+      "pricing": "Precios y Extras",
+      "customers": "Clientes"
+    },
+    "dashboard": {
+      "title": "Resumen del Panel",
+      "totalRevenue": "Ingresos Totales",
+      "totalBookings": "Reservas Totales",
+      "commissions": "Comisiones (15%)",
+      "fleetUtilization": "Utilización de Flota",
+      "rented": "alquilados",
+      "ofTotal": "de {total} vehículos",
+      "revenueOverTime": "Ingresos en el Tiempo",
+      "bookingsPerIsland": "Reservas por Isla",
+      "last6Months": "Últimos 6 meses",
+      "noData": "Sin datos aún"
+    },
+    "pricing": {
+      "title": "Precios y Extras",
+      "subtitle": "Gestiona las reglas de precios y servicios adicionales.",
+      "globalRules": "Reglas de Precios Globales",
+      "highSeason": "Temporada Alta",
+      "highSeasonMonths": "Meses",
+      "surgePercent": "Porcentaje de Recargo",
+      "weeklyDiscount": "Descuento Semanal",
+      "commissionRate": "Tasa de Comisión",
+      "saveChanges": "Guardar Cambios",
+      "saved": "¡Cambios guardados!",
+      "extrasTitle": "Extras y Complementos",
+      "extrasSubtitle": "Gestiona las tarifas diarias de los servicios premium.",
+      "extraName": "Servicio",
+      "extraType": "Tipo de Precio",
+      "extraPrice": "Tarifa Diaria",
+      "perDay": "Por Día",
+      "perBooking": "Por Reserva"
+    },
+    "customers": {
+      "title": "Clientes",
+      "subtitle": "Todos los clientes registrados y su historial de reservas.",
+      "totalCustomers": "Clientes Totales",
+      "averageLtv": "LTV Promedio",
+      "topIsland": "Isla Más Popular",
+      "name": "Nombre",
+      "email": "Email",
+      "totalBookings": "Reservas",
+      "ltv": "Valor de por Vida",
+      "noCustomers": "No se encontraron clientes.",
+      "joined": "Registrado"
+    }
   }
 }

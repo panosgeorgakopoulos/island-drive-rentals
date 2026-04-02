@@ -167,5 +167,68 @@
     "totalPaid": "Totalt Betalt",
     "bookAnother": "Bestill ett Annet Kjøretøy",
     "printInvoice": "Skriv ut Faktura"
+  },
+  "locations": {
+    "santorini": "Santorini",
+    "mykonos": "Mykonos",
+    "crete": "Kreta",
+    "paros": "Paros",
+    "rhodes": "Rhodos"
+  },
+  "admin": {
+    "panelTitle": "Adminpanel",
+    "sidebar": {
+      "brand": "Island Drive Admin",
+      "dashboard": "Oversikt",
+      "fleet": "Flåtestyring",
+      "bookings": "Bestillinger",
+      "pricing": "Priser & Tillegg",
+      "customers": "Kunder"
+    },
+    "dashboard": {
+      "title": "Dashboardoversikt",
+      "totalRevenue": "Total Inntekt",
+      "totalBookings": "Totale Bestillinger",
+      "commissions": "Provisjoner (15%)",
+      "fleetUtilization": "Flåteutnyttelse",
+      "rented": "utleid",
+      "ofTotal": "av {total} kjøretøy",
+      "revenueOverTime": "Inntekter Over Tid",
+      "bookingsPerIsland": "Bestillinger per Øy",
+      "last6Months": "Siste 6 måneder",
+      "noData": "Ingen data ennå"
+    },
+    "pricing": {
+      "title": "Priser & Tillegg",
+      "subtitle": "Administrer globale prisregler og tilleggstjenester.",
+      "globalRules": "Globale Prisregler",
+      "highSeason": "Høysesong",
+      "highSeasonMonths": "Måneder",
+      "surgePercent": "Tilleggsprosent",
+      "weeklyDiscount": "Ukerabatt",
+      "commissionRate": "Provisjonssats",
+      "saveChanges": "Lagre Endringer",
+      "saved": "Endringer lagret!",
+      "extrasTitle": "Tillegg & Ekstra",
+      "extrasSubtitle": "Administrer dagspriser for premiumtjenester.",
+      "extraName": "Tjeneste",
+      "extraType": "Pristype",
+      "extraPrice": "Dagspris",
+      "perDay": "Per Dag",
+      "perBooking": "Per Bestilling"
+    },
+    "customers": {
+      "title": "Kunder",
+      "subtitle": "Alle registrerte kunder og deres bestillingshistorikk.",
+      "totalCustomers": "Totale Kunder",
+      "averageLtv": "Gjennomsnittlig LTV",
+      "topIsland": "Mest Populære Øy",
+      "name": "Navn",
+      "email": "E-post",
+      "totalBookings": "Bestillinger",
+      "ltv": "Livstidsverdi",
+      "noCustomers": "Ingen kunder funnet.",
+      "joined": "Registrert"
+    }
   }
 }

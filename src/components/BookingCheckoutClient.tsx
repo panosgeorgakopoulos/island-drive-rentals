@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Shield, Baby, Users } from "lucide-react"
 import { useTranslations } from 'next-intl'
+import { ISLANDS } from "@/config/locations"
 
 export function BookingCheckoutClient({ 
   vehicle, 
@@ -25,6 +26,7 @@ export function BookingCheckoutClient({
   const [wantsChildSeat, setWantsChildSeat] = useState(false)
   const [wantsExtraDriver, setWantsExtraDriver] = useState(false)
   const t = useTranslations('booking')
+  const tLoc = useTranslations('locations')
 
   const insuranceCost = 15;
   const childSeatCost = 5;
@@ -85,12 +87,14 @@ export function BookingCheckoutClient({
 
             <div className="space-y-2">
               <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">{t('pickupLocation')}</label>
-              <select name="pickupLocation" defaultValue={location || "Athens Airport"} className="w-full border border-gray-200 rounded-xl p-3 bg-[var(--color-surface-alt)] font-semibold outline-none focus:ring-2 focus:ring-[var(--color-primary)]">
-                <option value="Athens Airport">Athens Airport</option>
-                <option value="Athens City Center">Athens City Center</option>
-                <option value="Santorini Airport">Santorini Airport</option>
-                <option value="Mykonos Port">Mykonos Port</option>
-                <option value="Crete Heraklion Airport">Crete Heraklion Airport</option>
+              <select name="pickupLocation" defaultValue={location || ISLANDS[0].pickupPoints[0]} className="w-full border border-gray-200 rounded-xl p-3 bg-[var(--color-surface-alt)] font-semibold outline-none focus:ring-2 focus:ring-[var(--color-primary)]">
+                {ISLANDS.map(island => (
+                  <optgroup key={island.id} label={tLoc(island.id as any)}>
+                    {island.pickupPoints.map(point => (
+                      <option key={point} value={point}>{point}</option>
+                    ))}
+                  </optgroup>
+                ))}
               </select>
             </div>
 

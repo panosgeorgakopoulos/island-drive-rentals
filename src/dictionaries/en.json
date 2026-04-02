@@ -167,5 +167,68 @@
     "totalPaid": "Total Paid",
     "bookAnother": "Book Another Vehicle",
     "printInvoice": "Print Invoice"
+  },
+  "locations": {
+    "santorini": "Santorini",
+    "mykonos": "Mykonos",
+    "crete": "Crete",
+    "paros": "Paros",
+    "rhodes": "Rhodes"
+  },
+  "admin": {
+    "panelTitle": "Admin Panel",
+    "sidebar": {
+      "brand": "Island Drive Admin",
+      "dashboard": "Dashboard",
+      "fleet": "Fleet Management",
+      "bookings": "Bookings",
+      "pricing": "Pricing & Extras",
+      "customers": "Customers"
+    },
+    "dashboard": {
+      "title": "Dashboard Overview",
+      "totalRevenue": "Total Revenue",
+      "totalBookings": "Total Bookings",
+      "commissions": "Commissions (15%)",
+      "fleetUtilization": "Fleet Utilization",
+      "rented": "rented",
+      "ofTotal": "of {total} vehicles",
+      "revenueOverTime": "Revenue Over Time",
+      "bookingsPerIsland": "Bookings Per Island",
+      "last6Months": "Last 6 months",
+      "noData": "No data yet"
+    },
+    "pricing": {
+      "title": "Pricing & Extras",
+      "subtitle": "Manage global pricing rules and add-on services.",
+      "globalRules": "Global Pricing Rules",
+      "highSeason": "High Season",
+      "highSeasonMonths": "Months",
+      "surgePercent": "Surge Percentage",
+      "weeklyDiscount": "Weekly Discount",
+      "commissionRate": "Commission Rate",
+      "saveChanges": "Save Changes",
+      "saved": "Changes saved!",
+      "extrasTitle": "Extras & Add-ons",
+      "extrasSubtitle": "Manage daily rates for premium add-on services.",
+      "extraName": "Service",
+      "extraType": "Pricing Type",
+      "extraPrice": "Daily Rate",
+      "perDay": "Per Day",
+      "perBooking": "Per Booking"
+    },
+    "customers": {
+      "title": "Customers",
+      "subtitle": "All registered customers and their booking history.",
+      "totalCustomers": "Total Customers",
+      "averageLtv": "Average LTV",
+      "topIsland": "Most Popular Island",
+      "name": "Name",
+      "email": "Email",
+      "totalBookings": "Bookings",
+      "ltv": "Lifetime Value",
+      "noCustomers": "No customers found.",
+      "joined": "Joined"
+    }
   }
 }

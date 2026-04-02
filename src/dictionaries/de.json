@@ -167,5 +167,68 @@
     "totalPaid": "Gesamtbetrag Bezahlt",
     "bookAnother": "Weiteres Fahrzeug Buchen",
     "printInvoice": "Rechnung Drucken"
+  },
+  "locations": {
+    "santorini": "Santorin",
+    "mykonos": "Mykonos",
+    "crete": "Kreta",
+    "paros": "Paros",
+    "rhodes": "Rhodos"
+  },
+  "admin": {
+    "panelTitle": "Admin-Bereich",
+    "sidebar": {
+      "brand": "Island Drive Admin",
+      "dashboard": "Übersicht",
+      "fleet": "Flottenverwaltung",
+      "bookings": "Buchungen",
+      "pricing": "Preise & Extras",
+      "customers": "Kunden"
+    },
+    "dashboard": {
+      "title": "Dashboard-Übersicht",
+      "totalRevenue": "Gesamterlös",
+      "totalBookings": "Gesamtbuchungen",
+      "commissions": "Provisionen (15%)",
+      "fleetUtilization": "Flottenauslastung",
+      "rented": "vermietet",
+      "ofTotal": "von {total} Fahrzeugen",
+      "revenueOverTime": "Umsatz im Zeitverlauf",
+      "bookingsPerIsland": "Buchungen pro Insel",
+      "last6Months": "Letzte 6 Monate",
+      "noData": "Noch keine Daten"
+    },
+    "pricing": {
+      "title": "Preise & Extras",
+      "subtitle": "Verwalte globale Preisregeln und Zusatzleistungen.",
+      "globalRules": "Globale Preisregeln",
+      "highSeason": "Hochsaison",
+      "highSeasonMonths": "Monate",
+      "surgePercent": "Aufschlagsprozentsatz",
+      "weeklyDiscount": "Wochenrabatt",
+      "commissionRate": "Provisionssatz",
+      "saveChanges": "Änderungen Speichern",
+      "saved": "Änderungen gespeichert!",
+      "extrasTitle": "Extras & Zusatzleistungen",
+      "extrasSubtitle": "Tagespreise für Premium-Zusatzleistungen verwalten.",
+      "extraName": "Leistung",
+      "extraType": "Preistyp",
+      "extraPrice": "Tagespreis",
+      "perDay": "Pro Tag",
+      "perBooking": "Pro Buchung"
+    },
+    "customers": {
+      "title": "Kunden",
+      "subtitle": "Alle registrierten Kunden und ihre Buchungshistorie.",
+      "totalCustomers": "Gesamtkunden",
+      "averageLtv": "Durchschnittlicher LTV",
+      "topIsland": "Beliebteste Insel",
+      "name": "Name",
+      "email": "E-Mail",
+      "totalBookings": "Buchungen",
+      "ltv": "Lebenszeitwert",
+      "noCustomers": "Keine Kunden gefunden.",
+      "joined": "Beigetreten"
+    }
   }
 }

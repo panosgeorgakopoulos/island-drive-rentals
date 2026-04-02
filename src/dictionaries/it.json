@@ -167,5 +167,68 @@
     "totalPaid": "Totale Pagato",
     "bookAnother": "Prenota un Altro Veicolo",
     "printInvoice": "Stampa Fattura"
+  },
+  "locations": {
+    "santorini": "Santorini",
+    "mykonos": "Mykonos",
+    "crete": "Creta",
+    "paros": "Paros",
+    "rhodes": "Rodi"
+  },
+  "admin": {
+    "panelTitle": "Pannello Admin",
+    "sidebar": {
+      "brand": "Island Drive Admin",
+      "dashboard": "Dashboard",
+      "fleet": "Gestione Flotta",
+      "bookings": "Prenotazioni",
+      "pricing": "Prezzi & Extra",
+      "customers": "Clienti"
+    },
+    "dashboard": {
+      "title": "Panoramica Dashboard",
+      "totalRevenue": "Ricavi Totali",
+      "totalBookings": "Prenotazioni Totali",
+      "commissions": "Commissioni (15%)",
+      "fleetUtilization": "Utilizzo Flotta",
+      "rented": "noleggiati",
+      "ofTotal": "su {total} veicoli",
+      "revenueOverTime": "Ricavi nel Tempo",
+      "bookingsPerIsland": "Prenotazioni per Isola",
+      "last6Months": "Ultimi 6 mesi",
+      "noData": "Nessun dato"
+    },
+    "pricing": {
+      "title": "Prezzi & Extra",
+      "subtitle": "Gestisci le regole tariffarie e i servizi aggiuntivi.",
+      "globalRules": "Regole Tariffarie Globali",
+      "highSeason": "Alta Stagione",
+      "highSeasonMonths": "Mesi",
+      "surgePercent": "Percentuale di Supplemento",
+      "weeklyDiscount": "Sconto Settimanale",
+      "commissionRate": "Tasso di Commissione",
+      "saveChanges": "Salva Modifiche",
+      "saved": "Modifiche salvate!",
+      "extrasTitle": "Extra & Servizi",
+      "extrasSubtitle": "Gestisci le tariffe giornaliere dei servizi premium.",
+      "extraName": "Servizio",
+      "extraType": "Tipo Tariffa",
+      "extraPrice": "Tariffa Giornaliera",
+      "perDay": "Al Giorno",
+      "perBooking": "Per Prenotazione"
+    },
+    "customers": {
+      "title": "Clienti",
+      "subtitle": "Tutti i clienti registrati e la loro cronologia prenotazioni.",
+      "totalCustomers": "Clienti Totali",
+      "averageLtv": "LTV Medio",
+      "topIsland": "Isola Più Popolare",
+      "name": "Nome",
+      "email": "Email",
+      "totalBookings": "Prenotazioni",
+      "ltv": "Valore a Vita",
+      "noCustomers": "Nessun cliente trovato.",
+      "joined": "Iscritto"
+    }
   }
 }

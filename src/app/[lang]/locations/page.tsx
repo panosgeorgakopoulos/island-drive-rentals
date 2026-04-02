@@ -1,48 +1,12 @@
 import Link from "next/link"
 import { Search } from "lucide-react"
 import { getTranslations } from "next-intl/server"
-
-const LOCATIONS = [
-  {
-    id: "santorini",
-    name: "Santorini",
-    desc: "Experience the majestic sunsets and volcanic landscapes in premium comfort.",
-    img: "https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?auto=format&fit=crop&q=80&w=800",
-    points: ["Santorini Airport (JTR)", "Athinios Port"]
-  },
-  {
-    id: "mykonos",
-    name: "Mykonos",
-    desc: "Navigate the vibrant nightlife and pristine white sandy beaches.",
-    img: "https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?auto=format&fit=crop&q=80&w=800",
-    points: ["Mykonos Airport (JMK)", "New Port"]
-  },
-  {
-    id: "crete",
-    name: "Crete",
-    desc: "Discover ancient ruins, deep gorges, and expansive coastlines with our luxury SUVs.",
-    img: "https://images.unsplash.com/photo-1577903203403-dc3ec56a31c5?auto=format&fit=crop&q=80&w=800",
-    points: ["Heraklion Airport (HER)", "Chania Airport (CHQ)"]
-  },
-  {
-    id: "paros",
-    name: "Paros",
-    desc: "The quintessential cycladic experience requires the perfect convertible.",
-    img: "https://images.unsplash.com/photo-1620803512891-9e735ff6f05f?auto=format&fit=crop&q=80&w=800",
-    points: ["Paros Airport (PAS)", "Parikia Port"]
-  },
-  {
-    id: "rhodes",
-    name: "Rhodes",
-    desc: "Drive through medieval towns and crystal clear bays in absolute luxury.",
-    img: "https://images.unsplash.com/photo-1603565816030-6b38c4ebfe06?auto=format&fit=crop&q=80&w=800",
-    points: ["Rhodes Airport (RHO)", "Rhodes Port"]
-  }
-]
+import { ISLANDS } from "@/config/locations"
 
 export default async function LocationsPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   const t = await getTranslations('locationsPage');
+  const tLoc = await getTranslations('locations');
 
   return (
     <div className="bg-[var(--color-surface-alt)] min-h-screen pb-20">
@@ -58,20 +22,20 @@ export default async function LocationsPage({ params }: { params: Promise<{ lang
 
       <div className="max-w-6xl mx-auto px-6 mt-16">
         <div className="grid md:grid-cols-2 gap-10">
-          {LOCATIONS.map(loc => (
+          {ISLANDS.map(loc => (
             <div key={loc.id} className="card-premium overflow-hidden group flex flex-col">
               <div 
                 className="h-64 bg-gray-200 bg-cover bg-center relative overflow-hidden"
-                style={{ backgroundImage: `url(${loc.img})` }}
+                style={{ backgroundImage: `url(${loc.image})` }}
               >
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <h2 className="absolute bottom-6 left-6 text-3xl font-extrabold text-white tracking-tight drop-shadow-md">{t(`locations.${loc.id}.name` as any)}</h2>
+                <h2 className="absolute bottom-6 left-6 text-3xl font-extrabold text-white tracking-tight drop-shadow-md">{tLoc(loc.id as any)}</h2>
               </div>
               <div className="p-8 flex-1 flex flex-col">
                 <p className="text-gray-500 mb-6">{t(`locations.${loc.id}.desc` as any)}</p>
                 <div className="space-y-2 mb-8">
                   <h4 className="text-xs font-bold text-[var(--color-primary)] uppercase tracking-wider mb-3">{t('airports')}</h4>
-                  {loc.points.map(p => (
+                  {loc.pickupPoints.map(p => (
                     <div key={p} className="flex items-center gap-2 text-sm font-medium text-gray-700">
                       <div className="w-1.5 h-1.5 rounded-full bg-gray-300" /> {p}
                     </div>

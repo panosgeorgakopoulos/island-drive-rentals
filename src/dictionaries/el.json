@@ -167,5 +167,68 @@
     "totalPaid": "Συνολικό Ποσό",
     "bookAnother": "Κράτηση Άλλου Οχήματος",
     "printInvoice": "Εκτύπωση Τιμολογίου"
+  },
+  "locations": {
+    "santorini": "Σαντορίνη",
+    "mykonos": "Μύκονος",
+    "crete": "Κρήτη",
+    "paros": "Πάρος",
+    "rhodes": "Ρόδος"
+  },
+  "admin": {
+    "panelTitle": "Πίνακας Διαχείρισης",
+    "sidebar": {
+      "brand": "Island Drive Διαχείριση",
+      "dashboard": "Πίνακας Ελέγχου",
+      "fleet": "Διαχείριση Στόλου",
+      "bookings": "Κρατήσεις",
+      "pricing": "Τιμολόγηση & Extras",
+      "customers": "Πελάτες"
+    },
+    "dashboard": {
+      "title": "Επισκόπηση Πίνακα",
+      "totalRevenue": "Συνολικά Έσοδα",
+      "totalBookings": "Συνολικές Κρατήσεις",
+      "commissions": "Προμήθειες (15%)",
+      "fleetUtilization": "Αξιοποίηση Στόλου",
+      "rented": "ενοικιασμένα",
+      "ofTotal": "από {total} οχήματα",
+      "revenueOverTime": "Έσοδα ανά Χρονική Περίοδο",
+      "bookingsPerIsland": "Κρατήσεις ανά Νησί",
+      "last6Months": "Τελευταίοι 6 μήνες",
+      "noData": "Δεν υπάρχουν δεδομένα"
+    },
+    "pricing": {
+      "title": "Τιμολόγηση & Extras",
+      "subtitle": "Διαχειριστείτε τους κανόνες τιμολόγησης και τις πρόσθετες υπηρεσίες.",
+      "globalRules": "Κανόνες Τιμολόγησης",
+      "highSeason": "Υψηλή Σεζόν",
+      "highSeasonMonths": "Μήνες",
+      "surgePercent": "Ποσοστό Προσαύξησης",
+      "weeklyDiscount": "Εβδομαδιαία Έκπτωση",
+      "commissionRate": "Ποσοστό Προμήθειας",
+      "saveChanges": "Αποθήκευση",
+      "saved": "Οι αλλαγές αποθηκεύτηκαν!",
+      "extrasTitle": "Πρόσθετες Υπηρεσίες",
+      "extrasSubtitle": "Διαχειριστείτε τις ημερήσιες χρεώσεις.",
+      "extraName": "Υπηρεσία",
+      "extraType": "Τύπος Χρέωσης",
+      "extraPrice": "Ημερήσια Χρέωση",
+      "perDay": "Ανά Ημέρα",
+      "perBooking": "Ανά Κράτηση"
+    },
+    "customers": {
+      "title": "Πελάτες",
+      "subtitle": "Όλοι οι εγγεγραμμένοι πελάτες και το ιστορικό κρατήσεών τους.",
+      "totalCustomers": "Συνολικοί Πελάτες",
+      "averageLtv": "Μέσο LTV",
+      "topIsland": "Δημοφιλέστερο Νησί",
+      "name": "Όνομα",
+      "email": "Email",
+      "totalBookings": "Κρατήσεις",
+      "ltv": "Αξία Πελάτη",
+      "noCustomers": "Δεν βρέθηκαν πελάτες.",
+      "joined": "Εγγραφή"
+    }
   }
 }

@@ -167,5 +167,68 @@
     "totalPaid": "Totalt Betalt",
     "bookAnother": "Boka ett Annat Fordon",
     "printInvoice": "Skriv ut Faktura"
+  },
+  "locations": {
+    "santorini": "Santorini",
+    "mykonos": "Mykonos",
+    "crete": "Kreta",
+    "paros": "Paros",
+    "rhodes": "Rhodos"
+  },
+  "admin": {
+    "panelTitle": "Adminpanel",
+    "sidebar": {
+      "brand": "Island Drive Admin",
+      "dashboard": "Översikt",
+      "fleet": "Fordonsflotta",
+      "bookings": "Bokningar",
+      "pricing": "Priser & Tillägg",
+      "customers": "Kunder"
+    },
+    "dashboard": {
+      "title": "Dashboardöversikt",
+      "totalRevenue": "Total Intäkt",
+      "totalBookings": "Totala Bokningar",
+      "commissions": "Provisioner (15%)",
+      "fleetUtilization": "Flottutnyttjande",
+      "rented": "uthyrda",
+      "ofTotal": "av {total} fordon",
+      "revenueOverTime": "Intäkter Över Tid",
+      "bookingsPerIsland": "Bokningar per Ö",
+      "last6Months": "Senaste 6 månaderna",
+      "noData": "Ingen data ännu"
+    },
+    "pricing": {
+      "title": "Priser & Tillägg",
+      "subtitle": "Hantera globala prisregler och tillägstjänster.",
+      "globalRules": "Globala Prisregler",
+      "highSeason": "Högsäsong",
+      "highSeasonMonths": "Månader",
+      "surgePercent": "Tilläggsprocessat",
+      "weeklyDiscount": "Veckorabatt",
+      "commissionRate": "Provisionssats",
+      "saveChanges": "Spara Ändringar",
+      "saved": "Ändringar sparade!",
+      "extrasTitle": "Tillägg & Extra",
+      "extrasSubtitle": "Hantera dagsavgifter för premiumtjänster.",
+      "extraName": "Tjänst",
+      "extraType": "Pristyp",
+      "extraPrice": "Dagspris",
+      "perDay": "Per Dag",
+      "perBooking": "Per Bokning"
+    },
+    "customers": {
+      "title": "Kunder",
+      "subtitle": "Alla registrerade kunder och deras bokningshistorik.",
+      "totalCustomers": "Totala Kunder",
+      "averageLtv": "Genomsnittligt LTV",
+      "topIsland": "Populäraste Ö",
+      "name": "Namn",
+      "email": "E-post",
+      "totalBookings": "Bokningar",
+      "ltv": "Livstidsvärde",
+      "noCustomers": "Inga kunder hittades.",
+      "joined": "Registrerad"
+    }
   }
 }

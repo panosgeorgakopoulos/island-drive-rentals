@@ -179,6 +179,37 @@ async function main() {
   }
 
   console.log(`Seeding complete. Added ${vehicles.length} premium vehicles!`)
+
+  // Seed GlobalSettings
+  await prisma.globalSettings.upsert({
+    where: { id: "global" },
+    update: {},
+    create: {
+      id: "global",
+      highSeasonStartMonth: 7,
+      highSeasonEndMonth: 8,
+      surgePercentage: 20,
+      weeklyDiscountPercent: 10,
+      commissionPercent: 15,
+    },
+  })
+  console.log("Global settings seeded.")
+
+  // Seed Extras
+  const extras = [
+    { name: "Full Protection Insurance", nameKey: "booking.fullInsurance", priceType: "per_day", price: 15 },
+    { name: "Child Seat", nameKey: "booking.childSeat", priceType: "per_day", price: 5 },
+    { name: "Additional Driver", nameKey: "booking.additionalDriver", priceType: "per_day", price: 10 },
+  ]
+
+  for (const extra of extras) {
+    await prisma.extra.upsert({
+      where: { name: extra.name },
+      update: extra,
+      create: extra,
+    })
+  }
+  console.log(`Seeded ${extras.length} extras.`)
 }
 
 main()

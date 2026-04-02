@@ -120,7 +120,18 @@ model Booking {
 
 model Extra {
   id        String @id @default(cuid())
-  name      String
+  name      String @unique
+  nameKey   String @default("")
   priceType String
   price     Float
+}
+
+model GlobalSettings {
+  id                  String   @id @default("global")
+  highSeasonStartMonth Int      @default(7)
+  highSeasonEndMonth   Int      @default(8)
+  surgePercentage      Float    @default(20)
+  weeklyDiscountPercent Float   @default(10)
+  commissionPercent    Float    @default(15)
+  updatedAt            DateTime @updatedAt
 }
