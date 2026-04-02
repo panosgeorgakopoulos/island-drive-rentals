@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { stripe } from "@/lib/stripe"
 import { prisma } from "@/lib/prisma"
-import { appendToSheet } from "@/lib/sheets"
+import { appendBookingToSheet } from "@/lib/sheets"
 import { sendBookingConfirmation } from "@/lib/email"
 
 export async function POST(req: NextRequest) {
@@ -46,19 +46,12 @@ export async function POST(req: NextRequest) {
       })
 
       // 1. Google Sheets sync (fire-and-forget)
-      if (process.env.GOOGLE_SPREADSHEET_ID) {
-        appendToSheet([
-          new Date().toISOString(),
-          booking.user.email!,
-          `${booking.vehicle.name} - ${booking.vehicle.type}`,
-          booking.startDate.toISOString().split('T')[0],
-          booking.endDate.toISOString().split('T')[0],
-          booking.pickupLocation,
-          booking.totalPrice,
-          booking.extras || "None",
-          "confirmed"
-        ], process.env.GOOGLE_SPREADSHEET_ID).catch(console.error)
-      }
+      appendBookingToSheet(booking as any)
+        .then(success => {
+          if (success) console.log(`✅ Sheets sync successful for booking ${booking.id}`)
+          else console.error(`❌ Sheets sync failed for booking ${booking.id}`)
+        })
+        .catch(err => console.error(`❌ Sheets sync unexpected error:`, err))
 
       // 2. Send email confirmation
       if (booking.user.email) {

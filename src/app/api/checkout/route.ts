@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { stripe } from "@/lib/stripe"
-import { appendToSheet } from "@/lib/sheets"
+import { appendBookingToSheet } from "@/lib/sheets"
 import { calculateTotal } from "@/lib/pricing"
 
 export async function POST(req: NextRequest) {
@@ -147,19 +147,7 @@ export async function POST(req: NextRequest) {
       })
 
       // 3. Google Sheets sync (non-blocking, after transaction)
-      if (process.env.GOOGLE_SPREADSHEET_ID) {
-        appendToSheet([
-          new Date().toISOString(),
-          booking.user.email!,
-          `${booking.vehicle.name} - ${booking.vehicle.type}`,
-          booking.startDate.toISOString().split('T')[0],
-          booking.endDate.toISOString().split('T')[0],
-          booking.pickupLocation,
-          booking.totalPrice,
-          booking.extras || "None",
-          "confirmed"
-        ], process.env.GOOGLE_SPREADSHEET_ID).catch(console.error)
-      }
+      appendBookingToSheet(booking as any).catch(console.error)
 
       return NextResponse.json({ url: new URL(`/${lang}/success?mock=true`, req.url).toString() })
     } catch (err: any) {
