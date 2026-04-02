@@ -7,33 +7,28 @@ export default async function AdminDashboardPage() {
   const t = await getTranslations('admin.dashboard')
   const tLoc = await getTranslations('locations')
 
-  // Fetch real stats
-  const [bookings, vehicles, settings] = await Promise.all([
+  // Fetch real stats — only count confirmed/paid bookings
+  const [bookings, vehicles, globalSettings] = await Promise.all([
     prisma.booking.findMany({
-      select: { totalPrice: true, pickupLocation: true, createdAt: true, startDate: true, endDate: true }
+      where: { status: { in: ["confirmed", "paid"] } },
+      select: { totalPrice: true, pickupLocation: true, createdAt: true, startDate: true, endDate: true, vehicleId: true }
     }),
     prisma.vehicle.findMany({ where: { isActive: true } }),
-    prisma.globalSettings.findFirst({ where: { id: "global" } }),
+    (prisma as any).globalSetting.findMany(),
   ])
+
+  // Build settings lookup from key-value pairs
+  const settingsMap: Record<string, string> = (globalSettings as any[]).reduce((acc: Record<string, string>, s: any) => ({ ...acc, [s.key]: s.value }), {})
 
   const totalRevenue = bookings.reduce((sum: number, b: any) => sum + b.totalPrice, 0)
   const totalBookings = bookings.length
-  const commissionRate = settings?.commissionPercent || 15
+  const commissionRate = parseFloat(settingsMap['commissionPercent'] || '15')
   const commissions = totalRevenue * (commissionRate / 100)
 
   // Fleet utilization: vehicles that have an active/current booking
   const now = new Date()
-  const activeBookingVehicleIds = new Set(
-    bookings
-      .filter((b: any) => b.startDate <= now && b.endDate >= now)
-      .map((b: any) => (b as any).vehicleId)
-  )
-  // Re-fetch with vehicleId for utilization  
-  const bookingsWithVehicle = await prisma.booking.findMany({
-    select: { vehicleId: true, startDate: true, endDate: true }
-  })
   const rentedNow = new Set(
-    bookingsWithVehicle
+    bookings
       .filter((b: any) => b.startDate <= now && b.endDate >= now)
       .map((b: any) => b.vehicleId)
   ).size

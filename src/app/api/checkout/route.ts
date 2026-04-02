@@ -59,10 +59,21 @@ export async function POST(req: NextRequest) {
     const useStripe = STRIPE_SECRET && STRIPE_SECRET !== "sk_test_mock" && STRIPE_SECRET.startsWith("sk_")
 
     if (useStripe) {
-      // ========================================================
-      // STRIPE MODE: Create checkout session with metadata only.
-      // The booking is created ONLY inside the webhook on success.
-      // ========================================================
+      // 1. Create a PENDING booking record first
+      const booking = await prisma.booking.create({
+        data: {
+          userId: session.user.id,
+          vehicleId: vehicle.id,
+          startDate,
+          endDate,
+          pickupLocation,
+          extras: extrasStr,
+          totalPrice,
+          status: "pending",
+        }
+      })
+
+      // 2. Create Stripe Checkout Session with bookingId in metadata
       const checkoutSession = await stripe.checkout.sessions.create({
         line_items: [
           {
@@ -81,6 +92,7 @@ export async function POST(req: NextRequest) {
         success_url: `http://localhost:3000/${lang}/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `http://localhost:3000/${lang}/book/${vehicle.id}?start=${startDateStr}&end=${endDateStr}`,
         metadata: {
+          bookingId: booking.id,
           userId: session.user.id,
           vehicleId: vehicle.id,
           startDate: startDateStr,
