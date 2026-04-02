@@ -1,252 +1,122 @@
 import { prisma } from "@/lib/prisma"
 import { getTranslations } from "next-intl/server"
-import { Settings, Sparkles, Calendar, Percent, Tag, Shield, Baby, Users } from "lucide-react"
-import { revalidatePath } from "next/cache"
-
-async function updateSettings(formData: FormData) {
-  "use server"
-  
-  await prisma.globalSettings.upsert({
-    where: { id: "global" },
-    update: {
-      highSeasonStartMonth: parseInt(formData.get("highSeasonStartMonth") as string),
-      highSeasonEndMonth: parseInt(formData.get("highSeasonEndMonth") as string),
-      surgePercentage: parseFloat(formData.get("surgePercentage") as string),
-      weeklyDiscountPercent: parseFloat(formData.get("weeklyDiscountPercent") as string),
-      commissionPercent: parseFloat(formData.get("commissionPercent") as string),
-    },
-    create: {
-      id: "global",
-      highSeasonStartMonth: parseInt(formData.get("highSeasonStartMonth") as string),
-      highSeasonEndMonth: parseInt(formData.get("highSeasonEndMonth") as string),
-      surgePercentage: parseFloat(formData.get("surgePercentage") as string),
-      weeklyDiscountPercent: parseFloat(formData.get("weeklyDiscountPercent") as string),
-      commissionPercent: parseFloat(formData.get("commissionPercent") as string),
-    },
-  })
-
-  revalidatePath("/admin/pricing")
-}
-
-async function updateExtra(formData: FormData) {
-  "use server"
-
-  const id = formData.get("id") as string
-  const price = parseFloat(formData.get("price") as string)
-
-  await prisma.extra.update({
-    where: { id },
-    data: { price },
-  })
-
-  revalidatePath("/admin/pricing")
-}
-
-const MONTH_NAMES = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'
-]
+import { Settings, Sparkles, Percent, Tag, Shield, Baby, Users, ArrowUpRight } from "lucide-react"
 
 const EXTRA_ICONS: Record<string, any> = {
-  "Full Protection Insurance": Shield,
+  "Full Insurance": Shield,
   "Child Seat": Baby,
   "Additional Driver": Users,
 }
 
 export default async function AdminPricingPage() {
-  const t = await getTranslations('admin.pricing')
+  const t = await getTranslations('admin')
 
   const [settings, extras] = await Promise.all([
-    prisma.globalSettings.findFirst({ where: { id: "global" } }),
+    (prisma as any).globalSetting.findMany(),
     prisma.extra.findMany(),
   ])
 
-  const s = settings || {
-    highSeasonStartMonth: 7,
-    highSeasonEndMonth: 8,
-    surgePercentage: 20,
-    weeklyDiscountPercent: 10,
-    commissionPercent: 15,
-  }
+  // Convert array to record for easier lookup with fallback defaults
+  const s = settings.reduce((acc: Record<string, string>, curr: any) => ({ ...acc, [curr.key]: curr.value }), {
+    surgePercentage: "20",
+    weeklyDiscount: "10"
+  })
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h2 className="text-2xl font-bold tracking-tight text-white">{t('title')}</h2>
-        <p className="text-sm text-gray-500 mt-1">{t('subtitle')}</p>
+    <div className="space-y-8 animate-in fade-in duration-700">
+      <div className="flex justify-between items-end">
+        <div>
+          <h2 className="text-3xl font-extrabold tracking-tight text-white">{t('pricing.title')}</h2>
+          <p className="text-gray-500 mt-1">{t('pricing.subtitle')}</p>
+        </div>
+        <div className="bg-white/5 px-4 py-3 rounded-2xl border border-white/10 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] flex items-center gap-2">
+          <div className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse" /> Read Only Mode
+        </div>
       </div>
 
-      {/* Global Pricing Rules */}
-      <div className="bg-[#1a1d27] rounded-2xl border border-white/5 p-8">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
-            <Settings className="text-white" size={18} />
+      {/* Global Rules Section */}
+      <div className="grid md:grid-cols-2 gap-6">
+        <div className="bg-[#1a1d27] rounded-3xl border border-white/5 p-8 relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full -mr-16 -mt-16 blur-2xl group-hover:bg-blue-500/10 transition-colors" />
+          <div className="flex items-center gap-4 mb-8">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-xl shadow-blue-500/20">
+              <Percent className="text-white" size={22} />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-white">{t('pricing.surgePercent')}</h3>
+              <p className="text-xs text-gray-500 uppercase tracking-widest font-bold">{t('pricing.highSeason')}</p>
+            </div>
           </div>
-          <h3 className="text-lg font-bold text-white">{t('globalRules')}</h3>
+          <div className="flex items-baseline gap-2">
+            <span className="text-5xl font-black text-white tracking-tighter">+{s['surgePercentage']}%</span>
+          </div>
+          <p className="text-sm text-gray-400 mt-4 leading-relaxed font-medium">
+            Automatic rate increase applied during peak travel months (July - August).
+          </p>
         </div>
 
-        <form action={updateSettings} className="space-y-6">
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* High Season Start */}
-            <div className="space-y-2">
-              <label className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-2">
-                <Calendar size={14} className="text-blue-400" />
-                {t('highSeason')} — Start {t('highSeasonMonths')}
-              </label>
-              <select
-                name="highSeasonStartMonth"
-                defaultValue={s.highSeasonStartMonth}
-                className="w-full bg-[#0f1117] border border-white/10 rounded-xl p-3 text-white font-medium outline-none focus:border-blue-500 transition-colors"
-              >
-                {MONTH_NAMES.map((m, i) => (
-                  <option key={i} value={i + 1}>{m}</option>
-                ))}
-              </select>
+        <div className="bg-[#1a1d27] rounded-3xl border border-white/5 p-8 relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full -mr-16 -mt-16 blur-2xl group-hover:bg-emerald-500/10 transition-colors" />
+          <div className="flex items-center gap-4 mb-8">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-xl shadow-emerald-500/20">
+              <Tag className="text-white" size={22} />
             </div>
-
-            {/* High Season End */}
-            <div className="space-y-2">
-              <label className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-2">
-                <Calendar size={14} className="text-blue-400" />
-                {t('highSeason')} — End {t('highSeasonMonths')}
-              </label>
-              <select
-                name="highSeasonEndMonth"
-                defaultValue={s.highSeasonEndMonth}
-                className="w-full bg-[#0f1117] border border-white/10 rounded-xl p-3 text-white font-medium outline-none focus:border-blue-500 transition-colors"
-              >
-                {MONTH_NAMES.map((m, i) => (
-                  <option key={i} value={i + 1}>{m}</option>
-                ))}
-              </select>
-            </div>
-
-            {/* Surge Percentage */}
-            <div className="space-y-2">
-              <label className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-2">
-                <Percent size={14} className="text-yellow-400" />
-                {t('surgePercent')}
-              </label>
-              <div className="relative">
-                <input
-                  name="surgePercentage"
-                  type="number"
-                  step="0.5"
-                  min="0"
-                  max="100"
-                  defaultValue={s.surgePercentage}
-                  className="w-full bg-[#0f1117] border border-white/10 rounded-xl p-3 text-white font-medium outline-none focus:border-yellow-500 transition-colors pr-10"
-                />
-                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 font-bold">%</span>
-              </div>
-            </div>
-
-            {/* Weekly Discount */}
-            <div className="space-y-2">
-              <label className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-2">
-                <Tag size={14} className="text-green-400" />
-                {t('weeklyDiscount')}
-              </label>
-              <div className="relative">
-                <input
-                  name="weeklyDiscountPercent"
-                  type="number"
-                  step="0.5"
-                  min="0"
-                  max="100"
-                  defaultValue={s.weeklyDiscountPercent}
-                  className="w-full bg-[#0f1117] border border-white/10 rounded-xl p-3 text-white font-medium outline-none focus:border-green-500 transition-colors pr-10"
-                />
-                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 font-bold">%</span>
-              </div>
-            </div>
-
-            {/* Commission Rate */}
-            <div className="space-y-2 md:col-span-2">
-              <label className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-2">
-                <Percent size={14} className="text-purple-400" />
-                {t('commissionRate')}
-              </label>
-              <div className="relative max-w-sm">
-                <input
-                  name="commissionPercent"
-                  type="number"
-                  step="0.5"
-                  min="0"
-                  max="100"
-                  defaultValue={s.commissionPercent}
-                  className="w-full bg-[#0f1117] border border-white/10 rounded-xl p-3 text-white font-medium outline-none focus:border-purple-500 transition-colors pr-10"
-                />
-                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 font-bold">%</span>
-              </div>
+            <div>
+              <h3 className="text-xl font-bold text-white">{t('pricing.weeklyDiscount')}</h3>
+              <p className="text-xs text-gray-500 uppercase tracking-widest font-bold">Long-term Stay</p>
             </div>
           </div>
-
-          <div className="pt-4 flex justify-end">
-            <button
-              type="submit"
-              className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold px-8 py-3 rounded-xl hover:shadow-lg hover:shadow-blue-500/25 transition-all hover:-translate-y-0.5"
-            >
-              {t('saveChanges')}
-            </button>
+          <div className="flex items-baseline gap-2">
+            <span className="text-5xl font-black text-white tracking-tighter">-{s['weeklyDiscount']}%</span>
           </div>
-        </form>
+          <p className="text-sm text-gray-400 mt-4 leading-relaxed font-medium">
+            Reduction applied automatically to any booking exceeding 7 consecutive days.
+          </p>
+        </div>
       </div>
 
-      {/* Extras Management */}
-      <div className="bg-[#1a1d27] rounded-2xl border border-white/5 p-8">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--color-primary)] to-orange-600 flex items-center justify-center shadow-lg shadow-orange-500/20">
-            <Sparkles className="text-white" size={18} />
+      {/* Extras Management Section */}
+      <div className="bg-[#1a1d27] rounded-3xl border border-white/5 overflow-hidden">
+        <div className="p-8 border-b border-white/5 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[var(--color-primary)] to-orange-600 flex items-center justify-center shadow-xl shadow-orange-500/20">
+              <Sparkles className="text-white" size={22} />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-white">{t('pricing.extrasTitle')}</h3>
+              <p className="text-sm text-gray-500 font-medium">{t('pricing.extrasSubtitle')}</p>
+            </div>
           </div>
-          <h3 className="text-lg font-bold text-white">{t('extrasTitle')}</h3>
         </div>
-        <p className="text-sm text-gray-500 mb-6 ml-[52px]">{t('extrasSubtitle')}</p>
 
-        <div className="space-y-4">
-          {extras.map((extra) => {
+        <div className="divide-y divide-white/5">
+          {extras.map((extra: any) => {
             const Icon = EXTRA_ICONS[extra.name] || Shield
             return (
-              <form key={extra.id} action={updateExtra} className="bg-[#0f1117] border border-white/5 rounded-xl p-5 flex flex-col md:flex-row items-start md:items-center gap-4 hover:border-white/10 transition-all">
-                <input type="hidden" name="id" value={extra.id} />
-                <div className="flex items-center gap-3 flex-1">
-                  <div className="w-9 h-9 rounded-lg bg-[var(--color-primary)]/10 flex items-center justify-center">
-                    <Icon className="text-[var(--color-primary)]" size={16} />
+              <div key={extra.id} className="p-6 flex items-center justify-between hover:bg-white/[0.02] transition-colors group">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Icon className="text-gray-400" size={18} />
                   </div>
                   <div>
-                    <span className="font-bold text-white text-sm">{extra.name}</span>
-                    <span className="block text-xs text-gray-500 capitalize">{extra.priceType === 'per_day' ? t('perDay') : t('perBooking')}</span>
+                    <span className="block font-bold text-white">{extra.name}</span>
+                    <span className="text-xs text-gray-500 font-bold uppercase tracking-widest leading-none">
+                      {extra.priceType === 'per_day' ? t('pricing.perDay') : t('pricing.perBooking')}
+                    </span>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 font-bold text-sm">€</span>
-                    <input
-                      name="price"
-                      type="number"
-                      step="0.5"
-                      min="0"
-                      defaultValue={extra.price}
-                      className="w-28 bg-[#1a1d27] border border-white/10 rounded-lg pl-7 pr-3 py-2.5 text-white font-medium outline-none focus:border-[var(--color-primary)] transition-colors text-sm"
-                    />
+                <div className="flex items-center gap-6">
+                  <div className="text-right">
+                    <span className="block text-2xl font-black text-white leading-none">€{extra.price}</span>
+                    <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Fixed Daily Rate</span>
                   </div>
-                  <span className="text-xs text-gray-500 font-medium">{t('perDay')}</span>
-                  <button
-                    type="submit"
-                    className="bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white px-4 py-2.5 rounded-lg text-xs font-bold transition-all"
-                  >
-                    {t('saveChanges')}
-                  </button>
+                  <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-600 group-hover:text-[var(--color-primary)] group-hover:border-[var(--color-primary)] transition-all">
+                    <ArrowUpRight size={18} />
+                  </div>
                 </div>
-              </form>
+              </div>
             )
           })}
-
-          {extras.length === 0 && (
-            <div className="text-center text-gray-600 py-12 text-sm">
-              No extras configured yet.
-            </div>
-          )}
         </div>
       </div>
     </div>

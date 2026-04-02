@@ -3,22 +3,36 @@
 import { useState, useMemo, useEffect } from "react"
 import { Calendar, MapPin, AlertCircle } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { ISLANDS } from "@/config/locations"
+import { useTranslations } from "next-intl"
 
 export function BookingSidebar({
   vehicleId,
   basePrice,
   initialStart,
-  initialEnd
+  initialEnd,
+  initialLocation
 }: {
   vehicleId: string
   basePrice: number
   initialStart?: string
   initialEnd?: string
+  initialLocation?: string
 }) {
   const router = useRouter()
+  const tLoc = useTranslations('locations')
   const [startDate, setStartDate] = useState(initialStart || "")
   const [endDate, setEndDate] = useState(initialEnd || "")
-  const [location, setLocation] = useState("Athens Airport")
+  
+  // Resolve initial location: if it's an island ID like 'naxos', use its first pickup point
+  const getInitialLocation = () => {
+    if (!initialLocation) return ""
+    const island = ISLANDS.find(i => i.id === initialLocation || i.name === initialLocation)
+    if (island && island.points.length > 0) return island.points[0]
+    return initialLocation
+  }
+
+  const [location, setLocation] = useState(getInitialLocation)
   const [todayDate, setTodayDate] = useState("")
 
   useEffect(() => {
@@ -41,7 +55,7 @@ export function BookingSidebar({
 
   const totalPrice = days * basePrice
   const isMissingDates = !startDate || !endDate
-  const isValid = !isMissingDates && !dateError
+  const isValid = !isMissingDates && !dateError && location
 
   const handleBook = () => {
     if (isValid) {
@@ -51,6 +65,7 @@ export function BookingSidebar({
 
   let buttonText = "Continue"
   if (isMissingDates) buttonText = "Select Dates"
+  else if (!location) buttonText = "Select Location"
   else if (dateError) buttonText = "Invalid Dates"
 
   return (
@@ -69,9 +84,16 @@ export function BookingSidebar({
             onChange={e => setLocation(e.target.value)}
             className="w-full font-bold text-gray-900 border border-gray-200 rounded-xl p-4 outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] transition bg-[var(--color-surface-alt)]"
           >
-            <option value="Athens Airport">Athens Airport</option>
-            <option value="City Center">City Center</option>
+            <option value="">Select Location</option>
+            {ISLANDS.map(island => (
+              <optgroup key={island.id} label={tLoc(island.id as any)}>
+                {island.points.map(point => (
+                  <option key={point} value={point}>{tLoc(point as any)}</option>
+                ))}
+              </optgroup>
+            ))}
           </select>
+
         </div>
         
         <div className="grid grid-cols-2 gap-4">

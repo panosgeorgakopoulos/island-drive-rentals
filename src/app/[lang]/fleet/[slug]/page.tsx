@@ -31,9 +31,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 }
 
-export default async function VehicleDetailsPage({ params, searchParams }: { params: Promise<{ slug: string }>, searchParams: Promise<{ start?: string, end?: string }> }) {
+export default async function VehicleDetailsPage({ params, searchParams }: { params: Promise<{ slug: string }>, searchParams: Promise<{ start?: string, end?: string, location?: string }> }) {
   const { slug } = await params
-  const { start, end } = await searchParams
+  const { start, end, location } = await searchParams
   
   const vehicle = await prisma.vehicle.findUnique({
     where: { slug }
@@ -116,7 +116,7 @@ export default async function VehicleDetailsPage({ params, searchParams }: { par
 
         {/* Booking Sidebar */}
         <div className="space-y-6">
-          <BookingSidebar vehicleId={vehicle.id} basePrice={vehicle.basePrice} initialStart={start} initialEnd={end} />
+          <BookingSidebar vehicleId={vehicle.id} basePrice={vehicle.basePrice} initialStart={start} initialEnd={end} initialLocation={location} />
           
           <div className="bg-blue-50 rounded-2xl p-6 border border-blue-100">
             <h4 className="font-bold text-blue-900 flex items-center gap-2"><Check size={18} className="text-blue-600" /> Free Cancellation</h4>

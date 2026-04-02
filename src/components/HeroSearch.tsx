@@ -1,35 +1,68 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { Search, MapPin, Calendar } from "lucide-react"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { ISLANDS } from "@/config/locations"
 
 export function HeroSearch() {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const t = useTranslations('booking')
   const tLoc = useTranslations('locations')
-  const [startDate, setStartDate] = useState("")
-  const [endDate, setEndDate] = useState("")
-  const [location, setLocation] = useState("")
+  
+  const [startDate, setStartDate] = useState(searchParams.get('start') || "")
+  const [endDate, setEndDate] = useState(searchParams.get('end') || "")
+  const [location, setLocation] = useState(searchParams.get('location') || "")
   const [todayDate, setTodayDate] = useState("")
 
   useEffect(() => {
     setTodayDate(new Date().toISOString().split('T')[0])
   }, [])
 
-  const handleSearch = () => {
-    let url = "/fleet"
-    const params = new URLSearchParams()
-    if (startDate) params.append("start", startDate)
-    if (endDate) params.append("end", endDate)
-    if (location) params.append("location", location)
-      
-    if (params.toString()) {
-      url += `?${params.toString()}`
+  // Sync state with URL params
+  const updateURL = useCallback((params: Record<string, string | null>) => {
+    const current = new URLSearchParams(Array.from(searchParams.entries()))
+    
+    Object.entries(params).forEach(([key, value]) => {
+      if (value === null || value === "") {
+        current.delete(key)
+      } else {
+        current.set(key, value)
+      }
+    })
+
+    const search = current.toString()
+    const query = search ? `?${search}` : ""
+    router.replace(`${window.location.pathname}${query}`, { scroll: false })
+  }, [router, searchParams])
+
+  const handleLocationChange = (val: string) => {
+    setLocation(val)
+    updateURL({ location: val })
+  }
+
+  const handleStartDateChange = (val: string) => {
+    setStartDate(val)
+    let newEndDate = endDate
+    if (endDate && new Date(val) >= new Date(endDate)) {
+      newEndDate = ""
+      setEndDate("")
     }
-    router.push(url)
+    updateURL({ start: val, end: newEndDate })
+  }
+
+  const handleEndDateChange = (val: string) => {
+    setEndDate(val)
+    updateURL({ end: val })
+  }
+
+  const isSearchDisabled = !location || !startDate || !endDate || new Date(endDate) <= new Date(startDate)
+
+  const handleSearch = () => {
+    if (isSearchDisabled) return
+    router.push(`/fleet?location=${location}&start=${startDate}&end=${endDate}`)
   }
 
   return (
@@ -41,9 +74,9 @@ export function HeroSearch() {
           <select
             className="w-full font-semibold outline-none bg-transparent text-gray-900 appearance-none cursor-pointer"
             value={location}
-            onChange={e => setLocation(e.target.value)}
+            onChange={e => handleLocationChange(e.target.value)}
           >
-            <option value="">{tLoc('santorini')}</option>
+            <option value="">{t('selectLocation')}</option>
             {ISLANDS.map(island => (
               <option key={island.id} value={island.id}>
                 {tLoc(island.id as any)}
@@ -61,12 +94,7 @@ export function HeroSearch() {
             className="w-full font-semibold outline-none bg-transparent text-gray-900" 
             min={todayDate}
             value={startDate}
-            onChange={e => {
-              setStartDate(e.target.value)
-              if (endDate && new Date(e.target.value) >= new Date(endDate)) {
-                 setEndDate("")
-              }
-            }}
+            onChange={e => handleStartDateChange(e.target.value)}
           />
         </div>
       </div>
@@ -79,13 +107,14 @@ export function HeroSearch() {
             className="w-full font-semibold outline-none bg-transparent text-gray-900" 
             min={startDate || todayDate}
             value={endDate}
-            onChange={e => setEndDate(e.target.value)}
+            onChange={e => handleEndDateChange(e.target.value)}
           />
         </div>
       </div>
       <button 
         onClick={handleSearch}
-        className="btn-primary m-1 !rounded-xl !px-8"
+        disabled={isSearchDisabled}
+        className="btn-primary m-1 !rounded-xl !px-8 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
       >
         <Search size={18} /> Search
       </button>

@@ -16,7 +16,7 @@ export default async function AdminDashboardPage() {
     prisma.globalSettings.findFirst({ where: { id: "global" } }),
   ])
 
-  const totalRevenue = bookings.reduce((sum, b) => sum + b.totalPrice, 0)
+  const totalRevenue = bookings.reduce((sum: number, b: any) => sum + b.totalPrice, 0)
   const totalBookings = bookings.length
   const commissionRate = settings?.commissionPercent || 15
   const commissions = totalRevenue * (commissionRate / 100)
@@ -25,8 +25,8 @@ export default async function AdminDashboardPage() {
   const now = new Date()
   const activeBookingVehicleIds = new Set(
     bookings
-      .filter(b => b.startDate <= now && b.endDate >= now)
-      .map(b => (b as any).vehicleId)
+      .filter((b: any) => b.startDate <= now && b.endDate >= now)
+      .map((b: any) => (b as any).vehicleId)
   )
   // Re-fetch with vehicleId for utilization  
   const bookingsWithVehicle = await prisma.booking.findMany({
@@ -34,8 +34,8 @@ export default async function AdminDashboardPage() {
   })
   const rentedNow = new Set(
     bookingsWithVehicle
-      .filter(b => b.startDate <= now && b.endDate >= now)
-      .map(b => b.vehicleId)
+      .filter((b: any) => b.startDate <= now && b.endDate >= now)
+      .map((b: any) => b.vehicleId)
   ).size
   const totalVehicles = vehicles.length
   const utilizationPct = totalVehicles > 0 ? Math.round((rentedNow / totalVehicles) * 100) : 0
@@ -49,18 +49,19 @@ export default async function AdminDashboardPage() {
     const month = d.getMonth()
     const year = d.getFullYear()
     const monthRevenue = bookings
-      .filter(b => b.createdAt.getMonth() === month && b.createdAt.getFullYear() === year)
-      .reduce((sum, b) => sum + b.totalPrice, 0)
+      .filter((b: any) => b.createdAt.getMonth() === month && b.createdAt.getFullYear() === year)
+      .reduce((sum: number, b: any) => sum + b.totalPrice, 0)
     revenueByMonth.push({ month: monthNames[month], revenue: monthRevenue })
   }
   const maxRevenue = Math.max(...revenueByMonth.map(m => m.revenue), 1)
 
   // Bookings per island
-  const islandBookings: { id: string; count: number }[] = ISLANDS.map(island => ({
+  const islandBookings: { id: string; name: string; count: number }[] = ISLANDS.map(island => ({
     id: island.id,
-    count: bookings.filter(b => {
+    name: island.name,
+    count: bookings.filter((b: any) => {
       const loc = b.pickupLocation.toLowerCase()
-      return loc.includes(island.id) || island.pickupPoints?.some(p => loc.includes(p.toLowerCase().split(' ')[0]))
+      return loc.includes(island.id.toLowerCase()) || island.points?.some((p: string) => loc.includes(p.toLowerCase().split(' ')[0]))
     }).length
   }))
   const maxIslandBookings = Math.max(...islandBookings.map(i => i.count), 1)

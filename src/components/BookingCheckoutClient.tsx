@@ -1,8 +1,9 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useCallback } from "react"
 import { Shield, Baby, Users } from "lucide-react"
 import { useTranslations } from 'next-intl'
+import { useRouter, useSearchParams, usePathname } from "next/navigation"
 import { ISLANDS } from "@/config/locations"
 
 export function BookingCheckoutClient({ 
@@ -22,11 +23,35 @@ export function BookingCheckoutClient({
   pricing: { days: number, baseTotal: number, surgeAmount: number, discountAmount: number, finalTotal: number, hasSurge: boolean, hasDiscount: boolean, discountPercent: number },
   lang: string
 }) {
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  
   const [wantsInsurance, setWantsInsurance] = useState(false)
   const [wantsChildSeat, setWantsChildSeat] = useState(false)
   const [wantsExtraDriver, setWantsExtraDriver] = useState(false)
   const t = useTranslations('booking')
   const tLoc = useTranslations('locations')
+
+  const updateURL = useCallback((params: Record<string, string | null>) => {
+    const current = new URLSearchParams(Array.from(searchParams.entries()))
+    
+    Object.entries(params).forEach(([key, value]) => {
+      if (value === null || value === "") {
+        current.delete(key)
+      } else {
+        current.set(key, value)
+      }
+    })
+
+    const search = current.toString()
+    const query = search ? `?${search}` : ""
+    router.replace(`${pathname}${query}`, { scroll: false })
+  }, [router, pathname, searchParams])
+
+  const handleLocationChange = (val: string) => {
+    updateURL({ location: val })
+  }
 
   const insuranceCost = 15;
   const childSeatCost = 5;
@@ -87,11 +112,22 @@ export function BookingCheckoutClient({
 
             <div className="space-y-2">
               <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">{t('pickupLocation')}</label>
-              <select name="pickupLocation" defaultValue={location || ISLANDS[0].pickupPoints[0]} className="w-full border border-gray-200 rounded-xl p-3 bg-[var(--color-surface-alt)] font-semibold outline-none focus:ring-2 focus:ring-[var(--color-primary)]">
+              <select 
+                name="pickupLocation" 
+                defaultValue={(() => {
+                  if (!location) return ""
+                  const island = ISLANDS.find(i => i.id === location || i.name === location)
+                  if (island && island.points.length > 0) return island.points[0]
+                  return location
+                })()} 
+                onChange={(e) => handleLocationChange(e.target.value)}
+                className="w-full border border-gray-200 rounded-xl p-3 bg-[var(--color-surface-alt)] font-semibold outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
+              >
+                <option value="">{t('selectLocation')}</option>
                 {ISLANDS.map(island => (
                   <optgroup key={island.id} label={tLoc(island.id as any)}>
-                    {island.pickupPoints.map(point => (
-                      <option key={point} value={point}>{point}</option>
+                    {island.points.map(point => (
+                      <option key={point} value={point}>{tLoc(point as any)}</option>
                     ))}
                   </optgroup>
                 ))}

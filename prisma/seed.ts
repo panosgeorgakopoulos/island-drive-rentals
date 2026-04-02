@@ -180,24 +180,24 @@ async function main() {
 
   console.log(`Seeding complete. Added ${vehicles.length} premium vehicles!`)
 
-  // Seed GlobalSettings
-  await prisma.globalSettings.upsert({
-    where: { id: "global" },
-    update: {},
-    create: {
-      id: "global",
-      highSeasonStartMonth: 7,
-      highSeasonEndMonth: 8,
-      surgePercentage: 20,
-      weeklyDiscountPercent: 10,
-      commissionPercent: 15,
-    },
-  })
-  console.log("Global settings seeded.")
+  // Seed GlobalSetting
+  const settings = [
+    { key: "surgePercentage", value: "20" },
+    { key: "weeklyDiscount", value: "10" },
+  ]
+
+  for (const s of settings) {
+    await prisma.globalSetting.upsert({
+      where: { key: s.key },
+      update: s,
+      create: s,
+    })
+  }
+  console.log("Global settings (key-value) seeded.")
 
   // Seed Extras
   const extras = [
-    { name: "Full Protection Insurance", nameKey: "booking.fullInsurance", priceType: "per_day", price: 15 },
+    { name: "Full Insurance", nameKey: "booking.fullInsurance", priceType: "per_day", price: 15 },
     { name: "Child Seat", nameKey: "booking.childSeat", priceType: "per_day", price: 5 },
     { name: "Additional Driver", nameKey: "booking.additionalDriver", priceType: "per_day", price: 10 },
   ]

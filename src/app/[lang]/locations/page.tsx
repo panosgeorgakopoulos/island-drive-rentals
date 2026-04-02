@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Search } from "lucide-react"
+import { MapPin, Plane, ChevronRight } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 import { ISLANDS } from "@/config/locations"
 
@@ -23,30 +23,36 @@ export default async function LocationsPage({ params }: { params: Promise<{ lang
       <div className="max-w-6xl mx-auto px-6 mt-16">
         <div className="grid md:grid-cols-2 gap-10">
           {ISLANDS.map(loc => (
-            <div key={loc.id} className="card-premium overflow-hidden group flex flex-col">
-              <div 
-                className="h-64 bg-gray-200 bg-cover bg-center relative overflow-hidden"
-                style={{ backgroundImage: `url(${loc.image})` }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <h2 className="absolute bottom-6 left-6 text-3xl font-extrabold text-white tracking-tight drop-shadow-md">{tLoc(loc.id as any)}</h2>
+            <div key={loc.id} className="card-premium p-8 group">
+              <div className="flex justify-between items-start mb-6">
+                <div>
+                  <h3 className="text-3xl font-extrabold tracking-tight mb-1">{tLoc(loc.id as any)}</h3>
+                  <p className="text-[var(--color-primary)] font-bold text-sm tracking-widest uppercase">{loc.id}</p>
+                </div>
+                <div className="bg-[var(--color-primary-light)] p-3 rounded-2xl text-[var(--color-primary)]">
+                  <MapPin size={24} />
+                </div>
               </div>
-              <div className="p-8 flex-1 flex flex-col">
-                <p className="text-gray-500 mb-6">{t(`locations.${loc.id}.desc` as any)}</p>
-                <div className="space-y-2 mb-8">
-                  <h4 className="text-xs font-bold text-[var(--color-primary)] uppercase tracking-wider mb-3">{t('airports')}</h4>
-                  {loc.pickupPoints.map(p => (
-                    <div key={p} className="flex items-center gap-2 text-sm font-medium text-gray-700">
-                      <div className="w-1.5 h-1.5 rounded-full bg-gray-300" /> {p}
-                    </div>
+
+              <div className="space-y-4 mb-8">
+                <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest flex items-center gap-2">
+                  <Plane size={14} /> {t('airports')}
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {loc.points.map(point => (
+                    <span key={point} className="px-3 py-1 bg-gray-50 border border-gray-100 rounded-full text-sm font-medium text-gray-600">
+                      {tLoc(point as any)}
+                    </span>
                   ))}
                 </div>
-                <div className="mt-auto">
-                  <Link href={`/${lang}/fleet?location=${loc.id}`} className="btn-secondary w-full">
-                    <Search size={18} /> {t('searchVehicles')}
-                  </Link>
-                </div>
               </div>
+
+              <Link 
+                href={`/${lang}/fleet?location=${loc.id}`}
+                className="btn-primary w-full flex items-center justify-center gap-2 group-hover:shadow-lg transition-all"
+              >
+                {t('searchVehicles')} <ChevronRight size={18} />
+              </Link>
             </div>
           ))}
         </div>

@@ -62,6 +62,7 @@
     "fullName": "Full Name",
     "email": "Email Address",
     "confirmAndPay": "Confirm & Pay",
+    "selectLocation": "Select Location",
     "selectDatesFirst": "Select valid dates first",
     "bookingSummary": "Booking Summary",
     "dailyRate": "Daily Rate",
@@ -81,25 +82,41 @@
     "airports": "Pick-up Points",
     "searchVehicles": "Search Vehicles",
     "locations": {
-      "santorini": {
-        "name": "Santorini",
-        "desc": "Experience the majestic sunsets and volcanic landscapes in premium comfort."
+      "paros": {
+        "name": "Paros",
+        "desc": "The quintessential cycladic experience requires the perfect convertible."
+      },
+      "naxos": {
+        "name": "Naxos",
+        "desc": "Endless sandy beaches and ancient marble gates await your discovery."
+      },
+      "ios": {
+        "name": "Ios",
+        "desc": "From high-energy beaches to hidden tranquil bays."
       },
       "mykonos": {
         "name": "Mykonos",
         "desc": "Navigate the vibrant nightlife and pristine white sandy beaches."
       },
-      "crete": {
-        "name": "Crete",
-        "desc": "Discover ancient ruins, deep gorges, and expansive coastlines with our luxury SUVs."
+      "santorini": {
+        "name": "Santorini",
+        "desc": "Experience the majestic sunsets and volcanic landscapes in premium comfort."
       },
-      "paros": {
-        "name": "Paros",
-        "desc": "The quintessential cycladic experience requires the perfect convertible."
+      "syros": {
+        "name": "Syros",
+        "desc": "Explore the noble elegance of the Cyclades capital."
       },
-      "rhodes": {
-        "name": "Rhodes",
-        "desc": "Drive through medieval towns and crystal clear bays in absolute luxury."
+      "aegina": {
+        "name": "Aegina",
+        "desc": "A perfect island escape just a short drive from the main port."
+      },
+      "hydra": {
+        "name": "Hydra",
+        "desc": "Experience the car-free charm and artistic legacy of the harbor."
+      },
+      "serifos": {
+        "name": "Serifos",
+        "desc": "Raw natural beauty and iron-red sunsets."
       }
     }
   },
@@ -169,11 +186,30 @@
     "printInvoice": "Print Invoice"
   },
   "locations": {
-    "santorini": "Santorini",
-    "mykonos": "Mykonos",
-    "crete": "Crete",
     "paros": "Paros",
-    "rhodes": "Rhodes"
+    "naxos": "Naxos",
+    "ios": "Ios",
+    "mykonos": "Mykonos",
+    "santorini": "Santorini",
+    "syros": "Syros",
+    "aegina": "Aegina",
+    "hydra": "Hydra",
+    "serifos": "Serifos",
+    "Parikia Port": "Parikia Port",
+    "Naousa": "Naousa",
+    "Airport": "Airport",
+    "Chora Port": "Chora Port",
+    "Agia Anna": "Agia Anna",
+    "Port": "Port",
+    "Mylopotas": "Mylopotas",
+    "New Port": "New Port",
+    "Fabrika": "Fabrika",
+    "Athinios Port": "Athinios Port",
+    "Fira": "Fira",
+    "Ermoupoli Port": "Ermoupoli Port",
+    "Main Port": "Main Port",
+    "Main Harbor": "Main Harbor",
+    "Livadi Port": "Livadi Port"
   },
   "admin": {
     "panelTitle": "Admin Panel",
