@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     const lang = supportedLocales.includes(rawLang) ? rawLang : "en"
 
     if (!vehicleId || !startDateStr || !endDateStr) {
-      return new NextResponse("Missing required fields", { status: 400 })
+      return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
     const startDate = new Date(startDateStr)
@@ -30,17 +30,33 @@ export async function POST(req: NextRequest) {
 
     // Validate dates
     if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
-      return new NextResponse("Invalid date format", { status: 400 })
+      return NextResponse.json({ error: "Invalid date format" }, { status: 400 })
     }
 
     const days = Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24))
     if (days <= 0) {
-      return new NextResponse("Invalid date range", { status: 400 })
+      return NextResponse.json({ error: "Invalid date range" }, { status: 400 })
     }
 
     const vehicle = await prisma.vehicle.findUnique({ where: { id: vehicleId } })
     if (!vehicle) {
-      return new NextResponse("Vehicle not found", { status: 404 })
+      return NextResponse.json({ error: "Vehicle not found" }, { status: 404 })
+    }
+
+    // --- OVERBOOKING SHIELD ---
+    // Check for any existing bookings for the same vehicleId where the dates overlap 
+    // AND the status is confirmed or paid.
+    const overlapping = await prisma.booking.findFirst({
+      where: {
+        vehicleId: vehicle.id,
+        status: { in: ["confirmed", "paid"] },
+        startDate: { lte: endDate },    // requested start is before or on existing end
+        endDate: { gte: startDate },    // requested end is after or on existing start
+      }
+    })
+
+    if (overlapping) {
+      return NextResponse.json({ error: "Vehicle already booked for these dates" }, { status: 400 })
     }
 
     // --- Parse incoming extras to backend logic ---
@@ -107,50 +123,34 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ url: checkoutSession.url })
       }
 
-      return new NextResponse("Error creating checkout session", { status: 500 })
+      return NextResponse.json({ error: "Error creating checkout session" }, { status: 500 })
     }
 
     // ========================================================
     // MOCK / DEV MODE: No Stripe — atomic booking creation now.
+    // Logic: If we are here, we already checked for overbooking.
     // ========================================================
     try {
-      const booking = await prisma.$transaction(async (tx) => {
-        // 1. Check for overlapping CONFIRMED bookings
-        const overlapping = await (tx as any).booking.findFirst({
-          where: {
-            vehicleId: vehicle.id,
-            status: "confirmed",
-            startDate: { lt: endDate },
-            endDate: { gt: startDate },
-          }
-        })
-
-        if (overlapping) {
-          throw new Error("VEHICLE_UNAVAILABLE")
-        }
-
-        // 2. Create CONFIRMED booking atomically
-        return (tx as any).booking.create({
-          data: {
-            userId: session.user!.id!,
-            vehicleId: vehicle.id,
-            startDate,
-            endDate,
-            pickupLocation,
-            extras: extrasStr,
-            totalPrice,
-            status: "confirmed",
-            paymentIntentId: `mock_${Date.now()}`
-          },
-          include: { user: true, vehicle: true }
-        })
+      const booking = await prisma.booking.create({
+        data: {
+          userId: session.user!.id!,
+          vehicleId: vehicle.id,
+          startDate,
+          endDate,
+          pickupLocation,
+          extras: extrasStr,
+          totalPrice,
+          status: "confirmed",
+          paymentIntentId: `mock_${Date.now()}`
+        },
+        include: { user: true, vehicle: true }
       })
 
       // 3. Google Sheets sync (non-blocking, after transaction)
       if (process.env.GOOGLE_SPREADSHEET_ID) {
         appendToSheet([
           new Date().toISOString(),
-          booking.user.email,
+          booking.user.email!,
           `${booking.vehicle.name} - ${booking.vehicle.type}`,
           booking.startDate.toISOString().split('T')[0],
           booking.endDate.toISOString().split('T')[0],
@@ -164,15 +164,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ url: new URL(`/${lang}/success?mock=true`, req.url).toString() })
     } catch (err: any) {
       if (err.message === "VEHICLE_UNAVAILABLE") {
-        return NextResponse.json({ 
-          url: new URL(`/${lang}/book/${vehicle.id}?start=${startDateStr}&end=${endDateStr}&error=unavailable`, req.url).toString() 
-        })
+        return NextResponse.json({ error: "Vehicle already booked for these dates" }, { status: 400 })
       }
-      throw err
+      console.error("Checkout Mock Error:", err)
+      return NextResponse.json({ error: "An unexpected error occurred" }, { status: 500 })
     }
 
   } catch (error) {
     console.error("Checkout POST Error:", error)
-    return new NextResponse("Internal server error", { status: 500 })
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
   }
 }

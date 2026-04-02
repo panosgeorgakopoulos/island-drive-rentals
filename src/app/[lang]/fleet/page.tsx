@@ -18,6 +18,24 @@ export default async function PublicFleetPage({
   if (category) where.category = category
   if (maxPrice) where.basePrice = { lte: Number(maxPrice) }
 
+  // --- SMART AVAILABILITY FILTER ---
+  if (start && end) {
+    const startDate = new Date(start)
+    const endDate = new Date(end)
+
+    if (!isNaN(startDate.getTime()) && !isNaN(endDate.getTime())) {
+      where.bookings = {
+        none: {
+          AND: [
+            { startDate: { lte: endDate } },    // Existing start is before or on requested end
+            { endDate: { gte: startDate } },    // Existing end is after or on requested start
+            { status: { in: ['confirmed', 'paid'] } }
+          ]
+        }
+      }
+    }
+  }
+
   const vehicles = await prisma.vehicle.findMany({
     where,
     orderBy: { basePrice: 'asc' }

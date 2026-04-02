@@ -43,3 +43,17 @@ export async function cancelMyBooking(bookingId: string) {
 
   revalidatePath("/profile")
 }
+
+export async function deleteBookingAction(bookingId: string) {
+  const session = await auth();
+  if (!session || session.user.role !== "admin") {
+    throw new Error("Unauthorized: Admin access required.");
+  }
+
+  await prisma.booking.delete({
+    where: { id: bookingId }
+  })
+
+  revalidatePath("/admin/bookings")
+}
+

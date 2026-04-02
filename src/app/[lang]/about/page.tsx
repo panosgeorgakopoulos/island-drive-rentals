@@ -9,7 +9,7 @@ export default async function AboutPage() {
     <div className="bg-[var(--color-surface-alt)] min-h-screen pb-20">
       {/* Hero */}
       <div className="bg-gray-900 relative">
-        <div className="absolute inset-0 bg-cover bg-center opacity-30 object-cover" style={{backgroundImage: 'url("https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=2000")'}} />
+        <div className="absolute inset-0 bg-cover bg-center opacity-30 object-cover" style={{backgroundImage: 'url("https://expertvagabond.com/wp-content/uploads/renting-car-greece-tips.jpg")'}} />
         <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-surface-alt)] to-transparent" />
         <div className="max-w-6xl mx-auto px-6 pt-32 pb-48 relative z-10 text-center">
           <h1 className="text-5xl md:text-6xl font-extrabold tracking-tighter text-white mb-6">{t('title')}</h1>
@@ -35,8 +35,8 @@ export default async function AboutPage() {
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-6">
-               <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=600" className="rounded-2xl shadow-md w-full h-48 object-cover" alt="Luxury car interior" />
-               <img src="https://images.unsplash.com/photo-1581534089903-82a15f0113dd?auto=format&fit=crop&w=600" className="rounded-2xl shadow-md w-full h-48 object-cover mt-8" alt="Greek island road" />
+               <img src="https://expertvagabond.com/wp-content/uploads/mykonos-greece-road-900x600.jpg" className="rounded-2xl shadow-md w-full h-48 object-cover" alt="Luxury car interior" />
+               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1kGJyiPbJ-N2pjhQuOOJioEs984MlFoSIZw&s" className="rounded-2xl shadow-md w-full h-48 object-cover mt-8" alt="Greek island road" />
             </div>
           </div>
         </div>

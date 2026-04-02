@@ -19,7 +19,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       <section className="relative h-[600px] md:h-[680px] flex items-center justify-center">
         <div 
           className="absolute inset-0 z-0 bg-cover bg-center bg-gray-900" 
-          style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80")' }}
+          style={{ backgroundImage: 'url("https://www.heraklion-airport-carhire.com/wp-content/uploads/2023/10/car-rental-yay46494676-1280px-1024x682.jpg")' }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 z-10" />
         </div>

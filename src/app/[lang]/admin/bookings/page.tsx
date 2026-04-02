@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma"
-import { CheckCircle, Clock, XCircle, FileSpreadsheet } from "lucide-react"
-import { cancelBookingAction } from "@/app/[lang]/actions/booking"
+import { CheckCircle, Clock, XCircle, FileSpreadsheet, Trash2 } from "lucide-react"
+import { cancelBookingAction, deleteBookingAction } from "@/app/[lang]/actions/booking"
 
 export default async function AdminBookingsPage() {
   const bookings = await prisma.booking.findMany({
@@ -72,16 +72,26 @@ export default async function AdminBookingsPage() {
                   )}
                 </td>
                 <td className="p-4 text-right">
-                  {b.status === "confirmed" && (
-                    <form action={cancelBookingAction.bind(null, b.id)}>
-                      <button type="submit" className="text-xs font-medium text-red-600 hover:text-red-700 bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded-lg transition">
-                        Cancel
-                      </button>
-                    </form>
-                  )}
+                  <div className="flex justify-end gap-2">
+                    {b.status === "confirmed" && (
+                      <form action={cancelBookingAction.bind(null, b.id)}>
+                        <button type="submit" className="text-xs font-medium text-red-600 hover:text-red-700 bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded-lg transition">
+                          Cancel
+                        </button>
+                      </form>
+                    )}
+                    {(b.status === "pending" || b.status === "cancelled") && (
+                      <form action={deleteBookingAction.bind(null, b.id)}>
+                        <button type="submit" className="text-xs font-medium text-gray-600 hover:text-red-600 bg-gray-50 hover:bg-red-50 border border-gray-200 hover:border-red-200 px-3 py-1.5 rounded-lg transition flex items-center gap-1">
+                          <Trash2 size={12} /> Delete
+                        </button>
+                      </form>
+                    )}
+                  </div>
                 </td>
               </tr>
             ))}
+
             {bookings.length === 0 && (
               <tr>
                 <td colSpan={7} className="p-8 text-center text-gray-500">

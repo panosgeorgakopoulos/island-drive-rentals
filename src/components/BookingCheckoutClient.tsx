@@ -84,20 +84,30 @@ export function BookingCheckoutClient({
     
     try {
       const formData = new FormData(e.currentTarget);
-      const res = await fetch('/api/checkout', {
-        method: 'POST',
+      const res = await fetch("/api/checkout", {
+        method: "POST",
         body: formData,
-      });
-      
-      const data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        setIsCheckingOut(false);
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        alert(data.error || "Something went wrong. Please try again.")
+        setIsCheckingOut(false)
+        return
       }
-    } catch (error) {
-      console.error("Checkout error:", error);
-      setIsCheckingOut(false);
+
+      if (data.url) {
+        // Redirection must be native window location to avoid Next.js intercepting
+        // and causing a 403 Access Denied from Stripe.
+        window.location.href = data.url
+      } else {
+        setIsCheckingOut(false)
+      }
+    } catch (err) {
+      console.error("Checkout error:", err)
+      alert("An error occurred. Please try again.")
+      setIsCheckingOut(false)
     }
   }
 

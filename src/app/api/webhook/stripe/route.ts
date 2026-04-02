@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
     const meta = stripeSession.metadata
 
     if (!meta?.bookingId) {
-      console.error("Webhook: Missing bookingId in Stripe session metadata", meta)
+      console.error("❌ Webhook Error: Missing bookingId in Stripe session metadata", meta)
       return new NextResponse("Missing bookingId", { status: 400 })
     }
 
@@ -65,11 +65,11 @@ export async function POST(req: NextRequest) {
         await sendBookingConfirmation(booking.user.email, booking)
       }
 
-      console.log(`✅ Booking ${booking.id} confirmed via Stripe Webhook.`)
+      console.log(`✅ Webhook Success: Booking ${booking.id} confirmed via Stripe.`)
 
     } catch (err: any) {
-      console.error("Webhook: Error updating booking status:", err)
-      return new NextResponse("Database update failed", { status: 500 })
+      console.error(`❌ Webhook Error: Failed to update booking ${meta.bookingId}:`, err.message)
+      return new NextResponse("Database update failed or booking not found", { status: 500 })
     }
   }
 
