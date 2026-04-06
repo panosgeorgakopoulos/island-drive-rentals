@@ -1,10 +1,11 @@
-"use client"
+"use client";
 
 import Link from "next/link"
 import { logoutAction } from "@/app/[lang]/actions/auth"
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
 import { LanguageSwitcher } from "./LanguageSwitcher"
+import { MobileMenu } from "./MobileMenu"
 import { useTranslations } from 'next-intl'
 
 export function Navbar({ user, lang }: { user: any, lang: string }) {
@@ -43,53 +44,19 @@ export function Navbar({ user, lang }: { user: any, lang: string }) {
           )}
         </div>
         <button
-          className="md:hidden text-gray-700 focus:outline-none relative z-[9999] pointer-events-auto"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="md:hidden text-gray-700 focus:outline-none relative z-[9999] pointer-events-auto p-2 hover:bg-gray-100 rounded-xl transition-colors"
+          onClick={() => setIsMobileMenuOpen(true)}
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {isMobileMenuOpen && (
-        <div className="md:hidden bg-white/95 backdrop-blur-sm fixed inset-0 top-16 z-[9995] pointer-events-auto overflow-y-auto">
-          <div className="flex flex-col gap-4 p-6">
-            <div className="flex justify-end">
-              <button
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="w-11 h-11 flex items-center justify-center rounded-xl bg-gray-100 text-gray-700"
-              >
-                <X size={22} />
-              </button>
-            </div>
-            <div className="flex justify-between items-center pb-2 border-b border-gray-200">
-              <span className="text-sm font-medium text-gray-500">{t('language')}</span>
-              <LanguageSwitcher />
-            </div>
-            <Link href={`/${lang}/fleet`} className="font-semibold text-gray-800 py-2" onClick={() => setIsMobileMenuOpen(false)}>{t('fleet')}</Link>
-            <Link href={`/${lang}/locations`} className="font-semibold text-gray-800 py-2" onClick={() => setIsMobileMenuOpen(false)}>{t('locations')}</Link>
-            <Link href={`/${lang}/about`} className="font-semibold text-gray-800 py-2" onClick={() => setIsMobileMenuOpen(false)}>{t('about')}</Link>
-            <Link href={`/${lang}/contact`} className="font-semibold text-gray-800 py-2" onClick={() => setIsMobileMenuOpen(false)}>{t('contact')}</Link>
-            <div className="border-t border-gray-200 pt-4 mt-2">
-              {user ? (
-                <div className="flex flex-col gap-4">
-                  {user.role === "admin" && (
-                    <Link href={`/${lang}/admin`} className="font-bold text-[var(--color-primary)] py-2" onClick={() => setIsMobileMenuOpen(false)}>Admin Panel</Link>
-                  )}
-                  <Link href={`/${lang}/profile`} className="font-semibold text-gray-800 py-2" onClick={() => setIsMobileMenuOpen(false)}>Profile ({user.name || user.email})</Link>
-                  <form action={logoutAction}>
-                    <button type="submit" className="font-semibold text-red-500 py-2">Logout</button>
-                  </form>
-                </div>
-              ) : (
-                <div className="flex flex-col gap-3">
-                  <Link href={`/${lang}/login`} className="font-semibold text-gray-800 py-2" onClick={() => setIsMobileMenuOpen(false)}>Log in</Link>
-                  <Link href={`/${lang}/register`} className="btn-primary text-center" onClick={() => setIsMobileMenuOpen(false)}>Sign up</Link>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+      <MobileMenu 
+        isOpen={isMobileMenuOpen} 
+        onClose={() => setIsMobileMenuOpen(false)} 
+        user={user} 
+        lang={lang} 
+      />
     </header>
   )
 }

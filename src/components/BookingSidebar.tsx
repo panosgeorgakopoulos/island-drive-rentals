@@ -5,6 +5,7 @@ import { Calendar, MapPin, AlertCircle } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { ISLANDS } from "@/config/locations"
 import { useTranslations } from "next-intl"
+import { MobileBookingBar } from "./MobileBookingBar"
 
 export function BookingSidebar({
   vehicleId,
@@ -55,7 +56,7 @@ export function BookingSidebar({
 
   const totalPrice = days * basePrice
   const isMissingDates = !startDate || !endDate
-  const isValid = !isMissingDates && !dateError && location
+  const isValid = Boolean(!isMissingDates && !dateError && location)
 
   const handleBook = () => {
     if (isValid) {
@@ -152,7 +153,7 @@ export function BookingSidebar({
           <button 
             type="submit"
             disabled={!isValid}
-            className="btn-primary w-full text-lg mt-6"
+            className="btn-primary w-full text-lg mt-6 shadow-lg hover:shadow-xl active:scale-95 transition-all"
           >
             {buttonText}
           </button>
@@ -162,23 +163,14 @@ export function BookingSidebar({
         </div>
       </div>
 
-      {/* Mobile Fixed Bottom Bar */}
-      <div className="md:hidden fixed bottom-0 left-0 w-full bg-white border-t border-gray-100 p-4 shadow-[0_-10px_25px_-5px_rgba(0,0,0,0.08)] z-[100] flex items-center justify-between">
-        <div className="flex flex-col">
-          <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Total</span>
-          <span className="text-2xl font-extrabold text-gray-900">
-            {isValid ? `€${totalPrice}` : '––'}
-          </span>
-        </div>
-        
-        <button 
-          type="submit"
-          disabled={!isValid}
-          className="btn-primary !px-8 !py-3.5"
-        >
-          {buttonText}
-        </button>
-      </div>
+      <MobileBookingBar 
+        startDate={startDate}
+        endDate={endDate}
+        basePrice={basePrice}
+        isValid={isValid}
+        onBook={handleBook}
+        buttonText={buttonText}
+      />
     </form>
   )
 }
