@@ -5,7 +5,6 @@ import { Calendar, MapPin, AlertCircle } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { ISLANDS } from "@/config/locations"
 import { useTranslations } from "next-intl"
-import { MobileBookingBar } from "./MobileBookingBar"
 
 export function BookingSidebar({
   vehicleId,
@@ -71,19 +70,18 @@ export function BookingSidebar({
 
   return (
     <form onSubmit={(e) => { e.preventDefault(); handleBook(); }}>
-      <div className="bg-white rounded-2xl p-4 md:p-6 md:border md:border-gray-100 md:shadow-sm md:sticky md:top-24 mb-24 md:mb-0">
-        <h3 className="hidden md:block text-xl font-bold mb-6 tracking-tight">Reserve your dates</h3>
-        <h3 className="md:hidden text-lg font-bold mb-4 tracking-tight px-1">Step 1: Booking Details</h3>
-      
-      <div className="space-y-5">
+      <div className="bg-white rounded-xl border border-gray-200 p-4 md:p-6 md:sticky md:top-24">
+        <h3 className="text-lg md:text-xl font-bold mb-4">Booking Details</h3>
+
+      <div className="flex flex-col gap-4">
         <div className="flex flex-col">
-          <label className="text-xs font-bold text-gray-500 uppercase mb-2 flex items-center gap-2 tracking-wider">
-            <MapPin size={14} className="text-[var(--color-primary)]" /> Location
+          <label className="text-sm font-semibold mb-2 flex items-center gap-2">
+            <MapPin size={16} /> Location
           </label>
           <select 
             value={location}
             onChange={e => setLocation(e.target.value)}
-            className="w-full font-bold text-gray-900 border border-gray-200 rounded-xl p-4 outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] transition bg-[var(--color-surface-alt)]"
+            className="w-full min-h-11 border border-gray-300 rounded-lg px-3 bg-white"
           >
             <option value="">Select Location</option>
             {ISLANDS.map(island => (
@@ -97,55 +95,54 @@ export function BookingSidebar({
 
         </div>
         
-        <div className="flex flex-col md:grid md:grid-cols-2 gap-4">
+        <div className="flex flex-col gap-4 md:grid md:grid-cols-2">
           <div className="flex flex-col">
-            <label className="text-xs font-bold text-gray-500 uppercase mb-2 flex items-center gap-2 tracking-wider">
-              <Calendar size={14} className="text-[var(--color-primary)]" /> Pick-up
+            <label className="text-sm font-semibold mb-2 flex items-center gap-2">
+              <Calendar size={16} /> Pick-up
             </label>
             <input 
               type="date" 
               value={startDate}
               min={todayDate}
               onChange={e => setStartDate(e.target.value)}
-              className="w-full font-bold text-gray-900 border border-gray-200 rounded-xl p-4 outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] transition bg-[var(--color-surface-alt)]" 
+              className="w-full min-h-11 border border-gray-300 rounded-lg px-3 bg-white"
             />
           </div>
           <div className="flex flex-col">
-            <label className="text-xs font-bold text-gray-500 uppercase mb-2 flex items-center gap-2 tracking-wider">
-              <Calendar size={14} className="text-[var(--color-primary)]" /> Return
+            <label className="text-sm font-semibold mb-2 flex items-center gap-2">
+              <Calendar size={16} /> Return
             </label>
             <input 
               type="date" 
               value={endDate}
               min={startDate || todayDate}
               onChange={e => setEndDate(e.target.value)}
-              className="w-full font-bold text-gray-900 border border-gray-200 rounded-xl p-4 outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] transition bg-[var(--color-surface-alt)]" 
+              className="w-full min-h-11 border border-gray-300 rounded-lg px-3 bg-white"
             />
           </div>
         </div>
         
         {dateError && (
-          <div className="flex items-center gap-2 text-red-600 bg-red-50 p-3 rounded-lg text-sm font-medium">
+          <div className="flex items-center gap-2 text-red-700 bg-red-50 p-3 rounded-lg text-sm">
             <AlertCircle size={16} />
             {dateError}
           </div>
         )}
         
-        {/* Desktop Summary & CTA */}
-        <div className="hidden md:block pt-4 border-t border-gray-100 mt-6">
+        <div className="pt-4 border-t border-gray-200">
           {isValid ? (
             <>
               <div className="flex justify-between mb-2 text-sm">
                 <span className="text-gray-500">€{basePrice} × {days} days</span>
                 <span className="font-semibold text-gray-900">€{totalPrice}</span>
               </div>
-              <div className="flex justify-between font-extrabold text-2xl mt-4 pt-4 border-t border-gray-100">
+              <div className="flex justify-between font-bold text-xl mt-3 pt-3 border-t border-gray-200">
                 <span>Total</span>
-                <span className="text-[var(--color-primary)]">€{totalPrice}</span>
+                <span>€{totalPrice}</span>
               </div>
             </>
           ) : (
-            <div className="text-center text-sm font-medium text-gray-400 py-4 bg-[var(--color-surface-alt)] rounded-lg">
+            <div className="text-center text-sm text-gray-500 py-3 bg-gray-50 rounded-lg">
               Please select dates to see total
             </div>
           )}
@@ -153,24 +150,15 @@ export function BookingSidebar({
           <button 
             type="submit"
             disabled={!isValid}
-            className="btn-primary w-full text-lg mt-6 shadow-lg hover:shadow-xl active:scale-95 transition-all"
+            className="w-full min-h-11 mt-4 rounded-lg bg-black text-white font-semibold disabled:opacity-50"
           >
             {buttonText}
           </button>
-          <p className="text-xs text-center text-gray-400 mt-3 font-medium">You won't be charged yet.</p>
+          <p className="text-xs text-center text-gray-500 mt-2">You won't be charged yet.</p>
         </div>
 
         </div>
       </div>
-
-      <MobileBookingBar 
-        startDate={startDate}
-        endDate={endDate}
-        basePrice={basePrice}
-        isValid={isValid}
-        onBook={handleBook}
-        buttonText={buttonText}
-      />
     </form>
   )
 }

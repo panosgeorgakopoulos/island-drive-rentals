@@ -69,37 +69,34 @@ export function HeroSearch() {
   }
 
   return (
-    <div className="bg-white/95 backdrop-blur-md p-2 rounded-3xl shadow-2xl flex flex-col md:flex-row gap-2 items-stretch text-gray-800 text-left max-w-5xl mx-auto mt-6 md:mt-8 border border-white/20 relative z-[50] pointer-events-auto">
-      {/* Location */}
-      <div className="flex-1 min-w-0 px-5 py-4 border-b md:border-b-0 md:border-r border-gray-100 transition-colors hover:bg-gray-50/50 rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl">
-        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{t('pickupLocation')}</label>
-        <div className="flex items-center gap-2 mt-1.5">
-          <MapPin size={18} className="text-[var(--color-primary)] shrink-0" />
-          <select
-            className="w-full font-bold outline-none bg-transparent text-gray-900 appearance-none cursor-pointer text-base"
-            value={selectedLocation}
-            onChange={e => handleLocationChange(e.target.value)}
-          >
-            <option value="">{t('selectLocation')}</option>
-            {ISLANDS.map(island => (
-              <option key={island.id} value={island.id}>
-                {tLoc(island.id as any)}
-              </option>
-            ))}
-          </select>
+    <div className="bg-white/95 backdrop-blur-md p-2 rounded-3xl shadow-2xl border border-white/20 max-w-5xl mx-auto mt-6 md:mt-8">
+      <div className="flex flex-col md:flex-row gap-2">
+        <div className="flex-1 min-w-0 px-4 py-3 border border-gray-100 rounded-2xl md:border-0 md:rounded-l-2xl md:rounded-r-none md:border-r">
+          <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-1">{t('pickupLocation')}</label>
+          <div className="flex items-center gap-2">
+            <MapPin size={18} className="text-[var(--color-primary)] shrink-0" />
+            <select
+              className="w-full font-semibold outline-none bg-transparent text-gray-900 appearance-none min-h-11"
+              value={selectedLocation}
+              onChange={e => handleLocationChange(e.target.value)}
+            >
+              <option value="">{t('selectLocation')}</option>
+              {ISLANDS.map(island => (
+                <option key={island.id} value={island.id}>
+                  {tLoc(island.id as any)}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-      </div>
 
-      {/* Dates Container */}
-      <div className="flex flex-col md:flex-row flex-1 md:flex-[2] gap-2 md:gap-0">
-        {/* Pickup Date */}
-        <div className="flex-1 min-w-0 px-5 py-4 border-b md:border-b-0 md:border-r border-gray-100 transition-colors hover:bg-gray-50/50">
-          <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{t('pickupDate')}</label>
-          <div className="flex items-center gap-2 mt-1.5">
+        <div className="flex-1 min-w-0 px-4 py-3 border border-gray-100 rounded-2xl md:border-0 md:rounded-none md:border-r">
+          <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-1">{t('pickupDate')}</label>
+          <div className="flex items-center gap-2">
             <Calendar size={18} className="text-[var(--color-primary)] shrink-0" />
-            <input 
-              type="date" 
-              className="w-full font-bold outline-none bg-transparent text-gray-900 text-base" 
+            <input
+              type="date"
+              className="w-full font-semibold outline-none bg-transparent text-gray-900 min-h-11"
               min={todayDate}
               value={startDate}
               onChange={e => handleStartDateChange(e.target.value)}
@@ -107,30 +104,30 @@ export function HeroSearch() {
           </div>
         </div>
 
-        {/* Return Date */}
-        <div className="flex-1 min-w-0 px-5 py-4 border-b md:border-b-0 md:border-r border-gray-100 transition-colors hover:bg-gray-50/50">
-          <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{t('returnDate')}</label>
-          <div className="flex items-center gap-2 mt-1.5">
+        <div className="flex-1 min-w-0 px-4 py-3 border border-gray-100 rounded-2xl md:border-0 md:rounded-none md:border-r">
+          <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-1">{t('returnDate')}</label>
+          <div className="flex items-center gap-2">
             <Calendar size={18} className="text-[var(--color-primary)] shrink-0" />
-            <input 
-              type="date" 
-              className="w-full font-bold outline-none bg-transparent text-gray-900 text-base" 
+            <input
+              type="date"
+              className="w-full font-semibold outline-none bg-transparent text-gray-900 min-h-11"
               min={startDate || todayDate}
               value={endDate}
               onChange={e => handleEndDateChange(e.target.value)}
             />
           </div>
         </div>
-      </div>
 
-      {/* Search Button */}
-      <button 
-        onClick={handleSearch}
-        disabled={isSearchDisabled}
-        className="btn-primary m-1.5 !rounded-2xl w-full md:w-auto !px-10 py-4 md:py-0 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl active:scale-95 flex items-center justify-center gap-2"
-      >
-        <Search size={20} /> <span className="md:hidden font-bold">Search Vehicles</span>
-      </button>
+        <button
+          type="button"
+          onClick={handleSearch}
+          disabled={isSearchDisabled}
+          className="btn-primary w-full md:w-auto min-h-11 px-8 rounded-2xl disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
+        >
+          <Search size={18} />
+          <span className="font-bold">Search Vehicles</span>
+        </button>
+      </div>
     </div>
   )
 }
