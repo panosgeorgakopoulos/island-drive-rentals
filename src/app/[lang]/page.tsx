@@ -14,17 +14,17 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   })
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen relative z-0 pointer-events-auto">
       {/* Hero Section */}
       <section className="relative h-[600px] md:h-[680px] flex items-center justify-center">
         <div 
-          className="absolute inset-0 z-0 bg-cover bg-center bg-gray-900" 
+          className="absolute inset-0 z-0 bg-cover bg-center bg-gray-900 pointer-events-none" 
           style={{ backgroundImage: 'url("https://www.heraklion-airport-carhire.com/wp-content/uploads/2023/10/car-rental-yay46494676-1280px-1024x682.jpg")' }}
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 z-10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 z-10 pointer-events-none" />
         </div>
         
-        <div className="relative z-20 w-full max-w-5xl mx-auto px-6 text-center text-white space-y-8">
+        <div className="relative z-20 w-full max-w-5xl mx-auto px-6 text-center text-white space-y-8 pointer-events-auto">
           <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter drop-shadow-lg leading-[0.95]">
             {t('hero.title')}
           </h1>
@@ -87,7 +87,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               return (
                 <div key={vehicle.id} className="card-premium overflow-hidden flex flex-col text-left group">
                   <div className="h-52 bg-gray-200 bg-cover bg-center relative overflow-hidden" style={{ backgroundImage: `url(${mainImg})` }}>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                   </div>
                   <div className="p-6 flex-1 flex flex-col">
                     <div className="flex justify-between items-start mb-1">
@@ -108,7 +108,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                       {specs.fuel && <span>{specs.fuel}</span>}
                     </div>
                     <div className="mt-auto">
-                      <Link href={`/${lang}/fleet/${vehicle.slug}`} className="btn-primary w-full text-center text-sm !py-3">
+                      <Link href={`/${lang}/fleet/${vehicle.slug}`} className="btn-primary w-full text-center text-sm !py-3 relative z-20 pointer-events-auto">
                         {t('fleetPage.viewDetails')}
                       </Link>
                     </div>

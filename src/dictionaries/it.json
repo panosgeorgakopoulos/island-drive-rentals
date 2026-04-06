@@ -62,6 +62,7 @@
     "fullName": "Nome e Cognome",
     "email": "Indirizzo Email",
     "confirmAndPay": "Conferma e Paga",
+    "selectLocation": "Seleziona Luogo",
     "selectDatesFirst": "Seleziona prima le date valide",
     "bookingSummary": "Riepilogo Prenotazione",
     "dailyRate": "Tariffa",
@@ -81,25 +82,41 @@
     "airports": "Punti di Ritiro",
     "searchVehicles": "Cerca Veicoli",
     "locations": {
-      "santorini": {
-        "name": "Santorini",
-        "desc": "Scopri i tramonti maestosi e il paesaggio vulcanico in totale comfort."
+      "paros": {
+        "name": "Paros",
+        "desc": "L'esperienza cicladica richiede la decappottabile perfetta."
+      },
+      "naxos": {
+        "name": "Naxos",
+        "desc": "Spiagge di sabbia infinite e antichi portali di marmo ti aspettano."
+      },
+      "ios": {
+        "name": "Ios",
+        "desc": "Dalle spiagge animate alle baie tranquille nascoste."
       },
       "mykonos": {
         "name": "Mykonos",
         "desc": "Immergiti nella vibrante vita notturna e nelle spiagge caraibiche."
       },
-      "crete": {
-        "name": "Creta",
-        "desc": "Esplora antiche rovine e vasti paesaggi con i nostri SUV premium."
+      "santorini": {
+        "name": "Santorini",
+        "desc": "Scopri i tramonti maestosi e il paesaggio vulcanico in totale comfort."
       },
-      "paros": {
-        "name": "Paros",
-        "desc": "L'esperienza cicladica richiede la decappottabile perfetta."
+      "syros": {
+        "name": "Syros",
+        "desc": "Esplora la nobile eleganza della capitale delle Cicladi."
       },
-      "rhodes": {
-        "name": "Rodi",
-        "desc": "Guida attraverso borghi medievali in totale lusso."
+      "aegina": {
+        "name": "Egina",
+        "desc": "Una fuga insulare perfetta a pochi minuti dal porto principale."
+      },
+      "hydra": {
+        "name": "Idra",
+        "desc": "Vivi il fascino senza auto e l'eredità artistica del porto."
+      },
+      "serifos": {
+        "name": "Serifos",
+        "desc": "Bellezza naturale selvaggia e tramonti color ruggine."
       }
     }
   },
@@ -169,11 +186,30 @@
     "printInvoice": "Stampa Fattura"
   },
   "locations": {
-    "santorini": "Santorini",
-    "mykonos": "Mykonos",
-    "crete": "Creta",
     "paros": "Paros",
-    "rhodes": "Rodi"
+    "naxos": "Naxos",
+    "ios": "Ios",
+    "mykonos": "Mykonos",
+    "santorini": "Santorini",
+    "syros": "Syros",
+    "aegina": "Egina",
+    "hydra": "Idra",
+    "serifos": "Serifos",
+    "Parikia Port": "Porto Parikia",
+    "Naousa": "Naousa",
+    "Airport": "Aeroporto",
+    "Chora Port": "Porto Chora",
+    "Agia Anna": "Agia Anna",
+    "Port": "Porto",
+    "Mylopotas": "Mylopotas",
+    "New Port": "Nuovo Porto",
+    "Fabrika": "Fabrika",
+    "Athinios Port": "Porto Athinios",
+    "Fira": "Fira",
+    "Ermoupoli Port": "Porto Ermoupoli",
+    "Main Port": "Porto Principale",
+    "Main Harbor": "Porto Principale",
+    "Livadi Port": "Porto Livadi"
   },
   "admin": {
     "panelTitle": "Pannello Admin",

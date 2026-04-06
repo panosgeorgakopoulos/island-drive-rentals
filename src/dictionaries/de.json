@@ -62,6 +62,7 @@
     "fullName": "Vollständiger Name",
     "email": "E-Mail-Adresse",
     "confirmAndPay": "Bestätigen & Bezahlen",
+    "selectLocation": "Standort wählen",
     "selectDatesFirst": "Bitte gültige Daten wählen",
     "bookingSummary": "Buchungsübersicht",
     "dailyRate": "Tagesrate",
@@ -81,25 +82,41 @@
     "airports": "Abholpunkte",
     "searchVehicles": "Fahrzeuge suchen",
     "locations": {
-      "santorini": {
-        "name": "Santorin",
-        "desc": "Erleben Sie die majestätischen Sonnenuntergänge in absolutem Komfort."
+      "paros": {
+        "name": "Paros",
+        "desc": "Das ultimative Kykladen-Erlebnis in einem Cabrio."
+      },
+      "naxos": {
+        "name": "Naxos",
+        "desc": "Endlose Sandstrände und antike Marmortore warten darauf, entdeckt zu werden."
+      },
+      "ios": {
+        "name": "Ios",
+        "desc": "Von energiegeladenen Stränden bis hin zu verborgenen ruhigen Buchten."
       },
       "mykonos": {
         "name": "Mykonos",
         "desc": "Genießen Sie das vibrierende Nachtleben und die weißen Strände."
       },
-      "crete": {
-        "name": "Kreta",
-        "desc": "Entdecken Sie antike Ruinen und Küsten mit unseren SUVs."
+      "santorini": {
+        "name": "Santorin",
+        "desc": "Erleben Sie die majestätischen Sonnenuntergänge in absolutem Komfort."
       },
-      "paros": {
-        "name": "Paros",
-        "desc": "Das ultimative Kykladen-Erlebnis in einem Cabrio."
+      "syros": {
+        "name": "Syros",
+        "desc": "Entdecken Sie die edle Eleganz der Kykladen-Hauptstadt."
       },
-      "rhodes": {
-        "name": "Rhodos",
-        "desc": "Fahren Sie durch mittelalterliche Städte in purem Luxus."
+      "aegina": {
+        "name": "Ägina",
+        "desc": "Ein perfekter Inselurlaub nur eine kurze Fahrt vom Haupthafen entfernt."
+      },
+      "hydra": {
+        "name": "Hydra",
+        "desc": "Erleben Sie den autofreien Charme und das künstlerische Erbe des Hafens."
+      },
+      "serifos": {
+        "name": "Serifos",
+        "desc": "Wilde Naturschönheit und rostfarbene Sonnenuntergänge."
       }
     }
   },
@@ -169,11 +186,30 @@
     "printInvoice": "Rechnung Drucken"
   },
   "locations": {
-    "santorini": "Santorin",
-    "mykonos": "Mykonos",
-    "crete": "Kreta",
     "paros": "Paros",
-    "rhodes": "Rhodos"
+    "naxos": "Naxos",
+    "ios": "Ios",
+    "mykonos": "Mykonos",
+    "santorini": "Santorin",
+    "syros": "Syros",
+    "aegina": "Ägina",
+    "hydra": "Hydra",
+    "serifos": "Serifos",
+    "Parikia Port": "Hafen Parikia",
+    "Naousa": "Naousa",
+    "Airport": "Flughafen",
+    "Chora Port": "Hafen Chora",
+    "Agia Anna": "Agia Anna",
+    "Port": "Hafen",
+    "Mylopotas": "Mylopotas",
+    "New Port": "Neuer Hafen",
+    "Fabrika": "Fabrika",
+    "Athinios Port": "Hafen Athinios",
+    "Fira": "Fira",
+    "Ermoupoli Port": "Hafen Ermoupoli",
+    "Main Port": "Haupthafen",
+    "Main Harbor": "Haupthafen",
+    "Livadi Port": "Hafen Livadi"
   },
   "admin": {
     "panelTitle": "Admin-Bereich",

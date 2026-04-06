@@ -72,7 +72,7 @@ export default async function PublicFleetPage({
                   className="h-56 bg-gray-200 bg-cover bg-center relative overflow-hidden" 
                   style={{ backgroundImage: `url(${mainImg})` }} 
                 >
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                 </div>
                 <div className="p-6 flex-1 flex flex-col">
                   <div className="flex justify-between items-start">
@@ -100,7 +100,7 @@ export default async function PublicFleetPage({
                   </div>
 
                   <div className="mt-auto">
-                    <Link href={`/${lang}/fleet/${v.slug}${start && end ? `?start=${start}&end=${end}` : ''}`} className="btn-primary w-full text-center text-sm !py-3">
+                    <Link href={`/${lang}/fleet/${v.slug}${start && end ? `?start=${start}&end=${end}` : ''}`} className="btn-primary w-full text-center text-sm !py-3 relative z-20 pointer-events-auto">
                       {t('viewDetails')}
                     </Link>
                   </div>

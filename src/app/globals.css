@@ -39,6 +39,20 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html, body {
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: auto !important;
+}
+
+button, 
+.btn-primary, 
+.btn-secondary,
+input[type="submit"],
+a.btn-primary,
+a.btn-secondary {
+  min-height: 44px;
+}
+
 /* --- Premium Design Tokens --- */
 
 /* Headings */

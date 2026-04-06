@@ -62,9 +62,10 @@
     "fullName": "Nom Complet",
     "email": "Adresse Email",
     "confirmAndPay": "Confirmer et Payer",
+    "selectLocation": "Sélectionnez un lieu",
     "selectDatesFirst": "Sélectionnez d'abord des dates valides",
     "bookingSummary": "Résumé de Réservation",
-    "dailyRate": "Période",
+    "dailyRate": "Tarif Journalier",
     "duration": "Durée",
     "day": "jour",
     "days": "jours",
@@ -81,25 +82,41 @@
     "airports": "Points de Prise en Charge",
     "searchVehicles": "Rechercher des Véhicules",
     "locations": {
-      "santorini": {
-        "name": "Santorin",
-        "desc": "Découvrez les couchers de soleil majestueux et les paysages volcaniques dans un confort absolu."
+      "paros": {
+        "name": "Paros",
+        "desc": "L'expérience cycladique parfaite exige le cabriolet idéal."
+      },
+      "naxos": {
+        "name": "Naxos",
+        "desc": "Plages de sable infinies et portes de marbre antiques vous attendent."
+      },
+      "ios": {
+        "name": "Ios",
+        "desc": "Des plages animées aux baies tranquilles cachées."
       },
       "mykonos": {
         "name": "Mykonos",
         "desc": "Naviguez entre une vie nocturne vibrante et des plages de sable blanc immaculées."
       },
-      "crete": {
-        "name": "Crète",
-        "desc": "Découvrez des ruines antiques et de vastes côtes à bord de nos SUV de luxe."
+      "santorini": {
+        "name": "Santorin",
+        "desc": "Découvrez les couchers de soleil majestueux et les paysages volcaniques dans un confort absolu."
       },
-      "paros": {
-        "name": "Paros",
-        "desc": "L'expérience cycladique parfaite exige le cabriolet idéal."
+      "syros": {
+        "name": "Syros",
+        "desc": "Explorez l'élégance noble de la capitale des Cyclades."
       },
-      "rhodes": {
-        "name": "Rhodes",
-        "desc": "Conduisez à travers des villes médiévales et des baies cristallines."
+      "aegina": {
+        "name": "Égine",
+        "desc": "Une escapade insulaire parfaite à quelques minutes du port principal."
+      },
+      "hydra": {
+        "name": "Hydra",
+        "desc": "Vivez le charme sans voiture et l'héritage artistique du port."
+      },
+      "serifos": {
+        "name": "Sérifos",
+        "desc": "Beauté naturelle brute et couchers de soleil couleur rouille."
       }
     }
   },
@@ -169,11 +186,30 @@
     "printInvoice": "Imprimer la Facture"
   },
   "locations": {
-    "santorini": "Santorin",
-    "mykonos": "Mykonos",
-    "crete": "Crète",
     "paros": "Paros",
-    "rhodes": "Rhodes"
+    "naxos": "Naxos",
+    "ios": "Ios",
+    "mykonos": "Mykonos",
+    "santorini": "Santorin",
+    "syros": "Syros",
+    "aegina": "Égine",
+    "hydra": "Hydra",
+    "serifos": "Sérifos",
+    "Parikia Port": "Port de Parikia",
+    "Naousa": "Naousa",
+    "Airport": "Aéroport",
+    "Chora Port": "Port de Chora",
+    "Agia Anna": "Agia Anna",
+    "Port": "Port",
+    "Mylopotas": "Mylopotas",
+    "New Port": "Nouveau Port",
+    "Fabrika": "Fabrika",
+    "Athinios Port": "Port d'Athinios",
+    "Fira": "Fira",
+    "Ermoupoli Port": "Port d'Ermoupoli",
+    "Main Port": "Port Principal",
+    "Main Harbor": "Port Principal",
+    "Livadi Port": "Port de Livadi"
   },
   "admin": {
     "panelTitle": "Panneau d'Administration",

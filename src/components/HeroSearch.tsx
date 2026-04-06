@@ -66,7 +66,7 @@ export function HeroSearch() {
   }
 
   return (
-    <div className="bg-white/95 backdrop-blur-md p-2 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-0 items-stretch text-gray-800 text-left max-w-4xl mx-auto mt-8 border border-white/20">
+    <div className="bg-white/95 backdrop-blur-md p-2 rounded-2xl shadow-2xl flex flex-col md:flex-row gap-0 items-stretch text-gray-800 text-left max-w-4xl mx-auto mt-8 border border-white/20 relative z-[50] pointer-events-auto">
       <div className="flex-1 w-full px-5 py-3 border-b md:border-b-0 md:border-r border-gray-100 hidden md:block">
         <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{t('pickupLocation')}</label>
         <div className="flex items-center gap-2 mt-1">

@@ -12,7 +12,7 @@ export default async function LocationsPage({ params }: { params: Promise<{ lang
     <div className="bg-[var(--color-surface-alt)] min-h-screen pb-20">
       {/* Hero */}
       <div className="bg-gray-900 border-b relative">
-        <div className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay" style={{backgroundImage: 'url("https://www.bernard-gallay.com/uploads/destinations/Greece/Ionian%20Islands/yacht_charter_destination_itinerary_greece_ionian_islands_footer.jpg")'}} />
+        <div className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay pointer-events-none" style={{backgroundImage: 'url("https://www.bernard-gallay.com/uploads/destinations/Greece/Ionian%20Islands/yacht_charter_destination_itinerary_greece_ionian_islands_footer.jpg")'}} />
         <div className="max-w-6xl mx-auto px-6 section-spacing relative z-10 text-white">
           <p className="text-sm font-bold text-[var(--color-primary)] uppercase tracking-widest mb-3">{t('explore')}</p>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">{t('title')}</h1>

@@ -227,7 +227,7 @@ export function BookingCheckoutClient({
             <button 
               type="submit" 
               disabled={days <= 0 || isCheckingOut}
-              className="btn-primary w-full text-lg !py-4 mt-8 flex justify-center items-center gap-2"
+              className="btn-primary w-full text-lg !py-4 mt-8 flex justify-center items-center gap-2 relative z-50 pointer-events-auto"
             >
               {isCheckingOut ? (
                 <>
@@ -243,8 +243,8 @@ export function BookingCheckoutClient({
       </div>
 
       {/* Summary Sidebar */}
-      <div className="space-y-6">
-        <div className="card-premium p-6 sticky top-24">
+      <div className="space-y-6 relative z-10 pointer-events-none">
+        <div className="card-premium p-6 sticky top-24 pointer-events-auto">
           <h3 className="font-bold text-lg mb-4">{t('bookingSummary')}</h3>
           <div className="flex gap-4 items-center mb-6 pb-6 border-b border-gray-100">
             <div 
