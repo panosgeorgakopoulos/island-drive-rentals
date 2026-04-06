@@ -74,6 +74,8 @@ export async function POST(req: NextRequest) {
     const STRIPE_SECRET = process.env.STRIPE_SECRET_KEY
     const useStripe = STRIPE_SECRET && STRIPE_SECRET !== "sk_test_mock" && STRIPE_SECRET.startsWith("sk_")
 
+    const origin = req.headers.get("origin") || req.nextUrl.origin || process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
+
     if (useStripe) {
       // 1. Create a PENDING booking record first
       const booking = await prisma.booking.create({
@@ -105,8 +107,8 @@ export async function POST(req: NextRequest) {
           },
         ],
         mode: "payment",
-        success_url: `http://localhost:3000/${lang}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `http://localhost:3000/${lang}/book/${vehicle.id}?start=${startDateStr}&end=${endDateStr}`,
+        success_url: `${origin}/${lang}/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${origin}/${lang}/book/${vehicle.id}?start=${startDateStr}&end=${endDateStr}`,
         metadata: {
           bookingId: booking.id,
           userId: session.user.id,
