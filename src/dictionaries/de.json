@@ -183,7 +183,8 @@
     "amount": "Betrag",
     "totalPaid": "Gesamtbetrag Bezahlt",
     "bookAnother": "Weiteres Fahrzeug Buchen",
-    "printInvoice": "Rechnung Drucken"
+    "printInvoice": "Rechnung Drucken",
+    "reservationReference": "Buchungsreferenz"
   },
   "locations": {
     "paros": "Paros",

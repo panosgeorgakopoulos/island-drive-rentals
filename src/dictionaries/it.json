@@ -183,7 +183,8 @@
     "amount": "Importo",
     "totalPaid": "Totale Pagato",
     "bookAnother": "Prenota un Altro Veicolo",
-    "printInvoice": "Stampa Fattura"
+    "printInvoice": "Stampa Fattura",
+    "reservationReference": "Riferimento Prenotazione"
   },
   "locations": {
     "paros": "Paros",

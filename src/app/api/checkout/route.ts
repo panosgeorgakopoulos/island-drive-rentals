@@ -93,6 +93,7 @@ export async function POST(req: NextRequest) {
 
       // 2. Create Stripe Checkout Session with bookingId in metadata
       const checkoutSession = await stripe.checkout.sessions.create({
+        client_reference_id: booking.id,
         line_items: [
           {
             price_data: {
@@ -109,6 +110,11 @@ export async function POST(req: NextRequest) {
         mode: "payment",
         success_url: `${origin}/${lang}/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${origin}/${lang}/book/${vehicle.id}?start=${startDateStr}&end=${endDateStr}`,
+        payment_intent_data: {
+          metadata: {
+            bookingId: booking.id,
+          }
+        },
         metadata: {
           bookingId: booking.id,
           userId: session.user.id,

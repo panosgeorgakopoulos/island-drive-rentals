@@ -69,7 +69,6 @@ export default async function SuccessPage({
     )
   }
 
-  const invoiceNumber = `INV-${booking.id.slice(0, 8).toUpperCase()}`
   const days = Math.ceil((new Date(booking.endDate).getTime() - new Date(booking.startDate).getTime()) / (1000 * 60 * 60 * 24))
 
   return (
@@ -78,23 +77,32 @@ export default async function SuccessPage({
       <div className="bg-white max-w-3xl w-full rounded-2xl p-8 md:p-12 border shadow-lg print:shadow-none print:border-none print:p-0">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-8 mb-8 gap-4">
-          <div className="flex items-center gap-4">
-            <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center print:border print:border-green-500">
-              <CheckCircle className="text-green-500" size={32} />
+        <div className="flex items-center gap-4 mb-8">
+          <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center print:border print:border-green-500">
+            <CheckCircle className="text-green-500" size={32} />
+          </div>
+          <div>
+            <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">{dict.successPage?.title || 'Booking Confirmed'}</h1>
+            <p className="text-gray-500 font-medium">{dict.successPage?.thanks || 'Thank you for choosing Island Drive Rentals'}</p>
+          </div>
+        </div>
+
+        {/* Centralized Prominent Identification Box */}
+        <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6 mb-10 flex flex-col md:flex-row justify-between items-center gap-6 print:bg-white print:border-gray-200">
+          <div className="text-center md:text-left">
+            <div className="text-sm text-blue-600 uppercase font-bold tracking-widest mb-1">
+              {dict.successPage?.reservationReference || 'Reservation Reference'}
             </div>
-            <div>
-              <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">{dict.successPage?.title || 'Booking Confirmed'}</h1>
-              <p className="text-gray-500 font-medium">{dict.successPage?.thanks || 'Thank you for choosing Island Drive Rentals'}</p>
+            <div className="text-2xl md:text-3xl font-mono font-black text-gray-900 break-all">
+              #{booking.id.toUpperCase()}
             </div>
           </div>
-          <div className="text-left md:text-right">
-            <div className="text-sm text-gray-500 uppercase font-bold tracking-wider">{dict.successPage?.invoiceReference || 'Invoice / Reference'}</div>
-            <div className="text-2xl font-black text-gray-900">{invoiceNumber}</div>
-            <div className="text-sm font-medium mt-1">
-              <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full inline-block">
-                {dict.successPage?.paidInFull || 'Paid in Full'}
-              </span>
+          <div className="flex flex-col items-center md:items-end gap-2">
+            <span className="px-4 py-1.5 bg-green-500 text-white text-sm font-black rounded-full shadow-sm">
+              {dict.successPage?.paidInFull || 'Paid in Full'}
+            </span>
+            <div className="text-xs text-blue-400 font-medium tracking-tight">
+              {new Date().toLocaleDateString(lang, { day: 'numeric', month: 'long', year: 'numeric' })}
             </div>
           </div>
         </div>
@@ -192,7 +200,7 @@ export default async function SuccessPage({
       
       {/* Actions (Hidden in Print) */}
       <div className="mt-8 flex gap-4 print:hidden max-w-3xl w-full justify-end">
-        <PrintButton />
+        <PrintButton label={dict.successPage?.printInvoice || 'Print Invoice'} />
         <Link 
           href={`/${lang}/fleet`}
           className="bg-blue-600 text-white font-bold py-3 px-8 rounded-xl hover:bg-blue-700 transition"

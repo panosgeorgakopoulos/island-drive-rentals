@@ -183,7 +183,8 @@
     "amount": "Montant",
     "totalPaid": "Total Payé",
     "bookAnother": "Réserver un Autre Véhicule",
-    "printInvoice": "Imprimer la Facture"
+    "printInvoice": "Imprimer la Facture",
+    "reservationReference": "Référence de la Réservation"
   },
   "locations": {
     "paros": "Paros",

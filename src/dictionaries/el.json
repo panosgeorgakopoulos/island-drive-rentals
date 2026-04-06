@@ -183,7 +183,8 @@
     "amount": "Ποσό",
     "totalPaid": "Συνολικό Ποσό",
     "bookAnother": "Κράτηση Άλλου Οχήματος",
-    "printInvoice": "Εκτύπωση Τιμολογίου"
+    "printInvoice": "Εκτύπωση Τιμολογίου",
+    "reservationReference": "Κωδικός Κράτησης"
   },
   "locations": {
     "paros": "Πάρος",

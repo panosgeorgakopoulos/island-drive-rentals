@@ -183,7 +183,8 @@
     "amount": "Amount",
     "totalPaid": "Total Paid",
     "bookAnother": "Book Another Vehicle",
-    "printInvoice": "Print Invoice"
+    "printInvoice": "Print Invoice",
+    "reservationReference": "Reservation Reference"
   },
   "locations": {
     "paros": "Paros",

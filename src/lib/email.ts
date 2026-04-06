@@ -47,8 +47,8 @@ export async function sendBookingConfirmationEmail(email: string | null, booking
 
           <div class="details-card">
             <div class="detail-row">
-              <span class="detail-label">Booking ID</span>
-              <span class="detail-value">#${id.slice(-6).toUpperCase()}</span>
+              <span class="detail-label">Reservation Reference</span>
+              <span class="detail-value">#${id.toUpperCase()}</span>
             </div>
             <div class="detail-row">
               <span class="detail-label">Vehicle</span>
