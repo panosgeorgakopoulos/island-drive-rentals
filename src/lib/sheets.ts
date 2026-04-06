@@ -7,6 +7,7 @@ import { google } from "googleapis"
 export async function appendBookingToSheet(booking: {
   id: string;
   user: { name: string | null; email: string };
+  phone: string;
   vehicle: { name: string };
   pickupLocation: string;
   startDate: Date;
@@ -33,10 +34,12 @@ export async function appendBookingToSheet(booking: {
 
     const sheets = google.sheets({ version: "v4", auth })
     
-    // Formatting: [Booking ID, Customer Name, Vehicle, Pickup, Dates, Amount]
+    // Formatting: [Booking ID, Customer Name, Email, Phone, Vehicle, Pickup, Dates, Amount]
     const row = [
       booking.id,
-      booking.user.name || booking.user.email,
+      booking.user.name || "N/A",
+      booking.user.email,
+      booking.phone,
       booking.vehicle.name,
       booking.pickupLocation,
       `${booking.startDate.toLocaleDateString()} - ${booking.endDate.toLocaleDateString()}`,
@@ -45,7 +48,7 @@ export async function appendBookingToSheet(booking: {
 
     await sheets.spreadsheets.values.append({
       spreadsheetId,
-      range: "Sheet1!A:F",
+      range: "Sheet1!A:H", // Increased range to H
       valueInputOption: "USER_ENTERED",
       requestBody: {
         values: [row]

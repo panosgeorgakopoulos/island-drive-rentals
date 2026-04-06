@@ -31,14 +31,18 @@ export default async function ProfilePage() {
         <div className="bg-white p-8 rounded-2xl border shadow-sm">
           <h2 className="text-2xl font-bold tracking-tight mb-2">My Profile</h2>
           <p className="text-gray-600 mb-6">Manage your account and view your reservations.</p>
-          <div className="grid grid-cols-2 gap-4 max-w-sm">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
-              <label className="text-sm font-medium text-gray-500">Name</label>
-              <div className="font-medium">{user.name || "N/A"}</div>
+              <label className="text-sm font-medium text-gray-500 block mb-1">Name</label>
+              <div className="font-bold text-gray-900">{user.name || "N/A"}</div>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-500">Email</label>
-              <div className="font-medium">{user.email}</div>
+              <label className="text-sm font-medium text-gray-500 block mb-1">Email</label>
+              <div className="font-bold text-gray-900">{user.email}</div>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-gray-500 block mb-1">Phone</label>
+              <div className="font-bold text-gray-900">{user.phone || "Not set"}</div>
             </div>
           </div>
         </div>

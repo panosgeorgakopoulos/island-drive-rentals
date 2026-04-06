@@ -8,7 +8,7 @@ export async function sendBookingConfirmationEmail(email: string | null, booking
     return;
   }
 
-  const { vehicle, startDate, endDate, pickupLocation, totalPrice, extras, id } = booking;
+  const { vehicle, startDate, endDate, phone, pickupLocation, totalPrice, extras, id } = booking;
   const formattedStart = new Date(startDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
   const formattedEnd = new Date(endDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 
@@ -53,6 +53,14 @@ export async function sendBookingConfirmationEmail(email: string | null, booking
             <div class="detail-row">
               <span class="detail-label">Vehicle</span>
               <span class="detail-value">${vehicle.name}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Email</span>
+              <span class="detail-value">${email}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Phone</span>
+              <span class="detail-value">${phone}</span>
             </div>
             <div class="detail-row">
               <span class="detail-label">Pickup Date</span>

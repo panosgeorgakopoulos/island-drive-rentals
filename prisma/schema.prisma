@@ -103,6 +103,7 @@ model Booking {
   id              String   @id @default(cuid())
   userId          String
   vehicleId       String
+  phone           String   @default("+300000000000")
   startDate       DateTime
   endDate         DateTime
   pickupLocation  String

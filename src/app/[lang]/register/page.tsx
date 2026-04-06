@@ -3,8 +3,13 @@
 import { registerAction } from "@/app/[lang]/actions/auth"
 import Link from "next/link"
 import { Car } from "lucide-react"
+import { useState } from "react"
+import PhoneInput from 'react-phone-number-input'
+import 'react-phone-number-input/style.css'
 
 export default function RegisterPage() {
+  const [phone, setPhone] = useState<string | undefined>()
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
@@ -27,6 +32,18 @@ export default function RegisterPage() {
               <div className="mt-1">
                 <input required name="email" type="email" className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
               </div>
+            </div>
+
+            <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                <PhoneInput
+                  international
+                  defaultCountry="GR"
+                  value={phone}
+                  onChange={setPhone}
+                  className="phone-input-custom"
+                />
+                <input type="hidden" name="phone" value={phone || ''} required />
             </div>
 
             <div>

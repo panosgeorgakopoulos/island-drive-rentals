@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { stripe } from "@/lib/stripe"
 import { prisma } from "@/lib/prisma"
 import { appendBookingToSheet } from "@/lib/sheets"
+import { createCalendarEvent } from "@/lib/calendar"
 import { sendBookingConfirmationEmail } from "@/lib/email"
 
 export async function POST(req: NextRequest) {
@@ -52,6 +53,14 @@ export async function POST(req: NextRequest) {
           else console.error(`❌ Sheets sync failed for booking ${booking.id}`)
         })
         .catch(err => console.error(`❌ Sheets sync unexpected error:`, err))
+
+      // 2. Google Calendar sync (fire-and-forget)
+      createCalendarEvent(booking as any)
+        .then(success => {
+          if (success) console.log(`✅ Calendar event created for booking ${booking.id}`)
+          else console.error(`❌ Calendar sync failed for booking ${booking.id}`)
+        })
+        .catch(err => console.error(`❌ Calendar sync unexpected error:`, err))
 
       // 2. Send email confirmation
       if (booking.user.email) {

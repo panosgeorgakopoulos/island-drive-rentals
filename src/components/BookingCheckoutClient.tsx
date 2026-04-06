@@ -5,6 +5,8 @@ import { Shield, Baby, Users } from "lucide-react"
 import { useTranslations } from 'next-intl'
 import { useRouter, useSearchParams, usePathname } from "next/navigation"
 import { ISLANDS } from "@/config/locations"
+import PhoneInput from 'react-phone-number-input'
+import 'react-phone-number-input/style.css'
 
 export function BookingCheckoutClient({ 
   vehicle, 
@@ -30,6 +32,7 @@ export function BookingCheckoutClient({
   const [wantsInsurance, setWantsInsurance] = useState(false)
   const [wantsChildSeat, setWantsChildSeat] = useState(false)
   const [wantsExtraDriver, setWantsExtraDriver] = useState(false)
+  const [phone, setPhone] = useState<string | undefined>(user?.phone || "")
   const t = useTranslations('booking')
   const tLoc = useTranslations('locations')
 
@@ -217,9 +220,22 @@ export function BookingCheckoutClient({
                   <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">{t('fullName')}</label>
                   <input required name="name" defaultValue={user?.name || ""} className="w-full border border-gray-200 rounded-xl p-3 bg-[var(--color-surface-alt)] font-semibold" />
                 </div>
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">{t('email')}</label>
-                  <input required name="email" type="email" readOnly defaultValue={user?.email || ""} className="w-full border border-gray-200 rounded-xl p-3 bg-gray-50 text-gray-500 cursor-not-allowed font-semibold" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">{t('email')}</label>
+                    <input required name="email" type="email" readOnly defaultValue={user?.email || ""} className="w-full border border-gray-200 rounded-xl p-3 bg-gray-50 text-gray-500 cursor-not-allowed font-semibold" />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Phone Number</label>
+                    <PhoneInput
+                      international
+                      defaultCountry="GR"
+                      value={phone}
+                      onChange={setPhone}
+                      className="phone-input-custom !bg-[var(--color-surface-alt)] !rounded-xl !p-0.5"
+                    />
+                    <input type="hidden" name="phone" value={phone || ""} required />
+                  </div>
                 </div>
               </div>
             </div>

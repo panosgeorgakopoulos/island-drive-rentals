@@ -17,12 +17,13 @@ export async function POST(req: NextRequest) {
     const startDateStr = formData.get("startDate") as string
     const endDateStr = formData.get("endDate") as string
     const pickupLocation = (formData.get("pickupLocation") as string) || "Athens Airport"
+    const phone = formData.get("phone") as string
     const supportedLocales = ['en', 'el', 'fr', 'it', 'es', 'de', 'sv', 'no']
     const rawLang = (formData.get("lang") as string) || "en"
     const lang = supportedLocales.includes(rawLang) ? rawLang : "en"
-
-    if (!vehicleId || !startDateStr || !endDateStr) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
+    
+    if (!vehicleId || !startDateStr || !endDateStr || !phone) {
+      return NextResponse.json({ error: "Missing required fields (including phone)" }, { status: 400 })
     }
 
     const startDate = new Date(startDateStr)
@@ -84,6 +85,7 @@ export async function POST(req: NextRequest) {
           vehicleId: vehicle.id,
           startDate,
           endDate,
+          phone,
           pickupLocation,
           extras: extrasStr,
           totalPrice,
@@ -121,6 +123,7 @@ export async function POST(req: NextRequest) {
           vehicleId: vehicle.id,
           startDate: startDateStr,
           endDate: endDateStr,
+          phone,
           pickupLocation,
           extras: extrasStr,
           totalPrice: String(totalPrice),
@@ -145,6 +148,7 @@ export async function POST(req: NextRequest) {
           vehicleId: vehicle.id,
           startDate,
           endDate,
+          phone,
           pickupLocation,
           extras: extrasStr,
           totalPrice,

@@ -28,8 +28,9 @@ export async function registerAction(formData: FormData) {
   const name = formData.get("name") as string
   const email = formData.get("email") as string
   const password = formData.get("password") as string
+  const phone = formData.get("phone") as string
   
-  if (!name || !email || !password || password.length < 6) {
+  if (!name || !email || !password || !phone || password.length < 6) {
     redirect("/register?error=InvalidInput")
   }
 
@@ -45,6 +46,7 @@ export async function registerAction(formData: FormData) {
       name,
       email,
       password: hashedPassword,
+      phone,
       role: "customer"
     }
   })

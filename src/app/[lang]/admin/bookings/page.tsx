@@ -37,9 +37,10 @@ export default async function AdminBookingsPage() {
           <tbody className="divide-y text-sm">
             {bookings.map(b => (
               <tr key={b.id} className="hover:bg-gray-50">
-                <td className="p-4">
-                  <div className="font-medium text-gray-900">{b.user.name || "N/A"}</div>
-                  <div className="text-xs text-gray-500">{b.user.email}</div>
+                <td className="p-4 text-xs">
+                  <div className="font-bold text-gray-900 text-sm">{b.user.name || "N/A"}</div>
+                  <div className="text-gray-500">{b.user.email}</div>
+                  <div className="text-blue-600 font-medium mt-1">{b.phone}</div>
                 </td>
                 <td className="p-4">
                   <div className="font-medium text-gray-900">{b.vehicle.name}</div>
