@@ -43,15 +43,15 @@ export default async function PublicFleetPage({
 
   return (
     <div className="bg-[var(--color-surface-alt)] min-h-screen pb-20">
-      <div className="bg-white border-b border-gray-100 section-spacing !pb-12">
-        <div className="max-w-6xl mx-auto px-6">
+      <div className="bg-white border-b border-gray-100 section-spacing !pb-10 md:!pb-12">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
           <p className="text-sm font-bold text-[var(--color-primary)] uppercase tracking-widest mb-3">{t('browse')}</p>
-          <h1 className="text-4xl font-extrabold tracking-tighter text-gray-900">{t('title')}</h1>
-          <p className="text-lg text-gray-500 mt-2">{t('subtitle')}</p>
+          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tighter text-gray-900">{t('title')}</h1>
+          <p className="text-base md:text-lg text-gray-500 mt-2">{t('subtitle')}</p>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 mt-10 flex flex-col md:flex-row gap-8">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 mt-6 md:mt-10 flex flex-col md:flex-row gap-6 md:gap-8">
         
         {/* Left Sidebar: Filters (1/4 width) */}
         <div className="w-full md:w-1/4 shrink-0">
@@ -60,7 +60,7 @@ export default async function PublicFleetPage({
 
         {/* Right Content: Vehicles Grid (3/4 width) */}
         <div className="w-full md:w-3/4">
-          <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {vehicles.map((v: any) => {
             const images = JSON.parse(v.images)
             const mainImg = images[0] || 'https://images.unsplash.com/photo-1590362891991-f776e747a588?auto=format&fit=crop&w=800'

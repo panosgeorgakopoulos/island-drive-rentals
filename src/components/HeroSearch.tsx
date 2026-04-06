@@ -69,7 +69,7 @@ export function HeroSearch() {
   }
 
   return (
-    <div className="bg-white/95 backdrop-blur-md p-2 rounded-3xl shadow-2xl flex flex-col md:flex-row gap-2 items-stretch text-gray-800 text-left max-w-5xl mx-auto mt-8 border border-white/20 relative z-[50] pointer-events-auto">
+    <div className="bg-white/95 backdrop-blur-md p-2 rounded-3xl shadow-2xl flex flex-col md:flex-row gap-2 items-stretch text-gray-800 text-left max-w-5xl mx-auto mt-6 md:mt-8 border border-white/20 relative z-[50] pointer-events-auto">
       {/* Location */}
       <div className="flex-1 min-w-0 px-5 py-4 border-b md:border-b-0 md:border-r border-gray-100 transition-colors hover:bg-gray-50/50 rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl">
         <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{t('pickupLocation')}</label>
@@ -91,9 +91,9 @@ export function HeroSearch() {
       </div>
 
       {/* Dates Container */}
-      <div className="flex flex-col sm:flex-row flex-2 gap-2 sm:gap-0">
+      <div className="flex flex-col md:flex-row flex-1 md:flex-[2] gap-2 md:gap-0">
         {/* Pickup Date */}
-        <div className="flex-1 min-w-0 px-5 py-4 border-b sm:border-b-0 sm:border-r border-gray-100 transition-colors hover:bg-gray-50/50">
+        <div className="flex-1 min-w-0 px-5 py-4 border-b md:border-b-0 md:border-r border-gray-100 transition-colors hover:bg-gray-50/50">
           <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{t('pickupDate')}</label>
           <div className="flex items-center gap-2 mt-1.5">
             <Calendar size={18} className="text-[var(--color-primary)] shrink-0" />
@@ -127,7 +127,7 @@ export function HeroSearch() {
       <button 
         onClick={handleSearch}
         disabled={isSearchDisabled}
-        className="btn-primary m-1.5 !rounded-2xl !px-10 py-4 md:py-0 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl active:scale-95 flex items-center justify-center gap-2"
+        className="btn-primary m-1.5 !rounded-2xl w-full md:w-auto !px-10 py-4 md:py-0 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl active:scale-95 flex items-center justify-center gap-2"
       >
         <Search size={20} /> <span className="md:hidden font-bold">Search Vehicles</span>
       </button>

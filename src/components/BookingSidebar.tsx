@@ -71,7 +71,7 @@ export function BookingSidebar({
 
   return (
     <form onSubmit={(e) => { e.preventDefault(); handleBook(); }}>
-      <div className="bg-white rounded-2xl md:p-6 md:border md:border-gray-100 md:shadow-sm sticky top-24 mb-24 md:mb-0">
+      <div className="bg-white rounded-2xl p-4 md:p-6 md:border md:border-gray-100 md:shadow-sm md:sticky md:top-24 mb-24 md:mb-0">
         <h3 className="hidden md:block text-xl font-bold mb-6 tracking-tight">Reserve your dates</h3>
         <h3 className="md:hidden text-lg font-bold mb-4 tracking-tight px-1">Step 1: Booking Details</h3>
       
@@ -97,7 +97,7 @@ export function BookingSidebar({
 
         </div>
         
-        <div className="grid grid-cols-2 gap-4">
+        <div className="flex flex-col md:grid md:grid-cols-2 gap-4">
           <div className="flex flex-col">
             <label className="text-xs font-bold text-gray-500 uppercase mb-2 flex items-center gap-2 tracking-wider">
               <Calendar size={14} className="text-[var(--color-primary)]" /> Pick-up

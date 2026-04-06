@@ -41,12 +41,10 @@ body {
 
 html, body {
   -webkit-tap-highlight-color: transparent;
-  pointer-events: auto !important;
 }
 
 button, a, select, input { 
   cursor: pointer; 
-  touch-action: manipulation; 
   -webkit-tap-highlight-color: transparent; 
 }
 

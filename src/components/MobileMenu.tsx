@@ -5,7 +5,6 @@ import { X, ChevronRight, LogOut, User, LayoutDashboard, Car, MapPin, Info, Mail
 import { logoutAction } from "@/app/[lang]/actions/auth"
 import { LanguageSwitcher } from "./LanguageSwitcher"
 import { useTranslations } from "next-intl"
-import { useEffect } from "react"
 
 interface MobileMenuProps {
   isOpen: boolean
@@ -17,22 +16,10 @@ interface MobileMenuProps {
 export function MobileMenu({ isOpen, onClose, user, lang }: MobileMenuProps) {
   const t = useTranslations("nav")
 
-  // Prevent scroll when menu is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden"
-    } else {
-      document.body.style.overflow = "unset"
-    }
-    return () => {
-      document.body.style.overflow = "unset"
-    }
-  }, [isOpen])
-
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-[9999] md:hidden" style={{ transform: 'translateZ(0)' }}>
+    <div className="fixed inset-0 z-[10000] md:hidden" style={{ transform: 'translateZ(0)' }}>
       {/* Backdrop */}
       <div 
         className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-300" 
@@ -40,7 +27,7 @@ export function MobileMenu({ isOpen, onClose, user, lang }: MobileMenuProps) {
       />
       
       {/* Menu Panel */}
-      <div className={`absolute top-0 right-0 h-full w-[85%] max-w-sm bg-white shadow-2xl flex flex-col transform transition-transform duration-300 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div className={`absolute inset-0 h-[100dvh] w-full bg-white shadow-2xl flex flex-col transform transition-transform duration-300 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-100">
@@ -49,7 +36,7 @@ export function MobileMenu({ isOpen, onClose, user, lang }: MobileMenuProps) {
           </Link>
           <button 
             onClick={onClose}
-            className="p-3 bg-gray-50 rounded-2xl text-gray-700 hover:bg-gray-100 transition-colors"
+            className="p-3 bg-gray-50 rounded-2xl text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer"
           >
             <X size={20} />
           </button>
@@ -86,9 +73,9 @@ export function MobileMenu({ isOpen, onClose, user, lang }: MobileMenuProps) {
                 )}
                 <MobileNavLink href={`/${lang}/profile`} icon={<User size={20} />} label={`${user.name || user.email}`} onClick={onClose} />
                 <form action={logoutAction} className="mt-2">
-                  <button 
+                  <button
                     type="submit" 
-                    className="w-full flex items-center justify-between p-4 rounded-2xl text-red-500 font-semibold hover:bg-red-50 transition-colors"
+                    className="w-full flex items-center justify-between py-4 px-5 rounded-2xl text-red-500 text-lg font-semibold hover:bg-red-50 transition-colors cursor-pointer"
                   >
                     <span className="flex items-center gap-3"><LogOut size={20} /> Logout</span>
                     <ChevronRight size={16} />
@@ -100,14 +87,14 @@ export function MobileMenu({ isOpen, onClose, user, lang }: MobileMenuProps) {
                 <Link 
                   href={`/${lang}/login`} 
                   onClick={onClose}
-                  className="flex-1 text-center py-4 rounded-2xl font-bold text-gray-700 bg-gray-50 hover:bg-gray-100 transition-all"
+                  className="flex-1 text-center py-4 rounded-2xl text-lg font-bold text-gray-700 bg-gray-50 hover:bg-gray-100 transition-all"
                 >
                   Log in
                 </Link>
                 <Link 
                   href={`/${lang}/register`} 
                   onClick={onClose}
-                  className="flex-1 btn-primary text-center !py-4"
+                  className="flex-1 btn-primary text-center !py-4 !text-lg"
                 >
                   Sign up
                 </Link>
@@ -125,7 +112,7 @@ function MobileNavLink({ href, icon, label, onClick, className = "" }: { href: s
     <Link 
       href={href} 
       onClick={onClick}
-      className={`flex items-center justify-between p-4 rounded-2xl text-gray-800 font-bold hover:bg-gray-50 transition-all ${className}`}
+      className={`flex items-center justify-between py-4 px-5 rounded-2xl text-gray-800 font-bold hover:bg-gray-50 transition-all text-lg ${className}`}
     >
       <span className="flex items-center gap-3">
         <span className="p-2 bg-gray-50 rounded-xl text-gray-500">

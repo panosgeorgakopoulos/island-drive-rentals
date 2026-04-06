@@ -16,7 +16,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   return (
     <div className="flex flex-col min-h-screen relative z-0 pointer-events-auto">
       {/* Hero Section */}
-      <section className="relative h-[600px] md:h-[680px] flex items-center justify-center">
+      <section className="relative min-h-[560px] md:h-[680px] flex items-center justify-center">
         <div 
           className="absolute inset-0 z-0 bg-cover bg-center bg-gray-900 pointer-events-none" 
           style={{ backgroundImage: 'url("https://www.heraklion-airport-carhire.com/wp-content/uploads/2023/10/car-rental-yay46494676-1280px-1024x682.jpg")' }}
@@ -24,11 +24,11 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 z-10 pointer-events-none" />
         </div>
         
-        <div className="relative z-20 w-full max-w-5xl mx-auto px-6 text-center text-white space-y-8 pointer-events-auto">
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter drop-shadow-lg leading-[0.95]">
+        <div className="relative z-20 w-full max-w-5xl mx-auto px-4 md:px-8 text-center text-white space-y-6 md:space-y-8 pointer-events-auto">
+          <h1 className="text-3xl md:text-5xl lg:text-7xl font-extrabold tracking-tighter drop-shadow-lg leading-[0.95]">
             {t('hero.title')}
           </h1>
-          <p className="text-lg md:text-xl font-light text-gray-300 max-w-2xl mx-auto">
+          <p className="text-base md:text-xl font-light text-gray-300 max-w-2xl mx-auto">
             {t('hero.subtitle')}
           </p>
 
@@ -37,8 +37,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       </section>
 
       {/* Trust Badges */}
-      <section className="bg-white section-spacing border-b border-gray-100">
-        <div className="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <section className="bg-white py-12 md:py-24 border-b border-gray-100">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
           <div className="space-y-3">
             <div className="bg-[var(--color-primary-light)] w-14 h-14 mx-auto rounded-xl flex items-center justify-center">
               <Star className="text-[var(--color-primary)]" size={24} />
@@ -71,14 +71,14 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       </section>
 
       {/* Featured Vehicles */}
-      <section className="section-spacing bg-[var(--color-surface-alt)] flex-1">
-        <div className="max-w-6xl mx-auto px-6 text-center space-y-12">
+      <section className="py-12 md:py-24 bg-[var(--color-surface-alt)] flex-1">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 text-center space-y-10 md:space-y-12">
           <div>
             <p className="text-sm font-bold text-[var(--color-primary)] uppercase tracking-widest mb-3">{t('features.ourFleet')}</p>
-            <h2 className="text-4xl font-extrabold tracking-tighter">{t('features.premiumVehicles')}</h2>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tighter">{t('features.premiumVehicles')}</h2>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {featuredVehicles.map((vehicle: any) => {
               const images = JSON.parse(vehicle.images)
               const mainImg = images[0] || 'https://images.unsplash.com/photo-1590362891991-f776e747a588?auto=format&fit=crop&q=80'

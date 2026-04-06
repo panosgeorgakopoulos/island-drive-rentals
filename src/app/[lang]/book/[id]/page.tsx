@@ -18,11 +18,11 @@ export default async function BookingPage({
 
   if (!session) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
-        <div className="bg-white p-8 rounded-2xl shadow-sm border max-w-md w-full text-center">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Login Required</h2>
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 md:p-6">
+        <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border max-w-md w-full text-center">
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">Login Required</h2>
           <p className="text-gray-600 mb-6">You need to log in or create an account to complete your booking.</p>
-          <div className="flex gap-4">
+          <div className="flex flex-col md:flex-row gap-3 md:gap-4">
             <Link href="/login" className="flex-1 bg-gray-100 text-gray-900 py-3 rounded-xl font-medium hover:bg-gray-200 transition">Log in</Link>
             <Link href="/register" className="flex-1 bg-blue-600 text-white py-3 rounded-xl font-medium hover:bg-blue-700 transition">Sign up</Link>
           </div>
@@ -48,7 +48,7 @@ export default async function BookingPage({
   }
 
   return (
-    <div className="bg-[var(--color-surface-alt)] min-h-screen pb-20 pt-10">
+    <div className="bg-[var(--color-surface-alt)] min-h-screen pb-32 md:pb-20 pt-8 md:pt-10">
       <BookingCheckoutClient 
         vehicle={vehicle} 
         user={session.user} 

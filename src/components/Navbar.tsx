@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { logoutAction } from "@/app/[lang]/actions/auth"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Menu, X } from "lucide-react"
 import { LanguageSwitcher } from "./LanguageSwitcher"
 import { MobileMenu } from "./MobileMenu"
@@ -12,9 +12,26 @@ export function Navbar({ user, lang }: { user: any, lang: string }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const t = useTranslations('nav')
 
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden"
+      document.documentElement.style.overflow = "hidden"
+      return () => {
+        document.body.style.removeProperty("overflow")
+        document.documentElement.style.removeProperty("overflow")
+      }
+    }
+    document.body.style.removeProperty("overflow")
+    document.documentElement.style.removeProperty("overflow")
+    return () => {
+      document.body.style.removeProperty("overflow")
+      document.documentElement.style.removeProperty("overflow")
+    }
+  }, [isMobileMenuOpen])
+
   return (
-    <header className="border-b border-gray-100 bg-white/95 backdrop-blur-md sticky top-0 z-[100] pointer-events-auto">
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <header className="border-b border-gray-100 bg-white/95 backdrop-blur-md sticky top-0 z-[9999] w-full pointer-events-auto">
+      <div className="max-w-6xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
         <Link href={`/${lang}`} className="text-xl font-extrabold tracking-tight text-[var(--color-primary)]">
           Island Drive
         </Link>
@@ -44,8 +61,8 @@ export function Navbar({ user, lang }: { user: any, lang: string }) {
           )}
         </div>
         <button
-          className="md:hidden text-gray-700 focus:outline-none relative z-[9999] pointer-events-auto p-2 hover:bg-gray-100 rounded-xl transition-colors"
-          onClick={() => setIsMobileMenuOpen(true)}
+          className="md:hidden text-gray-700 focus:outline-none relative z-[10001] pointer-events-auto cursor-pointer p-2 hover:bg-gray-100 rounded-xl transition-colors"
+          onClick={() => setIsMobileMenuOpen((prev) => !prev)}
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>

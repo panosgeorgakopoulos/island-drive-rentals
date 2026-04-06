@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { Viewport } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import { Navbar } from "@/components/Navbar";
@@ -29,6 +30,11 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+}
+
 export default async function RootLayout({
   children,
   params
@@ -46,13 +52,13 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           <Navbar user={session?.user} lang={lang} />
           {children}
-        <footer className="bg-gray-950 py-16 text-sm text-gray-500">
-          <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+        <footer className="bg-gray-950 py-10 md:py-16 text-sm text-gray-500">
+          <div className="max-w-6xl mx-auto px-4 md:px-8 flex flex-col md:flex-row justify-between items-center gap-6 md:gap-6">
             <div className="text-center md:text-left">
-              <p className="font-extrabold text-white text-lg tracking-tight mb-1">Island Drive Rentals</p>
+              <p className="font-extrabold text-white text-base md:text-lg tracking-tight mb-1">Island Drive Rentals</p>
               <p>&copy; {new Date().getFullYear()} All rights reserved.</p>
             </div>
-            <div className="flex gap-8 font-medium">
+            <div className="flex flex-wrap justify-center md:justify-end gap-x-8 gap-y-4 font-medium">
               <a href={`/${lang}/fleet`} className="hover:text-white transition">Fleet</a>
               <a href={`/${lang}/policies/cancellation`} className="hover:text-white transition">Cancellation Policy</a>
               <a href={`/${lang}/about`} className="hover:text-white transition">About Us</a>
